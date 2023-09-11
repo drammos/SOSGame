@@ -25,6 +25,7 @@
             <Button
                 x:Name="CounterBtn"
                 Text="Start Game"
+                Padding="18"
                 SemanticProperties.Hint="Counts the number of times you click"
                 Clicked="OnClickedStartGame"
                 HorizontalOptions="Center" />

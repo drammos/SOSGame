@@ -5,14 +5,24 @@
              xmlns:view="clr-namespace:TicTacToe.View"
              x:Class="TicTacToe.StartGame"
              >
-    <VerticalStackLayout VerticalOptions="CenterAndExpand" Padding="10" Spacing="20">
-        
-        <ContentPage.BindingContext>
-            <view:TicTacToeGame />
-        </ContentPage.BindingContext>
 
-        <Label Text="{Binding PlayerTurn}" FontSize="20" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
-               
+
+    <VerticalStackLayout VerticalOptions="CenterAndExpand" Padding="10" Spacing="20">
+
+        <Frame BackgroundColor="SlateBlue" 
+                CornerRadius="30"    
+                Padding="0"
+                HorizontalOptions="CenterAndExpand" 
+                VerticalOptions="CenterAndExpand">
+            
+                <Label Text="{Binding ScreenPlayer}" 
+                       FontSize="25" 
+                       HorizontalOptions="CenterAndExpand" 
+                       VerticalOptions="CenterAndExpand" 
+                       TextColor="White" 
+                       Padding="25"/>
+        </Frame>
+        
         <CollectionView ItemsSource="{Binding TicTacToeList}">
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Span="3" Orientation="Vertical" VerticalItemSpacing="20" />
@@ -28,18 +38,10 @@
                                 Command="{Binding Source={x:RelativeSource AncestorType={x:Type view:TicTacToeGame}}, Path=SelectedItemCommand}"
                                 CommandParameter="{Binding .}" />
                         </Frame.GestureRecognizers>
-                    </Frame> 
+                    </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        
-        
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        
-        
         
     </VerticalStackLayout>
 </ContentPage>

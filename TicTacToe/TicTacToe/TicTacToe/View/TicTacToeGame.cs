@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using TicTacToe.Box;
 
 namespace TicTacToe.View
@@ -12,17 +13,32 @@ namespace TicTacToe.View
 
         public TicTacToeGame()
         {
+            this.PlayerTurn = "X";
             SetUpGame();
         }
 
 
-        private String PlayerTurn
+        public string ScreenPlayer
         {
-            get;
-            set;   
+            get
+            {
+                return "Player " + _playerTurn;
+            }
         }
 
-
+        private string _playerTurn;
+        public String PlayerTurn
+        {
+            get
+            {
+                return _playerTurn;
+            }
+            set
+            {
+                _playerTurn = value;
+                OnPropertyChanged("ScreenPlayer");
+            }
+        }
 
         private void SetUpGame()
         {
@@ -48,14 +64,36 @@ namespace TicTacToe.View
                 selectedItem.SelectedText = "X";
                 selectedItem.Player = 0;
                 this.PlayerTurn = "O";
+                this._playerTurn = "O";
+
+
             }
             else
             {
                 selectedItem.SelectedText = "O";
                 selectedItem.Player = 1;
+                this._playerTurn = "X";
                 this.PlayerTurn = "X";
+
             }
 
+
+            CheckStateForGame();
+        }
+
+
+        public void CheckStateForGame()
+        {
+            // Check for X player
+            for(int i = 0; i<9;i++)
+            {
+
+            }
+
+            // Check for O player
         }
     }
+
+
+
 }
