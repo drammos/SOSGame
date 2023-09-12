@@ -11,19 +11,19 @@
             Title="StartGame"
             ContentTemplate="{DataTemplate local:StartGame}"
             Route="StartGame" 
-            Icon="dotnet_bot.png"/>
+            Icon="play.png"/>
 
 
         <ShellContent
             Title="HighScore"
             ContentTemplate="{DataTemplate local:HighScore}"
             Route="HighScore" 
-            Icon="dotnet_bot.png"/>
+            Icon="high_score.png"/>
 
         <ShellContent
             Title="Settings"
             ContentTemplate="{DataTemplate local:Settings}"
             Route="Settings" 
-            Icon="settings_lines.png"/>
+            Icon="setting_lines.png"/>
     </FlyoutItem>
 </Shell>
