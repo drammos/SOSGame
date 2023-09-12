@@ -42,6 +42,22 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        
+
+        <Frame BackgroundColor="GreenYellow" 
+        CornerRadius="30"    
+        Padding="0"
+        HorizontalOptions="CenterAndExpand" 
+        VerticalOptions="CenterAndExpand"
+        IsVisible="{Binding }"       
+        >
+
+            <Label Text="{Binding Winner}" 
+               FontSize="25" 
+               HorizontalOptions="CenterAndExpand" 
+               VerticalOptions="CenterAndExpand" 
+               TextColor="White" 
+               Padding="25"/>
+        </Frame>
+
     </VerticalStackLayout>
 </ContentPage>
