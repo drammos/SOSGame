@@ -7907,6 +7907,12 @@ namespace SOS
 			// aapt resource value: 0x7F0700A1
 			public const int tooltip_frame_light = 2131165345;
 			
+			// aapt resource value: 0x7F0700A2
+			public const int user = 2131165346;
+			
+			// aapt resource value: 0x7F0700A3
+			public const int user1 = 2131165347;
+			
 			static Drawable()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();

@@ -5,25 +5,24 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:SOS"
     Shell.FlyoutBehavior="Flyout">
-
     <FlyoutItem Title="Home" FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent
-            Title="StartGame"
-            ContentTemplate="{DataTemplate local:StartGame}"
-            Route="StartGame" 
-            Icon="play.png"/>
+        Title="StartGame"
+        ContentTemplate="{DataTemplate local:StartGame}"
+        Route="StartGame" 
+        Icon="play.png"/>
 
 
         <ShellContent
-            Title="HighScore"
-            ContentTemplate="{DataTemplate local:HighScore}"
-            Route="HighScore" 
-            Icon="high_score.png"/>
+        Title="HighScore"
+        ContentTemplate="{DataTemplate local:HighScore}"
+        Route="HighScore" 
+        Icon="high_score.png"/>
 
         <ShellContent
-            Title="Settings"
-            ContentTemplate="{DataTemplate local:Settings}"
-            Route="Settings" 
-            Icon="setting_lines.png"/>
+        Title="Settings"
+        ContentTemplate="{DataTemplate local:Settings}"
+        Route="Settings" 
+        Icon="setting_lines.png"/>
     </FlyoutItem>
 </Shell>

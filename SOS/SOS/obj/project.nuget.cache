@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "S6PbJTBsBTl8XzfujpfZpfnS04uf5O9p5h7wUdIsZkAS1ndo0lKUz9FGAVBpaEIbUi+gIr5GnXdlQbn3UopcFg==",
+  "dgSpecHash": "mMUiQ9ZUnTOWp03eCwjHBAJqrWKfzzoFTAc2DRfTKLNOPURdhLyXwm621mViCyaCbmVA/0xp7sDwl9SOYwnBmg==",
   "success": true,
   "projectFilePath": "C:\\Users\\drm\\Documents\\csharp\\SOS\\SOS\\SOS.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\drm\\.nuget\\packages\\communitytoolkit.mvvm\\8.2.1\\communitytoolkit.mvvm.8.2.1.nupkg.sha512",
     "C:\\Users\\drm\\.nuget\\packages\\googlegson\\2.9.0.1\\googlegson.2.9.0.1.nupkg.sha512",
     "C:\\Users\\drm\\.nuget\\packages\\microsoft.extensions.configuration\\6.0.1\\microsoft.extensions.configuration.6.0.1.nupkg.sha512",
     "C:\\Users\\drm\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\6.0.0\\microsoft.extensions.configuration.abstractions.6.0.0.nupkg.sha512",

@@ -28,6 +28,12 @@ build_metadata.AdditionalFiles.ManifestResourceName = SOS.HighScore.xaml
 build_metadata.AdditionalFiles.TargetPath = HighScore.xaml
 build_metadata.AdditionalFiles.RelativePath = HighScore.xaml
 
+[C:/Users/drm/Documents/csharp/SOS/SOS/LoginPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = SOS.LoginPage.xaml
+build_metadata.AdditionalFiles.TargetPath = LoginPage.xaml
+build_metadata.AdditionalFiles.RelativePath = LoginPage.xaml
+
 [C:/Users/drm/Documents/csharp/SOS/SOS/MainPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = SOS.MainPage.xaml

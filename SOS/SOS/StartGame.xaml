@@ -2,36 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SOS.StartGame"
+             xmlns:item="clr-namespace:SOS"
              Title="StartGame">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
 
-        <!-- Χρησιμοποιήστε το DataTemplate για να δημιουργήσετε τα τετραγωνάκια -->
-        <CollectionView Grid.Row="1" Grid.Column="0" Grid.RowSpan="5" Grid.ColumnSpan="5" ItemsSource="{Binding Board}">
-            <CollectionView.ItemsLayout>
-                <GridItemsLayout Orientation="Vertical" Span="5" />
-            </CollectionView.ItemsLayout>
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame BorderColor="Blue" Padding="10" Margin="0" CornerRadius="0" HeightRequest="50" WidthRequest="50">
-                        <Label Text="{Binding Symbol}" VerticalOptions="Center" HorizontalOptions="Center" FontSize="24"/>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-
-    </Grid>
 </ContentPage>
