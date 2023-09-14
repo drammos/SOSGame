@@ -968,6 +968,13 @@ C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-android\resizetizer\r\dra
 C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-android\resizetizer\r\drawable-xxhdpi\play.png
 C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-android\resizetizer\r\drawable-xxxhdpi\high_score.png
 C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-android\resizetizer\r\drawable-xxxhdpi\play.png
+C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-android\android\assets\CommunityToolkit.Mvvm.dll
+C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-android\android\assets\CommunityToolkit.Mvvm.pdb
+C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-android\resizetizer\r\drawable\user.png
+C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-android\resizetizer\r\drawable\user1.png
+C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-android\resizetizer\r\drawable\locked.png
+C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-android\resizetizer\r\drawable\username.png
+C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-android\resizetizer\r\drawable\loginimage.jpg
 C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-android\android\typemaps.x86_64.s
 C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-android\android\environment.x86_64.s
 C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-android\android\compressed_assemblies.x86_64.s
@@ -975,7 +982,3 @@ C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-android\android\typemaps.
 C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-android\android\environment.x86_64.o
 C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-android\android\compressed_assemblies.x86_64.o
 C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-android\app_shared_libraries\x86_64\libxamarin-app.so
-C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-android\android\assets\CommunityToolkit.Mvvm.dll
-C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-android\android\assets\CommunityToolkit.Mvvm.pdb
-C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-android\resizetizer\r\drawable\user.png
-C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-android\resizetizer\r\drawable\user1.png

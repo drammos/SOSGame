@@ -15,12 +15,19 @@
         </member>
         <member name="T:SOS.ViewModel.LoginViewModel">
             <inheritdoc/>
+            <inheritdoc/>
         </member>
         <member name="P:SOS.ViewModel.LoginViewModel.UserName">
             <inheritdoc cref="F:SOS.ViewModel.LoginViewModel._userName"/>
         </member>
         <member name="P:SOS.ViewModel.LoginViewModel.Password">
             <inheritdoc cref="F:SOS.ViewModel.LoginViewModel._password"/>
+        </member>
+        <member name="F:SOS.ViewModel.LoginViewModel.loginCommand">
+            <summary>The backing field for <see cref="P:SOS.ViewModel.LoginViewModel.LoginCommand"/>.</summary>
+        </member>
+        <member name="P:SOS.ViewModel.LoginViewModel.LoginCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="M:SOS.ViewModel.LoginViewModel.Login"/>.</summary>
         </member>
         <member name="T:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs">
             <summary>

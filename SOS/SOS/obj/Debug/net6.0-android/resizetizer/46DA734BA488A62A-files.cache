@@ -1,6 +1,9 @@
-﻿obj\Debug\net6.0-android\resizetizer\r\drawable\setting_lines.png
+﻿obj\Debug\net6.0-android\resizetizer\r\drawable\locked.png
+obj\Debug\net6.0-android\resizetizer\r\drawable\loginimage.jpg
+obj\Debug\net6.0-android\resizetizer\r\drawable\setting_lines.png
 obj\Debug\net6.0-android\resizetizer\r\drawable\user.png
 obj\Debug\net6.0-android\resizetizer\r\drawable\user1.png
+obj\Debug\net6.0-android\resizetizer\r\drawable\username.png
 obj\Debug\net6.0-android\resizetizer\r\drawable-hdpi\dotnet_bot.png
 obj\Debug\net6.0-android\resizetizer\r\drawable-hdpi\high_score.png
 obj\Debug\net6.0-android\resizetizer\r\drawable-hdpi\play.png
