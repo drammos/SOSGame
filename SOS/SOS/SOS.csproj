@@ -49,6 +49,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <AndroidResource Remove="NewFolder1\**" />
+	  <Compile Remove="NewFolder1\**" />
+	  <EmbeddedResource Remove="NewFolder1\**" />
+	  <MauiCss Remove="NewFolder1\**" />
+	  <MauiXaml Remove="NewFolder1\**" />
+	  <None Remove="NewFolder1\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiXaml Update="ContantUs.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -73,11 +82,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="NewFolder1\" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+	  <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
 	</ItemGroup>
 
 </Project>

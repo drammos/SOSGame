@@ -4,7 +4,16 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:SOS"
-    Shell.FlyoutBehavior="Flyout">
+    xmlns:views="clr-namespace:SOS.ViewModel"
+    Shell.FlyoutBehavior="Disabled">
+
+    <ShellContent
+        ContentTemplate="{DataTemplate local:LoginPage}"
+        Route="LoginPage" />
+
+
+
+
     <FlyoutItem Title="Home" FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent
         Title="StartGame"

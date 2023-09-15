@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:SOS.ViewModel"
              x:Class="SOS.LoginPage"
-             Title="LoginPage"
-             BackgroundImageSource="loginimage.jpg">
-
-
+             BackgroundImageSource="loginimage.jpg"
+             Shell.NavBarIsVisible="False"
+             x:DataType="local:LoginViewModel"
+             >
     <Grid>
 
 
@@ -20,7 +21,8 @@
                 <Image Source="user1.png" Aspect="AspectFill" Margin="0"/>
             </Frame>
         </StackLayout>
-
+        <Button Text="SIGN IN" BackgroundColor="#48bfe3" TextColor="White" FontAttributes="Bold" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0" 
+Command="{Binding LoginCommand}"/>
 
         <Grid RowSpacing="5" Grid.Row="1" Margin="20,20,20,0">
 
@@ -33,11 +35,12 @@
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+           
 
+            <Label Grid.Row="1" Text="Welcome!" TextColor="White" HorizontalOptions="Center" FontSize="Title" FontAttributes="Bold" Padding="0" Margin="0"/>
 
-            <Label Grid.Row="1" Text="Sign In" HorizontalOptions="Center" FontSize="Title" FontAttributes="Bold" Padding="0" Margin="0"/>
-
-            <StackLayout Grid.Row="3" Orientation="Vertical" HorizontalOptions="CenterAndExpand">
+            <StackLayout Grid.Row="3" Orientation="Vertical" HorizontalOptions="CenterAndExpand" 
+             x:DataType="local:LoginViewModel">
                 
                 <Frame BackgroundColor="White" BorderColor="White" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
                     <StackLayout Orientation="Horizontal">
@@ -56,16 +59,17 @@
                             <Image Source="locked.png" Aspect="AspectFill" Margin="0"/>
                         </Frame>
 
-                        <Entry Text="{Binding Password}" Placeholder="Password" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                        <Entry Text="{Binding Password}" IsPassword="True" Placeholder="Password" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
 
                     </StackLayout>
                 </Frame>
 
-                <Button Text="SIGN IN" BackgroundColor="BlueViolet" TextColor="Black" FontAttributes="Bold" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0" Command="{Binding LoginCommand}"/>
+                <Button Text="SIGN IN" BackgroundColor="#48bfe3" TextColor="White" FontAttributes="Bold" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0" 
+                        Command="{Binding LoginCommand}"/>
 
                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="0,60,0,0" Padding="0">
-                    <Label Text="New User?" TextColor="DarkGray" FontSize="Small" />
-                    <Label Text=" Sign Up" TextColor="LightGray" FontAttributes="Bold" FontSize="Small" />
+                    <Label Text="New User?" TextColor="Black" FontSize="Small" />
+                    <Label Text=" Sign Up" TextColor="White" FontAttributes="Bold" FontSize="Small" />
                 </StackLayout>
             </StackLayout>
         </Grid>
