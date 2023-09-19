@@ -1,19 +1,39 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Maui.Graphics.Text;
 using SOS.Services;
-using SOS.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Json;
-using System.Text;
-using System.Threading.Tasks;
-using System.Text.Json.Serialization;
-using System.Text.Json;
 using System.Diagnostics;
+using System.Windows.Input;
 
 namespace SOS.ViewModel
 {
+
+    public class HyperlinkSpan : Span
+    {
+        public static readonly BindableProperty UrlProperty =
+            BindableProperty.Create(nameof(Url), typeof(string), typeof(HyperlinkSpan), null);
+
+        public string Url
+        {
+            get { return (string)GetValue(UrlProperty); }
+            set { SetValue(UrlProperty, value); }
+        }
+
+        public HyperlinkSpan()
+        {
+            TextDecorations = TextDecorations.Underline;
+            TextColor = Colors.Blue;
+            GestureRecognizers.Add(new TapGestureRecognizer
+            {
+                // Launcher.OpenAsync is provided by Essentials.
+                Command = new Command(async () => await Launcher.OpenAsync(Url))
+            });
+        }
+    }
+
+
+
     public partial class LoginViewModel : BaseViewModel
     {
         [ObservableProperty]
@@ -23,25 +43,27 @@ namespace SOS.ViewModel
         private string _password;
 
         readonly ILoginRepo loginRepo = new LoginService();
+       
+        [RelayCommand]
+        public async Task Login()
+        {
+            await loginRepo.Login(UserName, Password);
+        }
 
         [RelayCommand]
-        public async void Login()
+        public async Task IsValid()
         {
-
-            Debug.WriteLine("\n\nELAAAAAAAAAAAAAA\n\n");
-            if (!string.IsNullOrWhiteSpace(UserName) && !string.IsNullOrWhiteSpace(Password))
+            bool  res = await loginRepo.IsValid(UserName, Password);
+            if(res)
             {
-                Info user = await loginRepo.Login(UserName, Password);
-                if (Preferences.ContainsKey(nameof(App.UserInfo)))
-                {
-                    Preferences.Remove(nameof(App.UserInfo));
-                }
-
-                string userDetails = JsonSerializer.Serialize(user);
+                await Shell.Current.GoToAsync($"//{nameof(StartGame)}");
             }
+        }
 
-
-            Console.WriteLine("\n\nELAAAAAAAAAAAAAA\n\n");
+        [RelayCommand]
+        public async Task Tap()
+        {
+            await Shell.Current.GoToAsync($"//{nameof(RegisterPage)}");
         }
     }
 }

@@ -22,6 +22,12 @@ build_metadata.AdditionalFiles.ManifestResourceName = SOS.AppShell.xaml
 build_metadata.AdditionalFiles.TargetPath = AppShell.xaml
 build_metadata.AdditionalFiles.RelativePath = AppShell.xaml
 
+[C:/Users/drm/Documents/csharp/SOS/SOS/CustomControls/EntryControl.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = SOS.CustomControls.EntryControl.xaml
+build_metadata.AdditionalFiles.TargetPath = CustomControls\EntryControl.xaml
+build_metadata.AdditionalFiles.RelativePath = CustomControls\EntryControl.xaml
+
 [C:/Users/drm/Documents/csharp/SOS/SOS/HighScore.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = SOS.HighScore.xaml
@@ -39,6 +45,18 @@ build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = SOS.MainPage.xaml
 build_metadata.AdditionalFiles.TargetPath = MainPage.xaml
 build_metadata.AdditionalFiles.RelativePath = MainPage.xaml
+
+[C:/Users/drm/Documents/csharp/SOS/SOS/NewPage1.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = SOS.NewPage1.xaml
+build_metadata.AdditionalFiles.TargetPath = NewPage1.xaml
+build_metadata.AdditionalFiles.RelativePath = NewPage1.xaml
+
+[C:/Users/drm/Documents/csharp/SOS/SOS/RegisterPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = SOS.RegisterPage.xaml
+build_metadata.AdditionalFiles.TargetPath = RegisterPage.xaml
+build_metadata.AdditionalFiles.RelativePath = RegisterPage.xaml
 
 [C:/Users/drm/Documents/csharp/SOS/SOS/Resources/Styles/Colors.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml

@@ -29,29 +29,29 @@
     <AppXManifest Include="C:\Users\drm\Documents\csharp\SOS\SOS\bin\Debug\net6.0-windows10.0.19041.0\win10-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2023-09-15T13:13:24.860</Modified>
+      <Modified>2023-09-19T11:32:38.659</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\bin\Debug\net6.0-windows10.0.19041.0\win10-x64\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2023-09-15T13:07:01.018</Modified>
+      <Modified>2023-09-19T11:30:28.569</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\bin\Debug\net6.0-windows10.0.19041.0\win10-x64\SOS.runtimeconfig.json">
       <PackagePath>SOS.runtimeconfig.json</PackagePath>
-      <Modified>2023-09-15T12:52:11.229</Modified>
+      <Modified>2023-09-18T13:13:14.434</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\bin\Debug\net6.0-windows10.0.19041.0\win10-x64\SOS.dll">
       <PackagePath>SOS.dll</PackagePath>
-      <Modified>2023-09-15T13:13:24.136</Modified>
+      <Modified>2023-09-19T11:32:37.899</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\apphost.exe">
       <PackagePath>SOS.exe</PackagePath>
-      <Modified>2023-09-15T13:13:24.153</Modified>
+      <Modified>2023-09-19T11:32:37.919</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\bin\Debug\net6.0-windows10.0.19041.0\win10-x64\SOS.deps.json">
       <PackagePath>SOS.deps.json</PackagePath>
-      <Modified>2023-09-15T13:01:54.161</Modified>
+      <Modified>2023-09-19T11:30:28.439</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\.nuget\packages\microsoft.netcore.app.runtime.win-x64\6.0.21\runtimes\win-x64\lib\net6.0\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
@@ -1065,21 +1065,17 @@
       <PackagePath>SQLite-net.dll</PackagePath>
       <Modified>2021-09-02T21:04:32.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\drm\.nuget\packages\sqlitepclraw.bundle_green\2.0.4\lib\netcoreapp3.1\SQLitePCLRaw.batteries_v2.dll">
+    <AppxPackagedFile Include="C:\Users\drm\.nuget\packages\sqlitepclraw.bundle_green\2.1.6\lib\netstandard2.0\SQLitePCLRaw.batteries_v2.dll">
       <PackagePath>SQLitePCLRaw.batteries_v2.dll</PackagePath>
-      <Modified>2020-09-03T17:13:26.000</Modified>
+      <Modified>2023-08-23T18:41:14.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\drm\.nuget\packages\sqlitepclraw.bundle_green\2.0.4\lib\netcoreapp3.1\SQLitePCLRaw.nativelibrary.dll">
-      <PackagePath>SQLitePCLRaw.nativelibrary.dll</PackagePath>
-      <Modified>2020-09-03T17:13:02.000</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\drm\.nuget\packages\sqlitepclraw.core\2.0.4\lib\netstandard2.0\SQLitePCLRaw.core.dll">
+    <AppxPackagedFile Include="C:\Users\drm\.nuget\packages\sqlitepclraw.core\2.1.6\lib\netstandard2.0\SQLitePCLRaw.core.dll">
       <PackagePath>SQLitePCLRaw.core.dll</PackagePath>
-      <Modified>2020-09-03T17:13:04.000</Modified>
+      <Modified>2023-08-23T18:38:38.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\drm\.nuget\packages\sqlitepclraw.provider.dynamic_cdecl\2.0.4\lib\netstandard2.0\SQLitePCLRaw.provider.dynamic_cdecl.dll">
-      <PackagePath>SQLitePCLRaw.provider.dynamic_cdecl.dll</PackagePath>
-      <Modified>2020-09-03T17:13:18.000</Modified>
+    <AppxPackagedFile Include="C:\Users\drm\.nuget\packages\sqlitepclraw.provider.e_sqlite3\2.1.6\lib\net6.0-windows7.0\SQLitePCLRaw.provider.e_sqlite3.dll">
+      <PackagePath>SQLitePCLRaw.provider.e_sqlite3.dll</PackagePath>
+      <Modified>2023-08-23T18:38:52.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\.nuget\packages\microsoft.graphics.win2d\1.0.3.1\runtimes\win10-x64\native\Microsoft.Graphics.Canvas.dll">
       <PackagePath>Microsoft.Graphics.Canvas.dll</PackagePath>
@@ -1089,9 +1085,9 @@
       <PackagePath>Microsoft.WindowsAppRuntime.Bootstrap.dll</PackagePath>
       <Modified>2022-09-07T21:54:36.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\drm\.nuget\packages\sqlitepclraw.lib.e_sqlite3\2.0.4\runtimes\win-x64\native\e_sqlite3.dll">
+    <AppxPackagedFile Include="C:\Users\drm\.nuget\packages\sqlitepclraw.lib.e_sqlite3\2.1.6\runtimes\win-x64\native\e_sqlite3.dll">
       <PackagePath>e_sqlite3.dll</PackagePath>
-      <Modified>2020-08-17T14:38:20.000</Modified>
+      <Modified>2023-08-23T18:33:44.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\.nuget\packages\microsoft.maui.controls.ref.win\6.0.553\ref\net6.0-windows10.0.19041\Microsoft.Maui.Controls.Compatibility.pri">
       <PackagePath>Microsoft.Maui.Controls.Compatibility.pri</PackagePath>
@@ -1111,23 +1107,23 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-100.png">
       <PackagePath>splashSplashScreen.scale-100.png</PackagePath>
-      <Modified>2023-09-12T09:50:08.779</Modified>
+      <Modified>2023-09-18T09:19:21.200</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-125.png">
       <PackagePath>splashSplashScreen.scale-125.png</PackagePath>
-      <Modified>2023-09-12T09:50:08.794</Modified>
+      <Modified>2023-09-18T09:19:21.209</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-150.png">
       <PackagePath>splashSplashScreen.scale-150.png</PackagePath>
-      <Modified>2023-09-12T09:50:08.807</Modified>
+      <Modified>2023-09-18T09:19:21.220</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-200.png">
       <PackagePath>splashSplashScreen.scale-200.png</PackagePath>
-      <Modified>2023-09-12T09:50:08.826</Modified>
+      <Modified>2023-09-18T09:19:21.238</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-400.png">
       <PackagePath>splashSplashScreen.scale-400.png</PackagePath>
-      <Modified>2023-09-12T09:50:08.903</Modified>
+      <Modified>2023-09-18T09:19:21.314</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\f\OpenSans-Regular.ttf">
       <PackagePath>OpenSans-Regular.ttf</PackagePath>
@@ -1139,227 +1135,227 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appicon.ico">
       <PackagePath>appicon.ico</PackagePath>
-      <Modified>2023-09-14T10:16:36.779</Modified>
+      <Modified>2023-09-18T09:19:21.367</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-100.png">
       <PackagePath>appiconLargeTile.scale-100.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.910</Modified>
+      <Modified>2023-09-18T09:19:21.522</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-125.png">
       <PackagePath>appiconLargeTile.scale-125.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.918</Modified>
+      <Modified>2023-09-18T09:19:21.531</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-150.png">
       <PackagePath>appiconLargeTile.scale-150.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.924</Modified>
+      <Modified>2023-09-18T09:19:21.537</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-200.png">
       <PackagePath>appiconLargeTile.scale-200.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.934</Modified>
+      <Modified>2023-09-18T09:19:21.550</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-400.png">
       <PackagePath>appiconLargeTile.scale-400.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.970</Modified>
+      <Modified>2023-09-18T09:19:21.588</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-16.png">
       <PackagePath>appiconLogo.altform-lightunplated_targetsize-16.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.814</Modified>
+      <Modified>2023-09-18T09:19:21.417</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-24.png">
       <PackagePath>appiconLogo.altform-lightunplated_targetsize-24.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.816</Modified>
+      <Modified>2023-09-18T09:19:21.419</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-256.png">
       <PackagePath>appiconLogo.altform-lightunplated_targetsize-256.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.823</Modified>
+      <Modified>2023-09-18T09:19:21.428</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-32.png">
       <PackagePath>appiconLogo.altform-lightunplated_targetsize-32.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.817</Modified>
+      <Modified>2023-09-18T09:19:21.421</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-48.png">
       <PackagePath>appiconLogo.altform-lightunplated_targetsize-48.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.819</Modified>
+      <Modified>2023-09-18T09:19:21.422</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-16.png">
       <PackagePath>appiconLogo.altform-unplated_targetsize-16.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.803</Modified>
+      <Modified>2023-09-18T09:19:21.404</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-24.png">
       <PackagePath>appiconLogo.altform-unplated_targetsize-24.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.805</Modified>
+      <Modified>2023-09-18T09:19:21.406</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-256.png">
       <PackagePath>appiconLogo.altform-unplated_targetsize-256.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.812</Modified>
+      <Modified>2023-09-18T09:19:21.415</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-32.png">
       <PackagePath>appiconLogo.altform-unplated_targetsize-32.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.806</Modified>
+      <Modified>2023-09-18T09:19:21.408</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-48.png">
       <PackagePath>appiconLogo.altform-unplated_targetsize-48.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.808</Modified>
+      <Modified>2023-09-18T09:19:21.410</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-100.png">
       <PackagePath>appiconLogo.scale-100.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.784</Modified>
+      <Modified>2023-09-18T09:19:21.379</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-125.png">
       <PackagePath>appiconLogo.scale-125.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.785</Modified>
+      <Modified>2023-09-18T09:19:21.382</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-150.png">
       <PackagePath>appiconLogo.scale-150.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.787</Modified>
+      <Modified>2023-09-18T09:19:21.385</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-200.png">
       <PackagePath>appiconLogo.scale-200.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.789</Modified>
+      <Modified>2023-09-18T09:19:21.387</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-400.png">
       <PackagePath>appiconLogo.scale-400.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.792</Modified>
+      <Modified>2023-09-18T09:19:21.390</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-16.png">
       <PackagePath>appiconLogo.targetsize-16.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.794</Modified>
+      <Modified>2023-09-18T09:19:21.392</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-24.png">
       <PackagePath>appiconLogo.targetsize-24.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.795</Modified>
+      <Modified>2023-09-18T09:19:21.394</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-256.png">
       <PackagePath>appiconLogo.targetsize-256.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.802</Modified>
+      <Modified>2023-09-18T09:19:21.403</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-32.png">
       <PackagePath>appiconLogo.targetsize-32.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.797</Modified>
+      <Modified>2023-09-18T09:19:21.397</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-48.png">
       <PackagePath>appiconLogo.targetsize-48.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.798</Modified>
+      <Modified>2023-09-18T09:19:21.399</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-100.png">
       <PackagePath>appiconMediumTile.scale-100.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.848</Modified>
+      <Modified>2023-09-18T09:19:21.455</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-125.png">
       <PackagePath>appiconMediumTile.scale-125.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.851</Modified>
+      <Modified>2023-09-18T09:19:21.459</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-150.png">
       <PackagePath>appiconMediumTile.scale-150.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.854</Modified>
+      <Modified>2023-09-18T09:19:21.463</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-200.png">
       <PackagePath>appiconMediumTile.scale-200.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.858</Modified>
+      <Modified>2023-09-18T09:19:21.469</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-400.png">
       <PackagePath>appiconMediumTile.scale-400.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.867</Modified>
+      <Modified>2023-09-18T09:19:21.478</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-100.png">
       <PackagePath>appiconSmallTile.scale-100.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.834</Modified>
+      <Modified>2023-09-18T09:19:21.442</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-125.png">
       <PackagePath>appiconSmallTile.scale-125.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.835</Modified>
+      <Modified>2023-09-18T09:19:21.444</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-150.png">
       <PackagePath>appiconSmallTile.scale-150.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.837</Modified>
+      <Modified>2023-09-18T09:19:21.446</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-200.png">
       <PackagePath>appiconSmallTile.scale-200.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.840</Modified>
+      <Modified>2023-09-18T09:19:21.448</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-400.png">
       <PackagePath>appiconSmallTile.scale-400.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.845</Modified>
+      <Modified>2023-09-18T09:19:21.453</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-100.png">
       <PackagePath>appiconStoreLogo.scale-100.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.824</Modified>
+      <Modified>2023-09-18T09:19:21.430</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-125.png">
       <PackagePath>appiconStoreLogo.scale-125.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.826</Modified>
+      <Modified>2023-09-18T09:19:21.432</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-150.png">
       <PackagePath>appiconStoreLogo.scale-150.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.827</Modified>
+      <Modified>2023-09-18T09:19:21.435</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-200.png">
       <PackagePath>appiconStoreLogo.scale-200.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.829</Modified>
+      <Modified>2023-09-18T09:19:21.437</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-400.png">
       <PackagePath>appiconStoreLogo.scale-400.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.832</Modified>
+      <Modified>2023-09-18T09:19:21.440</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-100.png">
       <PackagePath>appiconWideTile.scale-100.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.871</Modified>
+      <Modified>2023-09-18T09:19:21.481</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-125.png">
       <PackagePath>appiconWideTile.scale-125.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.874</Modified>
+      <Modified>2023-09-18T09:19:21.485</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-150.png">
       <PackagePath>appiconWideTile.scale-150.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.879</Modified>
+      <Modified>2023-09-18T09:19:21.490</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-200.png">
       <PackagePath>appiconWideTile.scale-200.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.885</Modified>
+      <Modified>2023-09-18T09:19:21.497</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-400.png">
       <PackagePath>appiconWideTile.scale-400.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.904</Modified>
+      <Modified>2023-09-18T09:19:21.516</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-100.png">
       <PackagePath>dotnet_bot.scale-100.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.778</Modified>
+      <Modified>2023-09-18T09:19:21.402</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-125.png">
       <PackagePath>dotnet_bot.scale-125.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.785</Modified>
+      <Modified>2023-09-18T09:19:21.411</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-150.png">
       <PackagePath>dotnet_bot.scale-150.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.793</Modified>
+      <Modified>2023-09-18T09:19:21.420</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-200.png">
       <PackagePath>dotnet_bot.scale-200.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.805</Modified>
+      <Modified>2023-09-18T09:19:21.432</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-400.png">
       <PackagePath>dotnet_bot.scale-400.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.833</Modified>
+      <Modified>2023-09-18T09:19:21.463</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\high_score.scale-100.png">
       <PackagePath>high_score.scale-100.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.789</Modified>
+      <Modified>2023-09-18T09:19:21.406</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\high_score.scale-125.png">
       <PackagePath>high_score.scale-125.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.812</Modified>
+      <Modified>2023-09-18T09:19:21.432</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\high_score.scale-150.png">
       <PackagePath>high_score.scale-150.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.844</Modified>
+      <Modified>2023-09-18T09:19:21.464</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\high_score.scale-200.png">
       <PackagePath>high_score.scale-200.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.900</Modified>
+      <Modified>2023-09-18T09:19:21.517</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\high_score.scale-400.png">
       <PackagePath>high_score.scale-400.png</PackagePath>
-      <Modified>2023-09-14T10:16:37.105</Modified>
+      <Modified>2023-09-18T09:19:21.726</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\locked.scale-100.png">
       <PackagePath>locked.scale-100.png</PackagePath>
@@ -1371,63 +1367,63 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\play.scale-100.png">
       <PackagePath>play.scale-100.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.788</Modified>
+      <Modified>2023-09-18T09:19:21.398</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\play.scale-125.png">
       <PackagePath>play.scale-125.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.810</Modified>
+      <Modified>2023-09-18T09:19:21.424</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\play.scale-150.png">
       <PackagePath>play.scale-150.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.840</Modified>
+      <Modified>2023-09-18T09:19:21.454</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\play.scale-200.png">
       <PackagePath>play.scale-200.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.893</Modified>
+      <Modified>2023-09-18T09:19:21.505</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\play.scale-400.png">
       <PackagePath>play.scale-400.png</PackagePath>
-      <Modified>2023-09-14T10:16:37.093</Modified>
+      <Modified>2023-09-18T09:19:21.716</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\settings.scale-100.png">
       <PackagePath>settings.scale-100.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.791</Modified>
+      <Modified>2023-09-18T09:19:21.402</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\settings.scale-125.png">
       <PackagePath>settings.scale-125.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.814</Modified>
+      <Modified>2023-09-18T09:19:21.426</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\settings.scale-150.png">
       <PackagePath>settings.scale-150.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.846</Modified>
+      <Modified>2023-09-18T09:19:21.466</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\settings.scale-200.png">
       <PackagePath>settings.scale-200.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.899</Modified>
+      <Modified>2023-09-18T09:19:21.521</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\settings.scale-400.png">
       <PackagePath>settings.scale-400.png</PackagePath>
-      <Modified>2023-09-14T10:16:37.099</Modified>
+      <Modified>2023-09-18T09:19:21.727</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\setting_lines.scale-100.png">
       <PackagePath>setting_lines.scale-100.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.787</Modified>
+      <Modified>2023-09-18T09:19:21.396</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\setting_lines.scale-125.png">
       <PackagePath>setting_lines.scale-125.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.808</Modified>
+      <Modified>2023-09-18T09:19:21.422</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\setting_lines.scale-150.png">
       <PackagePath>setting_lines.scale-150.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.836</Modified>
+      <Modified>2023-09-18T09:19:21.460</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\setting_lines.scale-200.png">
       <PackagePath>setting_lines.scale-200.png</PackagePath>
-      <Modified>2023-09-14T10:16:36.884</Modified>
+      <Modified>2023-09-18T09:19:21.513</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\setting_lines.scale-400.png">
       <PackagePath>setting_lines.scale-400.png</PackagePath>
-      <Modified>2023-09-14T10:16:37.066</Modified>
+      <Modified>2023-09-18T09:19:21.704</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\user.scale-100.png">
       <PackagePath>user.scale-100.png</PackagePath>

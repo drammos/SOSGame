@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sf="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
+             x:Class="SOS.RegisterPage"
+             xmlns:local="clr-namespace:SOS.ViewModel"
+             xmlns:customControls="clr-namespace:SOS.CustomControls"
+             Title="RegisterPage"
+             BackgroundColor="#48bfe3"
+             Shell.NavBarIsVisible="False"
+             x:DataType="local:LoginViewModel">
+  
+    
+    
+    
+    <Grid>
+
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+        <Label Grid.Row="0" Text="Create your Account" TextColor="White" HorizontalOptions="Center" FontSize="Title" FontAttributes="Bold" Padding="0" Margin="0"/>
+
+        <customControls:EntryControl />
+
+
+    </Grid>
+    
+    
+    
+    
+</ContentPage>

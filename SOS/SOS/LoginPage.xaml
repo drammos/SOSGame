@@ -11,68 +11,55 @@
 
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
             <RowDefinition Height="220"/>
-            <RowDefinition Height="*"/>
             <RowDefinition Height="50"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackLayout>
-            <Frame BackgroundColor="White" HeightRequest="70" WidthRequest="70" CornerRadius="20" Padding="0" Margin="0,150,0,0" HorizontalOptions="Center">
-                <Image Source="user1.png" Aspect="AspectFill" Margin="0"/>
-            </Frame>
-        </StackLayout>
-        <Button Text="SIGN IN" BackgroundColor="#48bfe3" TextColor="White" FontAttributes="Bold" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0" 
-Command="{Binding LoginCommand}"/>
 
-        <Grid RowSpacing="5" Grid.Row="1" Margin="20,20,20,0">
+        <Frame Grid.Row="0" BackgroundColor="White" HeightRequest="70" WidthRequest="70" CornerRadius="20" Padding="0" Margin="0,150,0,0" HorizontalOptions="Center">
+            <Image Source="user1.png" Aspect="AspectFill" Margin="0"/>
+        </Frame>
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="0"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-           
+        <Label Grid.Row="2" Text="Welcome!" TextColor="White" HorizontalOptions="Center" FontSize="Title" FontAttributes="Bold" Padding="0" Margin="0"/>
 
-            <Label Grid.Row="1" Text="Welcome!" TextColor="White" HorizontalOptions="Center" FontSize="Title" FontAttributes="Bold" Padding="0" Margin="0"/>
-
-            <StackLayout Grid.Row="3" Orientation="Vertical" HorizontalOptions="CenterAndExpand" 
-             x:DataType="local:LoginViewModel">
-                
-                <Frame BackgroundColor="White" BorderColor="White" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
-                    <StackLayout Orientation="Horizontal">
-                        <Frame BackgroundColor="White" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="1" Margin="5">
-                            <Image Source="username.png" Aspect="AspectFill" Margin="0"/>
-                        </Frame>
-
-                        <Entry Text="{Binding UserName}" Placeholder="Username" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
-
-                    </StackLayout>
-                </Frame>
-                
-                <Frame BackgroundColor="White" BorderColor="White" Margin="0,15,0,0" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
-                    <StackLayout Orientation="Horizontal">
-                        <Frame BackgroundColor="White" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="5" Margin="5">
-                            <Image Source="locked.png" Aspect="AspectFill" Margin="0"/>
-                        </Frame>
-
-                        <Entry Text="{Binding Password}" IsPassword="True" Placeholder="Password" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
-
-                    </StackLayout>
+        <Frame Grid.Row="3" BackgroundColor="White" BorderColor="White" Margin="0,5,0,0" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+            <StackLayout Orientation="Horizontal">
+                <Frame BackgroundColor="White" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="1" Margin="5">
+                    <Image Source="username.png" Aspect="AspectFill" Margin="0"/>
                 </Frame>
 
-                <Button Text="SIGN IN" BackgroundColor="#48bfe3" TextColor="White" FontAttributes="Bold" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0" 
-                        Command="{Binding LoginCommand}"/>
+                <Entry Text="{Binding UserName}" Placeholder="Username" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
 
-                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="0,60,0,0" Padding="0">
-                    <Label Text="New User?" TextColor="Black" FontSize="Small" />
-                    <Label Text=" Sign Up" TextColor="White" FontAttributes="Bold" FontSize="Small" />
-                </StackLayout>
             </StackLayout>
-        </Grid>
+        </Frame>
+
+        <Frame Grid.Row="4" BackgroundColor="White" BorderColor="White" Margin="0,5,0,0" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+            <StackLayout Orientation="Horizontal">
+                <Frame BackgroundColor="White" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="5" Margin="5">
+                    <Image Source="locked.png" Aspect="AspectFill" Margin="0"/>
+                </Frame>
+
+                <Entry Text="{Binding Password}" IsPassword="True" Placeholder="Password" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+
+            </StackLayout>
+        </Frame>
+
+        <Button Grid.Row="6"  Text="SIGN IN" BackgroundColor="#48bfe3" TextColor="White" FontAttributes="Bold" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0" 
+        Command="{Binding IsValidCommand}"/>
+
+        <StackLayout Grid.Row="7" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="0,30,0,0" Padding="0">
+            <Label Text="New User?" TextColor="Black" />
+            <Label Text=" Resgister" TextColor="AliceBlue" FontAttributes="Bold">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding TapCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+        </StackLayout>
     </Grid>
 </ContentPage>
     

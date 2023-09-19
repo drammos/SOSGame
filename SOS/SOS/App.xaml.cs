@@ -5,7 +5,6 @@ namespace SOS;
 
 public partial class App : Application
 {
-	public static Info UserInfo;
 
 	public App()
 	{

@@ -9,6 +9,8 @@ namespace SOS.Services
 {
     public interface ILoginRepo
     {
-        Task<Info> Login(string username, string password); 
+        Task<User> Login(string username, string password);
+
+        Task<bool> IsValid(string username, string password);
     }
 }

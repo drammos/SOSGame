@@ -78,6 +78,14 @@
               "version": "[6.0.553, )",
               "autoReferenced": true
             },
+            "SQLitePCLRaw.bundle_green": {
+              "target": "Package",
+              "version": "[2.1.6, )"
+            },
+            "Syncfusion.Maui.Core": {
+              "target": "Package",
+              "version": "[23.1.36, )"
+            },
             "sqlite-net-pcl": {
               "target": "Package",
               "version": "[1.8.116, )"
@@ -188,6 +196,14 @@
               "version": "[6.0.553, )",
               "autoReferenced": true
             },
+            "SQLitePCLRaw.bundle_green": {
+              "target": "Package",
+              "version": "[2.1.6, )"
+            },
+            "Syncfusion.Maui.Core": {
+              "target": "Package",
+              "version": "[23.1.36, )"
+            },
             "System.Runtime.InteropServices.NFloat.Internal": {
               "target": "Package",
               "version": "[6.0.1, )",
@@ -278,6 +294,14 @@
               "target": "Package",
               "version": "[6.0.553, )",
               "autoReferenced": true
+            },
+            "SQLitePCLRaw.bundle_green": {
+              "target": "Package",
+              "version": "[2.1.6, )"
+            },
+            "Syncfusion.Maui.Core": {
+              "target": "Package",
+              "version": "[23.1.36, )"
             },
             "System.Runtime.InteropServices.NFloat.Internal": {
               "target": "Package",
@@ -370,6 +394,14 @@
               "target": "Package",
               "version": "[6.0.553, )",
               "autoReferenced": true
+            },
+            "SQLitePCLRaw.bundle_green": {
+              "target": "Package",
+              "version": "[2.1.6, )"
+            },
+            "Syncfusion.Maui.Core": {
+              "target": "Package",
+              "version": "[23.1.36, )"
             },
             "sqlite-net-pcl": {
               "target": "Package",

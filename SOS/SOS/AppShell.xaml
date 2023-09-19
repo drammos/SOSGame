@@ -9,7 +9,15 @@
 
     <ShellContent
         ContentTemplate="{DataTemplate local:LoginPage}"
+        FlyoutItemIsVisible="False"
+        Shell.FlyoutBehavior="Disabled"
         Route="LoginPage" />
+
+    <ShellContent
+    ContentTemplate="{DataTemplate local:RegisterPage}"
+    FlyoutItemIsVisible="False"
+    Shell.FlyoutBehavior="Disabled"
+    Route="RegisterPage" />
 
 
 
