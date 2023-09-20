@@ -11,16 +11,10 @@
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
   <ItemGroup>
-    <MauiXaml Update="CustomControls\EntryControl.xaml">
-      <SubType>Designer</SubType>
-    </MauiXaml>
     <MauiXaml Update="HighScore.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="LoginPage.xaml">
-      <SubType>Designer</SubType>
-    </MauiXaml>
-    <MauiXaml Update="NewPage1.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="RegisterPage.xaml">

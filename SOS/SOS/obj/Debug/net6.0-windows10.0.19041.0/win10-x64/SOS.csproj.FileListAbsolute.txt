@@ -389,3 +389,5 @@ C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10
 C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\qualifiers.txt.intermediate
 C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\MultipleQualifiersPerDimensionFound.txt
 C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\ProjectArchitectures.txt
+C:\Users\drm\Documents\csharp\SOS\SOS\bin\Debug\net6.0-windows10.0.19041.0\win10-x64\Syncfusion.Licensing.dll
+C:\Users\drm\Documents\csharp\SOS\SOS\bin\Debug\net6.0-windows10.0.19041.0\win10-x64\Syncfusion.Maui.Core.dll

@@ -13,6 +13,7 @@
           "Microsoft.Maui.Dependencies": "6.0.553",
           "Microsoft.Maui.Extensions": "6.0.553",
           "SQLitePCLRaw.bundle_green": "2.1.6",
+          "Syncfusion.Maui.Core": "23.1.36",
           "sqlite-net-pcl": "1.8.116",
           "runtimepack.Microsoft.NETCore.App.Runtime.win-x64": "6.0.21",
           "runtimepack.Microsoft.Maui.Core.Runtime.win": "6.0.553",
@@ -1165,6 +1166,25 @@
           }
         }
       },
+      "Syncfusion.Licensing/23.1.36": {
+        "runtime": {
+          "lib/net6.0/Syncfusion.Licensing.dll": {
+            "assemblyVersion": "23.1.36.0",
+            "fileVersion": "23.1.36.0"
+          }
+        }
+      },
+      "Syncfusion.Maui.Core/23.1.36": {
+        "dependencies": {
+          "Syncfusion.Licensing": "23.1.36"
+        },
+        "runtime": {
+          "lib/net6.0-windows10.0.19041.0/Syncfusion.Maui.Core.dll": {
+            "assemblyVersion": "23.1.36.0",
+            "fileVersion": "23.1.36.0"
+          }
+        }
+      },
       "System.Diagnostics.DiagnosticSource/6.0.0": {
         "dependencies": {
           "System.Runtime.CompilerServices.Unsafe": "6.0.0"
@@ -1351,6 +1371,20 @@
       "sha512": "sha512-PQ2Oq3yepLY4P7ll145P3xtx2bX8xF4PzaKPRpw9jZlKvfe4LE/saAV82inND9usn1XRpmxXk7Lal3MTI+6CNg==",
       "path": "sqlitepclraw.provider.e_sqlite3/2.1.6",
       "hashPath": "sqlitepclraw.provider.e_sqlite3.2.1.6.nupkg.sha512"
+    },
+    "Syncfusion.Licensing/23.1.36": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-MKXVxD6nr86rs5bT88gxnmSQYt0zfN8DIS2X9ZxfWHxRNZDWHHkTUqftvKf4k+3o7086LvBSVTZAHVMtXBUqlA==",
+      "path": "syncfusion.licensing/23.1.36",
+      "hashPath": "syncfusion.licensing.23.1.36.nupkg.sha512"
+    },
+    "Syncfusion.Maui.Core/23.1.36": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-aUQzoCPnF+pTsbF6bEOUMgdswSXECH76xZ7u6w0MjGSwJSYxdmnvs6/6MK8/PcXlhTa2j5j2qm+Q4SQGuHzVUw==",
+      "path": "syncfusion.maui.core/23.1.36",
+      "hashPath": "syncfusion.maui.core.23.1.36.nupkg.sha512"
     },
     "System.Diagnostics.DiagnosticSource/6.0.0": {
       "type": "package",

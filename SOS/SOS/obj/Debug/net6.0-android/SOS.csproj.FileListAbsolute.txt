@@ -981,8 +981,6 @@ C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-android\lp\152\jl\files.c
 C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-android\lp\158\jl\files.cache
 C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-android\android\assets\Syncfusion.Licensing.dll
 C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-android\android\assets\Syncfusion.Maui.Core.dll
-C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-android\android\typemaps.x86_64.s
-C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-android\android\environment.x86_64.s
 C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-android\android\src\crc640360c8a960a6805b\PlatformSignaturePad.java
 C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-android\android\src\crc640360c8a960a6805b\StaticTextLayout.java
 C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-android\android\src\crc6479d6f9e48582dc67\GestureDetector_ScaleListener.java
@@ -1002,6 +1000,8 @@ C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-android\android\src\crc64
 C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-android\android\src\crc6486af4e8104107bae\LayoutViewGroupExt.java
 C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-android\android\src\crc648a9457dd5f66374f\ExtMauiHorizontalScrollView.java
 C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-android\android\src\crc648a9457dd5f66374f\ExtMauiScrollView.java
+C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-android\android\typemaps.x86_64.s
+C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-android\android\environment.x86_64.s
 C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-android\android\compressed_assemblies.x86_64.s
 C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-android\android\typemaps.x86_64.o
 C:\Users\drm\Documents\csharp\SOS\SOS\obj\Debug\net6.0-android\android\environment.x86_64.o

@@ -6,4 +6,9 @@ public partial class RegisterPage : ContentPage
 	{
 		InitializeComponent();
 	}
+
+	//public string UserInfo
+	//{
+
+	//}
 }

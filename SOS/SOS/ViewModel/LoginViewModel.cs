@@ -42,12 +42,16 @@ namespace SOS.ViewModel
         [ObservableProperty]
         private string _password;
 
+        [ObservableProperty]
+        private string _email;
+
+
         readonly ILoginRepo loginRepo = new LoginService();
        
         [RelayCommand]
         public async Task Login()
         {
-            await loginRepo.Login(UserName, Password);
+            await loginRepo.Login(UserName, Password, Email);
         }
 
         [RelayCommand]

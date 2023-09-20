@@ -25,7 +25,7 @@ namespace SOS.Services
             await Database.CreateTableAsync<User>();
         }
 
-        public async Task<User> Login(string username, string password)
+        public async Task<User> Login(string username, string password, string email)
         {
             await Init();
             //First check the usename 
@@ -36,6 +36,7 @@ namespace SOS.Services
                 Guid = Guid.NewGuid().ToString(),
                 UserName = username,
                 Password = hashedPassword,
+                Email = email
             };
 
             try
