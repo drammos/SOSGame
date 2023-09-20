@@ -52,6 +52,8 @@ namespace SOS.ViewModel
         public async Task Login()
         {
             await loginRepo.Login(UserName, Password, Email);
+
+
         }
 
         [RelayCommand]

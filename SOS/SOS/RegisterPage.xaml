@@ -7,38 +7,53 @@
              BackgroundColor="White"
              x:DataType="local:LoginViewModel">
 
-    <ScrollView>
-        <VerticalStackLayout Spacing="10" Margin="20,20,20,0" >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
 
-            <Frame Padding="10,2,10,2">
-                <HorizontalStackLayout>
-                    <Entry Text="{Binding UserName}" Placeholder="Username" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
 
-                </HorizontalStackLayout>
-            </Frame>
-
-            <Frame Padding="10,2,10,2">
-                <HorizontalStackLayout>
-                    <Entry Text="{Binding Password}" IsPassword="True" Placeholder="Password" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
-
-                </HorizontalStackLayout>
-            </Frame>
-
-            <Frame Padding="10,2,10,2">
-                <HorizontalStackLayout>
-                    <Entry Text="{Binding Email}" Placeholder="Email" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
-
-                </HorizontalStackLayout>
-            </Frame>
-
-            
-            <Button
-                BackgroundColor="Blue"
-                x:Name="CounterBtn"
-                Text="Click me"
-                HorizontalOptions="Center" />
+        <Label Grid.Row="0" Margin="20,20,20,0" TextColor="#48bfe3" HorizontalOptions="Center" FontSize="Title" FontAttributes="Bold" Text="Create your account" VerticalOptions="Center"/>
         
-        </VerticalStackLayout>
-    </ScrollView>
+        <Frame Grid.Row="2" Margin="20,20,20,0" Padding="10,2,10,2">
+            <HorizontalStackLayout>
+                <Label Text="Username" VerticalOptions="Center" WidthRequest="80"></Label>
+                <Entry Text="{Binding UserName}" Placeholder="user" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+
+            </HorizontalStackLayout>
+        </Frame>
+
+        <Frame Grid.Row="4" Margin="20,20,20,0" Padding="10,2,10,2">
+            <HorizontalStackLayout>
+                <Label Text="Password" VerticalOptions="Center" WidthRequest="80"></Label>
+                <Entry Text="{Binding Password}" IsPassword="True" Placeholder="12345678" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+            </HorizontalStackLayout>
+        </Frame>
+
+        <Frame Grid.Row="6" Margin="20,20,20,0" Padding="10,2,10,2">
+            <HorizontalStackLayout>
+                <Label Text="Mail" VerticalOptions="Center" WidthRequest="80"></Label>
+                <Entry Text="{Binding Email}" Placeholder="example@mail.com" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+            </HorizontalStackLayout>
+        </Frame>
+
+
+        <Button Grid.Row="8"
+                BackgroundColor="#48bfe3"
+                x:Name="CounterBtn"
+                Text="Sign Up"
+                HorizontalOptions="Center"
+                 Command="{Binding LoginCommand}"
+                />
+
+    </Grid>
 
 </ContentPage>
