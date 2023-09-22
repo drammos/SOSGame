@@ -1,11 +1,7 @@
 ﻿using SOS.Models;
 using SQLite;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Security.Cryptography;
 
 namespace SOS.Services
@@ -13,50 +9,27 @@ namespace SOS.Services
     public class LoginService : ILoginRepo
     {
         SQLiteAsyncConnection Database;
-        public LoginService()
+        public LoginService(SQLiteAsyncConnection database)
         {
+            Database = database;
         }
 
-        async Task Init()
-        {
-            if (Database is not null) return;
-
-            Database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
-            await Database.CreateTableAsync<User>();
-        }
-
-        public async Task<User> Login(string username, string password, string email)
-        {
-            await Init();
-            //First check the usename 
-            
-            string hashedPassword = PasswordHasher.HashPassword(password);
-            User user = new User()
-            {
-                Guid = Guid.NewGuid().ToString(),
-                UserName = username,
-                Password = hashedPassword,
-                Email = email
-            };
-
-            try
-            {
-                await Database.InsertAsync(user);
-            }catch(Exception E)
-            {
-                Debug.WriteLine(E.Message);
-            }
-
-            return user;
-        }
+        //async Task Seed()
+        //{
+        //    await Register("Test", "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08", "b@n.c");
+        //    await Register("Test1", "1b4f0e9851971998e732078544c96b36c3d01cedf7caa332359d6f1d83567014", "n@n.c");
+        //}
 
         public async Task<bool> IsValid(string username, string password)
         {
-            await Init();
             string hashedPassword = PasswordHasher.HashPassword(password);
 
             User user = await Database.Table<User>().Where(i => i.UserName == username).FirstOrDefaultAsync();
-            bool isMatch = PasswordHasher.VerifyPassword( password, user.Password);
+            bool isMatch = false;
+            if (user != null) 
+            {
+                isMatch = PasswordHasher.VerifyPassword(password, user.Password);
+            }
 
             if (isMatch)
             {

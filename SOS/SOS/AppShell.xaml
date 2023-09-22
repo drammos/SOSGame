@@ -17,6 +17,7 @@
     ContentTemplate="{DataTemplate local:RegisterPage}"
     FlyoutItemIsVisible="False"
     Shell.FlyoutBehavior="Disabled"
+        NavigationPage.HasNavigationBar="True"
     Route="RegisterPage" />
 
 

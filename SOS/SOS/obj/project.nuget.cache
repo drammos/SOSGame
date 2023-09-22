@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "tM/NxxLB2KtIOBBWo4KM0Tm+OmKsZb/w1XiWMBHCVNsrEzrCpOIktdRKSsmglAeu+fUkWjeq4Y55EfgI9oaj9w==",
+  "dgSpecHash": "Wl4LVwID+ouKLeGuGODeRWkAh5RyzjyScwXC4pCqskAlNV8W6xjgVxVbTyF6+Lqd6KxngsiNdxmdiSZWyfEJ8g==",
   "success": true,
   "projectFilePath": "C:\\Users\\drm\\Documents\\csharp\\SOS\\SOS\\SOS.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\drm\\.nuget\\packages\\communitytoolkit.maui\\2.0.0\\communitytoolkit.maui.2.0.0.nupkg.sha512",
+    "C:\\Users\\drm\\.nuget\\packages\\communitytoolkit.maui.core\\2.0.0\\communitytoolkit.maui.core.2.0.0.nupkg.sha512",
     "C:\\Users\\drm\\.nuget\\packages\\communitytoolkit.mvvm\\8.2.1\\communitytoolkit.mvvm.8.2.1.nupkg.sha512",
     "C:\\Users\\drm\\.nuget\\packages\\googlegson\\2.9.0.1\\googlegson.2.9.0.1.nupkg.sha512",
     "C:\\Users\\drm\\.nuget\\packages\\microsoft.extensions.configuration\\6.0.1\\microsoft.extensions.configuration.6.0.1.nupkg.sha512",

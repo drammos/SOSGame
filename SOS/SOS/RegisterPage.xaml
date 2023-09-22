@@ -2,10 +2,10 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SOS.RegisterPage"
-             xmlns:local="clr-namespace:SOS.ViewModel"
+             xmlns:local="clr-namespace:SOS.RegisterModel"
              Shell.NavBarIsVisible="False"
              BackgroundColor="White"
-             x:DataType="local:LoginViewModel">
+             x:DataType="local:RegisterViewModel">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -26,6 +26,7 @@
         <Frame Grid.Row="2" Margin="20,20,20,0" Padding="10,2,10,2">
             <HorizontalStackLayout>
                 <Label Text="Username" VerticalOptions="Center" WidthRequest="80"></Label>
+                
                 <Entry Text="{Binding UserName}" Placeholder="user" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
 
             </HorizontalStackLayout>
@@ -34,7 +35,7 @@
         <Frame Grid.Row="4" Margin="20,20,20,0" Padding="10,2,10,2">
             <HorizontalStackLayout>
                 <Label Text="Password" VerticalOptions="Center" WidthRequest="80"></Label>
-                <Entry Text="{Binding Password}" IsPassword="True" Placeholder="12345678" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                <Entry Text="{Binding Password}" IsPassword="True" Placeholder="pswd1234" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
             </HorizontalStackLayout>
         </Frame>
 
@@ -45,15 +46,25 @@
             </HorizontalStackLayout>
         </Frame>
 
-
-        <Button Grid.Row="8"
+        <HorizontalStackLayout  Grid.Row="8" Spacing="20" HorizontalOptions="CenterAndExpand">
+            <Button
+                BackgroundColor="#48bfe3"
+                x:Name="CounterBt"
+                Text="Back"
+                Command="{Binding PreviousPageCommand}"
+                HorizontalOptions="Center"
+                />
+            
+            <Button
                 BackgroundColor="#48bfe3"
                 x:Name="CounterBtn"
                 Text="Sign Up"
                 HorizontalOptions="Center"
-                 Command="{Binding LoginCommand}"
+                Clicked="SignUp"
                 />
-
+        </HorizontalStackLayout>
+        
+        
     </Grid>
 
 </ContentPage>

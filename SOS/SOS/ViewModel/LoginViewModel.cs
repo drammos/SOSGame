@@ -46,30 +46,40 @@ namespace SOS.ViewModel
         private string _email;
 
 
-        readonly ILoginRepo loginRepo = new LoginService();
-       
-        [RelayCommand]
-        public async Task Login()
+        readonly ILoginRepo loginRepo;
+        public LoginViewModel(ILoginRepo loginRepo)
         {
-            await loginRepo.Login(UserName, Password, Email);
-
-
+            this.loginRepo = loginRepo;
         }
 
         [RelayCommand]
         public async Task IsValid()
         {
-            bool  res = await loginRepo.IsValid(UserName, Password);
-            if(res)
+            bool res = await loginRepo.IsValid(UserName, Password);
+            if (res)
             {
                 await Shell.Current.GoToAsync($"//{nameof(StartGame)}");
             }
+            else
+            {
+                var mes = new VarMessage("This username is used by another user. Please try with different username");
+                var pop = new PopUp(mes);
+                RegisterPage.ShowPopup(pop);
+            }
+            Dispose();
         }
 
         [RelayCommand]
         public async Task Tap()
         {
             await Shell.Current.GoToAsync($"//{nameof(RegisterPage)}");
+        }
+
+        public void Dispose()
+        {
+            UserName = "";
+            Password = "";
+            Email = "";
         }
     }
 }
