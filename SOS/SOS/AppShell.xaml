@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:SOS"
     xmlns:views="clr-namespace:SOS.ViewModel"
-    Shell.FlyoutBehavior="Disabled">
+    Shell.FlyoutBehavior="Flyout">
 
     <ShellContent
         ContentTemplate="{DataTemplate local:LoginPage}"
@@ -14,33 +14,48 @@
         Route="LoginPage" />
 
     <ShellContent
-    ContentTemplate="{DataTemplate local:RegisterPage}"
-    FlyoutItemIsVisible="False"
-    Shell.FlyoutBehavior="Disabled"
+        ContentTemplate="{DataTemplate local:RegisterPage}"
+        FlyoutItemIsVisible="False"
+        Shell.FlyoutBehavior="Disabled"
         NavigationPage.HasNavigationBar="True"
-    Route="RegisterPage" />
+        Route="RegisterPage" />
 
 
 
 
     <FlyoutItem Title="Home" FlyoutDisplayOptions="AsMultipleItems">
+        
         <ShellContent
-        Title="StartGame"
-        ContentTemplate="{DataTemplate local:StartGame}"
-        Route="StartGame" 
-        Icon="play.png"/>
+            Title="StartGame"
+            ContentTemplate="{DataTemplate local:StartGame}"
+            Route="StartGame" 
+            Icon="play.png"/>
 
 
         <ShellContent
-        Title="HighScore"
-        ContentTemplate="{DataTemplate local:HighScore}"
-        Route="HighScore" 
-        Icon="high_score.png"/>
+            Title="HighScore"
+            ContentTemplate="{DataTemplate local:HighScore}"
+            Route="HighScore" 
+            Icon="high_score.png"/>
 
         <ShellContent
-        Title="Settings"
-        ContentTemplate="{DataTemplate local:Settings}"
-        Route="Settings" 
-        Icon="setting_lines.png"/>
+            Title="Settings"
+            ContentTemplate="{DataTemplate local:Settings}"
+            Route="Settings" 
+            Icon="setting_lines.png"/>
+        
     </FlyoutItem>
+
+
+
+    <Shell.FlyoutFooter>
+        <StackLayout Padding="20">
+            <Button 
+                Text="Sign Out" 
+                Command="{Binding SignOutCommand}"
+                BackgroundColor="#7FFFD4"/>
+        </StackLayout>
+    </Shell.FlyoutFooter>
+    
+    
 </Shell>

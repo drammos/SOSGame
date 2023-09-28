@@ -7,22 +7,15 @@ namespace SOS;
 
 public partial class RegisterPage : ContentPage
 {
-	public RegisterPage(RegisterViewModel registerViewModel)
-	{
-		InitializeComponent();
+    public RegisterPage(RegisterViewModel registerViewModel)
+    {
+        InitializeComponent();
         this.BindingContext = registerViewModel;
     }
 
-    private async void Simple(object sender, EventArgs e)
+    private async void OnBackButtonClicked(object sender, EventArgs e)
     {
-        var mes = new VarMessage("ela111");
-        var pop = new PopUp(mes);
-        //this.ShowPopup(pop);
+        // Καλέστε την μέθοδο για επιστροφή πίσω
+        await Navigation.PopAsync();
     }
-
-    private async void SignUp()
-    {
-        RegisterViewModel registerViewModel = this.BindingContext;
-    }
-
 }

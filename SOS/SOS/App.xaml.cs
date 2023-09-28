@@ -1,14 +1,14 @@
 ﻿
 using SOS.Models;
-
+using SOS.ViewModel;
 namespace SOS;
 
 public partial class App : Application
 {
 
-	public App()
+	public App(AppShellViewModel appShellViewModel)
 	{
 		InitializeComponent();
-		MainPage = new AppShell();
+		MainPage = new AppShell(appShellViewModel);
 	}
 }

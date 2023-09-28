@@ -29,6 +29,9 @@ public static class MauiProgram
             database.CreateTableAsync<User>();
             return database;
         });
+        builder.Services.AddTransient<IPopupService, PopupService>();
+        builder.Services.AddSingleton<AppShellViewModel>();
+        builder.Services.AddSingleton<SettingsViewModel>();
         builder.Services.AddSingleton<ILoginRepo, LoginService>();
         builder.Services.AddSingleton<IRegisterRepo, RegisterService>();
         builder.Services.AddSingleton<StartGame>();

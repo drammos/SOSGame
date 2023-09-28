@@ -47,9 +47,11 @@ namespace SOS.ViewModel
 
 
         readonly ILoginRepo loginRepo;
-        public LoginViewModel(ILoginRepo loginRepo)
+        readonly IPopupService popupService;
+        public LoginViewModel(ILoginRepo loginRepo, IPopupService opupService)
         {
             this.loginRepo = loginRepo;
+            this.popupService = opupService;
         }
 
         [RelayCommand]
@@ -62,9 +64,9 @@ namespace SOS.ViewModel
             }
             else
             {
-                var mes = new VarMessage("This username is used by another user. Please try with different username");
+                var mes = new VarMessage("Invalid username or password. Please try again");
                 var pop = new PopUp(mes);
-                RegisterPage.ShowPopup(pop);
+                popupService.ShowPopup(pop);
             }
             Dispose();
         }

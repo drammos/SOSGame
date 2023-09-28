@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using SOS.Services;
+using SOS.ViewModel;
 
 namespace SOS.RegisterModel
 {
@@ -43,15 +44,24 @@ namespace SOS.RegisterModel
 
 
         readonly IRegisterRepo registerRepo;
+        readonly IPopupService popupService;
 
-        public RegisterViewModel(IRegisterRepo registerRepo)
+        public RegisterViewModel(IRegisterRepo registerRepo, IPopupService popupService)
         {
             this.registerRepo = registerRepo;
+            this.popupService = popupService;
         }
 
         [RelayCommand]
         public async Task Register()
         {
+            if(UserName.Length == 0)
+            {
+                var mes = new VarMessage("This username is wrong. Please try again");
+                var pop = new PopUp(mes);
+                popupService.ShowPopup(pop);
+            }
+
             bool res = await registerRepo.Register(UserName, Password, Email);
             if (res)
             {
@@ -59,10 +69,9 @@ namespace SOS.RegisterModel
             }
             else
             {
-                var mes = new VarMessage("ela111");
+                var mes = new VarMessage("This username is used by another user. Please try with different username");
                 var pop = new PopUp(mes);
-                this.
-
+                popupService.ShowPopup(pop);
             }
             Dispose();
         }

@@ -1,1 +1,0 @@
-C:\Users\drm\Documents\csharp\SOS\SOS\SOS.csproj;x64

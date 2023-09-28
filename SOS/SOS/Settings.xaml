@@ -2,11 +2,61 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SOS.Settings"
-             Title="Settings">
-    <VerticalStackLayout>
-        <Label 
-            Text="SETTINGS"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+             Title="Settings"
+             xmlns:local="clr-namespace:SOS.ViewModel"
+             x:DataType="local:SettingsViewModel"
+             >
+    
+    <VerticalStackLayout Margin="50">
+        
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Frame Grid.Row="1" BackgroundColor="#7FFFD4">
+                <StackLayout>
+
+                    <Label Text="Choose Grid Board"  HorizontalOptions="CenterAndExpand" FontAttributes="Bold" />
+                    <Picker Title="Choose" HorizontalOptions="CenterAndExpand" TextColor="Gray"
+                        ItemsSource="{Binding PickerBoardOptions}"
+                        SelectedItem="{Binding SelectedBoardOption}">
+                    </Picker>
+
+                </StackLayout>
+            </Frame>
+
+            <Frame Grid.Row="3" BackgroundColor="#7FFFD4">
+                <StackLayout>
+
+                    <Label Text="Choose Level"  HorizontalOptions="CenterAndExpand" FontAttributes="Bold" />
+                    <Picker Title="Choose" HorizontalOptions="CenterAndExpand" TextColor="Gray"
+                        ItemsSource="{Binding PickerLevelOptions}"
+                        SelectedItem="{Binding SelectedLevelOption}">
+                    </Picker>
+
+                </StackLayout>
+            </Frame>
+
+            <Frame Grid.Row="5" BackgroundColor="#7FFFD4">
+                <StackLayout>
+
+                    <Label Text="Choose Number of Players"  HorizontalOptions="CenterAndExpand" FontAttributes="Bold" />
+                    <Picker Title="Choose" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" TextColor="Gray"
+                        ItemsSource="{Binding PickerPlayersOptions}"
+                        SelectedItem="{Binding SelectedPlayersOption}">
+                    </Picker>
+
+                </StackLayout>
+            </Frame>
+        </Grid>
+    
     </VerticalStackLayout>
 </ContentPage>

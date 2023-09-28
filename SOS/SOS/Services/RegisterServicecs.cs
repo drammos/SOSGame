@@ -20,7 +20,7 @@ namespace SOS.Services
             string hashedPassword = PasswordHasherRegister.HashPassword(password);
             User user = new User()
             {
-                Guid = Guid.NewGuid().ToString(),
+                Gid = Guid.NewGuid(),
                 UserName = username,
                 Password = hashedPassword,
                 Email = email
