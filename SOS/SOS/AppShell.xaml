@@ -10,16 +10,9 @@
     <ShellContent
         ContentTemplate="{DataTemplate local:LoginPage}"
         FlyoutItemIsVisible="False"
+        Shell.NavBarIsVisible="true"
         Shell.FlyoutBehavior="Disabled"
         Route="LoginPage" />
-
-    <ShellContent
-        ContentTemplate="{DataTemplate local:RegisterPage}"
-        FlyoutItemIsVisible="False"
-        Shell.FlyoutBehavior="Disabled"
-        NavigationPage.HasNavigationBar="True"
-        Route="RegisterPage" />
-
 
 
 
@@ -53,7 +46,7 @@
             <Button 
                 Text="Sign Out" 
                 Command="{Binding SignOutCommand}"
-                BackgroundColor="#7FFFD4"/>
+                BackgroundColor="#48bfe3"/>
         </StackLayout>
     </Shell.FlyoutFooter>
     

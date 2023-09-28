@@ -21,7 +21,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Frame Grid.Row="1" BackgroundColor="#7FFFD4">
+            <Frame Grid.Row="1" BackgroundColor="#48bfe3">
                 <StackLayout>
 
                     <Label Text="Choose Grid Board"  HorizontalOptions="CenterAndExpand" FontAttributes="Bold" />
@@ -33,7 +33,7 @@
                 </StackLayout>
             </Frame>
 
-            <Frame Grid.Row="3" BackgroundColor="#7FFFD4">
+            <Frame Grid.Row="3" BackgroundColor="#48bfe3">
                 <StackLayout>
 
                     <Label Text="Choose Level"  HorizontalOptions="CenterAndExpand" FontAttributes="Bold" />
@@ -45,7 +45,7 @@
                 </StackLayout>
             </Frame>
 
-            <Frame Grid.Row="5" BackgroundColor="#7FFFD4">
+            <Frame Grid.Row="5" BackgroundColor="#48bfe3">
                 <StackLayout>
 
                     <Label Text="Choose Number of Players"  HorizontalOptions="CenterAndExpand" FontAttributes="Bold" />

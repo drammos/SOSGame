@@ -7,6 +7,7 @@ public partial class AppShell : Shell
 	public AppShell(AppShellViewModel appShellViewModel)
 	{
 		InitializeComponent();
-		this.BindingContext = appShellViewModel;	
+        Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
+        this.BindingContext = appShellViewModel;	
 	}
 }

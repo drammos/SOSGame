@@ -40,6 +40,9 @@ namespace SOS.RegisterModel
         private string _password;
 
         [ObservableProperty]
+        private string _confirmPassword;
+
+        [ObservableProperty]
         private string _email;
 
 
@@ -58,6 +61,18 @@ namespace SOS.RegisterModel
             if(UserName.Length == 0)
             {
                 var mes = new VarMessage("This username is wrong. Please try again");
+                var pop = new PopUp(mes);
+                popupService.ShowPopup(pop);
+            }
+            if(Password != ConfirmPassword)
+            {
+                var mes = new VarMessage("The Password isn't match. Please try again");
+                var pop = new PopUp(mes);
+                popupService.ShowPopup(pop);
+            }
+            if(Password.Length == 0 || ConfirmPassword.Length == 0)
+            {
+                var mes = new VarMessage("Please insert your passowrd. Please try again");
                 var pop = new PopUp(mes);
                 popupService.ShowPopup(pop);
             }
@@ -89,6 +104,7 @@ namespace SOS.RegisterModel
         {
             UserName = "";
             Password = "";
+            ConfirmPassword = "";
             Email = "";
         }
 
