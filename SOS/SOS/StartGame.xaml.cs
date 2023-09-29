@@ -27,7 +27,7 @@ namespace SOS
             {
                 for (int j = 0; j < 5; j++)
                 {
-                    Console.WriteLine("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee3 ii == {0} kai jj == {1}\n", i , j);
+                    Console.WriteLine("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee3 ii == {0} kai jj == {1}\n", i, j);
                     Board.Add(new SOSItem { Symbol = "×" });
                 }
             }

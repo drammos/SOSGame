@@ -20,7 +20,7 @@ namespace SOS.Services
 
             User user = await Database.Table<User>().Where(i => i.UserName == username).FirstOrDefaultAsync();
             bool isMatch = false;
-            if (user != null) 
+            if (user != null)
             {
                 isMatch = PasswordHasher.VerifyPassword(password, user.Password);
             }

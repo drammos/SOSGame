@@ -7,8 +7,8 @@ public partial class Settings : ContentPage
 {
 
     public Settings(SettingsViewModel settingsViewModel)
-	{
-		InitializeComponent();
-		this.BindingContext = settingsViewModel;
-	}
+    {
+        InitializeComponent();
+        this.BindingContext = settingsViewModel;
+    }
 }

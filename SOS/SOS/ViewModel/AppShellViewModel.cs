@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SOS.ViewModel
 {
-    public partial class AppShellViewModel :BaseViewModel
+    public partial class AppShellViewModel : BaseViewModel
     {
         [RelayCommand]
         public async Task SignOut()

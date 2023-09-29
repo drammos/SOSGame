@@ -8,16 +8,16 @@ namespace SOS;
 public partial class PopUp : Popup
 {
 
-	public PopUp(VarMessage varMessage)
-	{
+    public PopUp(VarMessage varMessage)
+    {
         InitializeComponent();
-		this.BindingContext = varMessage;
+        this.BindingContext = varMessage;
     }
 
-	private void OKButton_Clicked(object sender, EventArgs e)
-	{
+    private void OKButton_Clicked(object sender, EventArgs e)
+    {
         Close();
-	}
+    }
 
 
 }

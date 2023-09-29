@@ -17,7 +17,7 @@
 
 
     <FlyoutItem Title="Home" FlyoutDisplayOptions="AsMultipleItems">
-        
+
         <ShellContent
             Title="StartGame"
             ContentTemplate="{DataTemplate local:StartGame}"
@@ -36,7 +36,7 @@
             ContentTemplate="{DataTemplate local:Settings}"
             Route="Settings" 
             Icon="setting_lines.png"/>
-        
+
     </FlyoutItem>
 
 
@@ -49,6 +49,6 @@
                 BackgroundColor="#48bfe3"/>
         </StackLayout>
     </Shell.FlyoutFooter>
-    
-    
+
+
 </Shell>

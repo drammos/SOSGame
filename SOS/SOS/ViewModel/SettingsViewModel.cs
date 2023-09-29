@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SOS.ViewModel
 {
-    public class SettingsViewModel: INotifyPropertyChanged
+    public class SettingsViewModel : INotifyPropertyChanged
     {
         private string[] _pickerLevelOptions = { "Easy", "Hard" };
         private string _selectedLevelOption;

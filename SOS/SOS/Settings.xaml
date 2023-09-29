@@ -6,9 +6,9 @@
              xmlns:local="clr-namespace:SOS.ViewModel"
              x:DataType="local:SettingsViewModel"
              >
-    
+
     <VerticalStackLayout Margin="50">
-        
+
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="70"/>
@@ -57,6 +57,6 @@
                 </StackLayout>
             </Frame>
         </Grid>
-    
+
     </VerticalStackLayout>
 </ContentPage>

@@ -16,7 +16,7 @@
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.sos</ApplicationId>
-		<ApplicationIdGuid>401108af-f158-4fd9-9c15-884e9ee5af54</ApplicationIdGuid>
+		<ApplicationIdGuid>3a9e6743-82fb-47db-89be-e86a1171d577</ApplicationIdGuid>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
@@ -49,18 +49,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <AndroidResource Remove="NewFolder1\**" />
-	  <Compile Remove="NewFolder1\**" />
-	  <EmbeddedResource Remove="NewFolder1\**" />
-	  <MauiCss Remove="NewFolder1\**" />
-	  <MauiXaml Remove="NewFolder1\**" />
-	  <None Remove="NewFolder1\**" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="6.0.0" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+		<PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
+		<PackageReference Include="Syncfusion.Maui.Core" Version="23.1.38" />
+		<PackageReference Include="Xam.Plugin.Media" Version="6.0.2" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="ContantUs.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="HighScore.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -81,23 +78,4 @@
 	  </MauiXaml>
 	</ItemGroup>
 
-	<ItemGroup>
-	  <PackageReference Include="CommunityToolkit.Maui" Version="2.0.0" />
-	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
-	  <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.4.230913002" />
-	  <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
-	  <PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.6" />
-	  <PackageReference Include="Syncfusion.Maui.Core" Version="23.1.36" />
-	  <PackageReference Include="Xam.Plugin.Media" Version="6.0.2" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
-	</ItemGroup>
-	
-	<ItemGroup>
-	  <Compile Update="PopUp.xaml.cs">
-	    <DependentUpon>PopUp.xaml</DependentUpon>
-	  </Compile>
-	</ItemGroup>
 </Project>

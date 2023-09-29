@@ -1,9 +1,5 @@
 ﻿using SQLite;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using TableAttribute = SQLite.TableAttribute;
 
 namespace SOS.Models
 {
@@ -11,7 +7,7 @@ namespace SOS.Models
     public class User
     {
         [PrimaryKey]
-        public Guid Gid{ get; set; }
+        public Guid Gid { get; set; }
         [Unique]
         public string UserName { get; set; }
         public string Password { get; set; }

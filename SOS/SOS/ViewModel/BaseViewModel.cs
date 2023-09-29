@@ -9,7 +9,7 @@ namespace SOS.ViewModel
     {
         [ObservableProperty]
         public bool _isBusy;
-        
+
 
         [ObservableProperty]
         public string _title;

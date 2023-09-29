@@ -75,6 +75,7 @@ namespace SOS.ViewModel
         public async Task Tap()
         {
             //await Shell.Current.GoToAsync("RegisterPage");
+            //await Shell.Current.GoToAsync($"//{nameof(RegisterPage)}");
 
             await Shell.Current.GoToAsync(nameof(RegisterPage));
         }
