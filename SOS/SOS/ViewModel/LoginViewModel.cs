@@ -2,9 +2,6 @@
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Maui.Graphics.Text;
 using SOS.Services;
-using System;
-using System.Diagnostics;
-using System.Windows.Input;
 
 namespace SOS.ViewModel
 {
@@ -68,15 +65,13 @@ namespace SOS.ViewModel
                 var pop = new PopUp(mes);
                 popupService.ShowPopup(pop);
             }
+
             Dispose();
         }
 
         [RelayCommand]
         public async Task Tap()
         {
-            //await Shell.Current.GoToAsync("RegisterPage");
-            //await Shell.Current.GoToAsync($"//{nameof(RegisterPage)}");
-
             await Shell.Current.GoToAsync(nameof(RegisterPage));
         }
 

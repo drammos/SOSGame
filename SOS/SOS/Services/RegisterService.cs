@@ -3,19 +3,16 @@ using System.Diagnostics;
 using SOS.Models;
 using System.Text;
 using System.Security.Cryptography;
+using SOS.Utils;
 
 namespace SOS.Services
 {
     public class RegisterService : IRegisterRepo
     {
-        SQLiteAsyncConnection Database;
-        public RegisterService(SQLiteAsyncConnection database)
-        {
-            Database = database;
-        }
-
+        public RegisterService() { }
         public async Task<bool> Register(string username, string password, string email)
         {
+            var database = await DBUtils.GetDatabase();
             //First check the usename
             string hashedPassword = PasswordHasherRegister.HashPassword(password);
             User user = new User()
@@ -28,7 +25,7 @@ namespace SOS.Services
 
             try
             {
-                await Database.InsertAsync(user);
+                await database.InsertAsync(user);
                 return true;
             }
             catch (Exception E)

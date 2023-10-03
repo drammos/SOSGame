@@ -3,22 +3,19 @@ using SQLite;
 using System.Diagnostics;
 using System.Text;
 using System.Security.Cryptography;
+using SOS.Utils;
 
 namespace SOS.Services
 {
     public class LoginService : ILoginRepo
     {
-        SQLiteAsyncConnection Database;
-        public LoginService(SQLiteAsyncConnection database)
-        {
-            Database = database;
-        }
-
+        public LoginService() { }
         public async Task<bool> IsValid(string username, string password)
         {
+            var database = await DBUtils.GetDatabase();
             string hashedPassword = PasswordHasher.HashPassword(password);
 
-            User user = await Database.Table<User>().Where(i => i.UserName == username).FirstOrDefaultAsync();
+            User user = await database.Table<User>().Where(i => i.UserName == username).FirstOrDefaultAsync();
             bool isMatch = false;
             if (user != null)
             {

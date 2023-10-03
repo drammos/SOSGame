@@ -5,17 +5,17 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:SOS"
     xmlns:views="clr-namespace:SOS.ViewModel"
-    Shell.FlyoutBehavior="Flyout">
+    Shell.FlyoutBehavior="Flyout"
+    >
 
     <ShellContent
         ContentTemplate="{DataTemplate local:LoginPage}"
         FlyoutItemIsVisible="False"
         Shell.NavBarIsVisible="true"
         Shell.FlyoutBehavior="Disabled"
-        Route="LoginPage" />
-
-
-
+        Route="LoginPage" >
+    </ShellContent>
+    
     <FlyoutItem Title="Home" FlyoutDisplayOptions="AsMultipleItems">
 
         <ShellContent

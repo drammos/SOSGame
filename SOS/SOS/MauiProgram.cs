@@ -1,11 +1,12 @@
 ﻿using SOS.Models;
-using SOS.RegisterModel;
 using SOS.Services;
 using SOS.ViewModel;
 using SQLite;
 using Syncfusion.Maui.Core.Hosting;
-namespace SOS;
 using CommunityToolkit.Maui;
+using Microsoft.Extensions.Logging;
+
+namespace SOS;
 
 public static class MauiProgram
 {
@@ -22,13 +23,9 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
 
-
-        builder.Services.AddSingleton((_) =>
-        {
-            var database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
-            database.CreateTableAsync<User>();
-            return database;
-        });
+#if DEBUG
+        builder.Logging.AddDebug();
+#endif
         builder.Services.AddTransient<IPopupService, PopupService>();
         builder.Services.AddSingleton<AppShellViewModel>();
         builder.Services.AddSingleton<SettingsViewModel>();
