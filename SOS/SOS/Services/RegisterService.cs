@@ -10,7 +10,7 @@ namespace SOS.Services
     public class RegisterService : IRegisterRepo
     {
         public RegisterService() { }
-        public async Task<bool> Register(string username, string password, string email)
+        public async Task<bool> Register(string username, string password, string email, string filePath)
         {
             var database = await DBUtils.GetDatabase();
             //First check the usename
@@ -20,7 +20,8 @@ namespace SOS.Services
                 Gid = Guid.NewGuid(),
                 UserName = username,
                 Password = hashedPassword,
-                Email = email
+                Email = email,
+                FilePath = filePath
             };
 
             try
@@ -33,7 +34,6 @@ namespace SOS.Services
                 Debug.WriteLine(E.Message);
                 return false;
             }
-
         }
     }
 

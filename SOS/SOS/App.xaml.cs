@@ -7,6 +7,8 @@ namespace SOS;
 public partial class App : Application
 {
 
+    public static User User;
+
     public App(AppShellViewModel appShellViewModel)
     {
         InitializeComponent();

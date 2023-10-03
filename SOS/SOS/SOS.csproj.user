@@ -47,6 +47,9 @@
     <MauiXaml Update="Pages\StartGame.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
+    <MauiXaml Update="UseControl\FlyoutHead.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
   </ItemGroup>
   <ItemGroup>
     <None Update="Platforms\Windows\Package.appxmanifest">

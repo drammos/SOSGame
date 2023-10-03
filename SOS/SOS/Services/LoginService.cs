@@ -10,7 +10,7 @@ namespace SOS.Services
     public class LoginService : ILoginRepo
     {
         public LoginService() { }
-        public async Task<bool> IsValid(string username, string password)
+        public async Task<User> IsValid(string username, string password)
         {
             var database = await DBUtils.GetDatabase();
             string hashedPassword = PasswordHasher.HashPassword(password);
@@ -20,16 +20,13 @@ namespace SOS.Services
             if (user != null)
             {
                 isMatch = PasswordHasher.VerifyPassword(password, user.Password);
+                if (isMatch)
+                {
+                    return user;
+                }
             }
-
-            if (isMatch)
-            {
-                return true;
-            }
-            return false;
+            return null;
         }
-
-
     }
 
 

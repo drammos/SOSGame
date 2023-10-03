@@ -2,6 +2,10 @@
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Maui.Graphics.Text;
 using SOS.Services;
+using SOS.Models;
+using System.Text.Json.Serialization;
+using System.Text.Json;
+using SOS.UseControl;
 
 namespace SOS.ViewModel
 {
@@ -54,9 +58,19 @@ namespace SOS.ViewModel
         [RelayCommand]
         public async Task IsValid()
         {
-            bool res = await loginRepo.IsValid(UserName, Password);
-            if (res)
+            User user = await loginRepo.IsValid(UserName, Password);
+            if (user!=null)
             {
+                if(Preferences.ContainsKey(nameof(App.User)))
+                {
+                    Preferences.Remove(nameof(App.User));
+                }
+                string userDetails = JsonSerializer.Serialize(user);
+                Preferences.Set(nameof(App.User), userDetails);
+                App.User = user;
+
+                AppShell.Current.FlyoutHeader = new FlyoutHead();
+
                 await Shell.Current.GoToAsync($"//{nameof(StartGame)}");
             }
             else

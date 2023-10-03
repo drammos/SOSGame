@@ -19,6 +19,8 @@ namespace SOS.ViewModel
         [ObservableProperty]
         private string _email;
 
+        public string FilePath {  get; set; }
+
 
         readonly IRegisterRepo registerRepo;
         readonly IPopupService popupService;
@@ -51,7 +53,8 @@ namespace SOS.ViewModel
                 popupService.ShowPopup(pop);
             }
 
-            bool res = await registerRepo.Register(UserName, Password, Email);
+            bool res = await registerRepo.Register(UserName, Password, Email, FilePath);
+
             if (res)
             {
                 await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
