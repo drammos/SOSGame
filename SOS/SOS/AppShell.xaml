@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:SOS"
+    xmlns:pages="clr-namespace:SOS.Pages"
     xmlns:views="clr-namespace:SOS.ViewModel"
     Shell.FlyoutBehavior="Flyout"
     >
@@ -36,6 +37,12 @@
             ContentTemplate="{DataTemplate local:Settings}"
             Route="Settings" 
             Icon="setting_lines.png"/>
+
+        <ShellContent
+            Title="User Settings"
+            ContentTemplate="{DataTemplate pages:UserSettings}"
+            Route="UserSettings" 
+            Icon="profile.png"/>
 
     </FlyoutItem>
 

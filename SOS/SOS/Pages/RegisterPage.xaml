@@ -19,14 +19,16 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition Height="10"/>
-            <RowDefinition Height="80"/>
+            <RowDefinition Height="120"/>
             <RowDefinition Height="10"/>
             <RowDefinition Height="80"/>
             <RowDefinition Height="10"/>
             <RowDefinition Height="80"/>
             <RowDefinition Height="10"/>
             <RowDefinition Height="80"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="90"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="80"/>
             <RowDefinition Height="50"/>
@@ -34,8 +36,27 @@
 
 
         <Label Grid.Row="0" Margin="20,20,20,0" TextColor="#48bfe3" HorizontalOptions="Center" FontSize="Title" FontAttributes="Bold" Text="Create your account" VerticalOptions="Center"/>
+        <StackLayout Grid.Row="2">
 
-        <Frame x:Name="UserFrame" Grid.Row="2" Margin="20,20,20,0" Padding="10,2,10,2">
+            <Frame HeightRequest="100" WidthRequest="100" CornerRadius="50" Padding="1" Margin="5" BorderColor="#48bfe3">
+                <Image
+                    x:Name="UploadedOrSelectedImage"
+                    HorizontalOptions="Center"
+                    Source="user.png"
+                    Aspect="AspectFill" Margin="0"
+                 />
+            </Frame>
+
+            <Label Text="Edit picture" HorizontalOptions="Center" TextColor="#48bfe3" FontAttributes="Bold">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding PopUpCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+            
+        </StackLayout>
+        
+        
+        <Frame x:Name="UserFrame" Grid.Row="4" Margin="20,20,20,0" Padding="10,2,10,2">
             <HorizontalStackLayout>
                 <Label Text="Username" VerticalOptions="Center" WidthRequest="80"></Label>
 
@@ -52,7 +73,7 @@
             </HorizontalStackLayout>
         </Frame>
 
-        <Frame Grid.Row="4" Margin="20,20,20,0" Padding="10,2,10,2">
+        <Frame Grid.Row="6" Margin="20,20,20,0" Padding="10,2,10,2">
             <HorizontalStackLayout>
                 <Label Text="Password" VerticalOptions="Center" WidthRequest="80"></Label>
                 <Entry 
@@ -68,7 +89,7 @@
             </HorizontalStackLayout>
         </Frame>
 
-        <Frame Grid.Row="6" Margin="20,20,20,0" Padding="10,2,10,2">
+        <Frame Grid.Row="8" Margin="20,20,20,0" Padding="10,2,10,2">
             <HorizontalStackLayout>
                 <Label Text="Confirm Password" VerticalOptions="Center" WidthRequest="80"></Label>
                 <Entry 
@@ -84,7 +105,7 @@
             </HorizontalStackLayout>
         </Frame>
 
-        <Frame Grid.Row="8" Margin="20,20,20,0" Padding="10,2,10,2">
+        <Frame Grid.Row="10" Margin="20,20,20,0" Padding="10,2,10,2">
             <HorizontalStackLayout>
                 <Label Text="Mail" VerticalOptions="Center" WidthRequest="80"></Label>
                 <Entry Text="{Binding Email}" Placeholder="The field is required" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0">
@@ -97,39 +118,18 @@
                 </Entry>
             </HorizontalStackLayout>
         </Frame>
+        
 
-        <HorizontalStackLayout Grid.Row="10" Spacing="20" HorizontalOptions="CenterAndExpand">
-            <Button
-                Clicked="OnPickPhotoClicked"
-                HorizontalOptions="Center"
-                Text="Pick photo" />
+        <StackLayout  Grid.Row="12"  Margin="10,10,10,0" Padding="10,2,10,2" HorizontalOptions="FillAndExpand">
 
-            <Button
-                Clicked="OnTakePhotoClicked"
-                HorizontalOptions="Center"
-                Text="Take photo" />
-
-            <Image
-                x:Name="UploadedOrSelectedImage"
-                HeightRequest="100"
-                HorizontalOptions="Center"
-             />
-
-            <Label x:Name="FileSizeLabel" HorizontalOptions="Center" />
-
-        </HorizontalStackLayout>
-
-        <HorizontalStackLayout  Grid.Row="12" Spacing="20" HorizontalOptions="CenterAndExpand">
-
-            <Button
+            <Button 
                 BackgroundColor="#48bfe3"
                 x:Name="CounterBtn"
                 Text="Sign Up"
-                HorizontalOptions="Center"
                 Command="{Binding RegisterCommand}"
 
                 />
-        </HorizontalStackLayout>
+        </StackLayout>
 
 
     </Grid>

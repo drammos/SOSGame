@@ -8,6 +8,7 @@ public partial class App : Application
 {
 
     public static User User;
+    public static string iconPath;
 
     public App(AppShellViewModel appShellViewModel)
     {

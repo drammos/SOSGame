@@ -39,8 +39,6 @@ public partial class RegisterPage : ContentPage
 
         var fileInfo = new FileInfo(result?.Path);
         var fileLength = fileInfo.Length;
-
-        FileSizeLabel.Text = $"Image size: {fileLength / 1000} kB";
     }
 
     private async void OnTakePhotoClicked(object sender, EventArgs e)
@@ -54,8 +52,6 @@ public partial class RegisterPage : ContentPage
 
         var fileInfo = new FileInfo(result?.Path);
         var fileLength = fileInfo.Length;
-
-        FileSizeLabel.Text = $"Image size: {fileLength / 1000} kB";
     }
 
 }

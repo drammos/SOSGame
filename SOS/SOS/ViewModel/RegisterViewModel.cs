@@ -68,6 +68,13 @@ namespace SOS.ViewModel
             Dispose();
         }
 
+        [RelayCommand]
+        public async Task PopUp()
+        {
+            var mes = new VarMessage("Upload your Photo");
+            var pop = new PopUpPhoto(mes);
+            popupService.ShowPopup(pop);
+        }
 
         [RelayCommand]
         public async Task PreviousPage()

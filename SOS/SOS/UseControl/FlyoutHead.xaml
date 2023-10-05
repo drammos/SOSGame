@@ -2,16 +2,14 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SOS.UseControl.FlyoutHead">
-    <StackLayout Padding="20">
-        <HorizontalStackLayout>
-            <Label Text="Lo"
-        </HorizontalStackLayout>
-        <Label x:Name="lblUserName" FontSize="20" FontAttributes="Bold" TextColor="#48bfe3"/>
-        <Label x:Name="lblUserEmail" FontSize="16" TextColor="#48bfe3"/>
+    <StackLayout Padding="40" Spacing="10">
+
         <Image
             x:Name="lblUserPhoto"
-            HeightRequest="100"
+            HeightRequest="80"
             HorizontalOptions="Center"
+            Source="user.png"
          />
+        <Label x:Name="lblUserName" FontSize="20" FontAttributes="Bold" TextColor="#48bfe3" HorizontalOptions="Center"/>
     </StackLayout>
 </ContentView>

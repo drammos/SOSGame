@@ -9,9 +9,11 @@ public partial class FlyoutHead : ContentView
 		InitializeComponent();
 		if(App.User != null)
 		{
-			lblUserName.Text = "Logged in as:" + App.User.UserName;
-			lblUserEmail.Text = App.User.Email;
-			lblUserPhoto.Source = App.User.FilePath;
+			lblUserName.Text = App.User.UserName;
+			if(App.User.FilePath != null && App.User.FilePath != "") 
+			{
+                lblUserPhoto.Source = App.User.FilePath;
+            }
 		}
 	}
 }

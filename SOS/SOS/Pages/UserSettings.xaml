@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SOS.Pages.UserSettings"
+             Title="UserSettings">
+    <VerticalStackLayout Margin="50">
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+
+            <StackLayout Grid.Row="1">
+                <Image
+                    x:Name="lblSetUserPhotoSettings"
+                    HeightRequest="80"
+                    HorizontalOptions="Center"
+                    Source="user.png"
+                 />
+            </StackLayout>
+
+            <Frame Grid.Row="3" Margin="0,20,0,0" Padding="10,2,10,2" CornerRadius="15" >
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Username" WidthRequest="70" HeightRequest="15"/>
+                    <Entry x:Name="lblSetUserName" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0" IsReadOnly="True"/>
+                </StackLayout>
+            </Frame>
+
+            <Frame Grid.Row="5" Margin="0,20,0,0" Padding="10,2,10,2" CornerRadius="15">
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Email" WidthRequest="70" HeightRequest="15"/>
+                    <Entry x:Name="lblSetUserMail" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                </StackLayout>
+            </Frame>
+
+
+
+            <HorizontalStackLayout Grid.Row="7" Spacing="10" HorizontalOptions="CenterAndExpand">
+                
+
+            </HorizontalStackLayout>
+
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>
