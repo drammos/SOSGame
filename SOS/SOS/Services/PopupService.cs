@@ -1,9 +1,4 @@
 ﻿using CommunityToolkit.Maui.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SOS.Services
 {
@@ -13,6 +8,13 @@ namespace SOS.Services
         {
             Page page = Application.Current?.MainPage ?? throw new NullReferenceException();
             page.ShowPopup(popup);
+        }
+
+        public async Task<T> ShowPopup<T>(Popup popup)
+        {
+            Page page = Application.Current?.MainPage ?? throw new NullReferenceException();
+            var result = await page.ShowPopupAsync(popup);
+            return (T)result;
         }
     }
 }

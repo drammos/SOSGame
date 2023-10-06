@@ -68,12 +68,10 @@ namespace SOS.ViewModel
             Dispose();
         }
 
-        [RelayCommand]
-        public async Task PopUp()
+        public async Task<bool> PopUp()
         {
-            var mes = new VarMessage("Upload your Photo");
-            var pop = new PopUpPhoto(mes);
-            popupService.ShowPopup(pop);
+            var res = await ShowYesCancelASync("Upload", "New Photo", "Pick Photo");
+            return res;
         }
 
         [RelayCommand]
@@ -83,12 +81,59 @@ namespace SOS.ViewModel
             Dispose();
         }
 
+
+
+        public Task<bool> ShowYesCancelASync(string message, string OK = "OK", string Cancel = "Cancel")
+        {
+            var tcs = new TaskCompletionSource<bool>();
+
+
+
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                try
+                {
+                    if (string.IsNullOrEmpty(Cancel) || Cancel.Equals("Cancel"))
+                        Cancel = "_cancel";
+
+
+
+                    if (!string.IsNullOrEmpty(message))
+                        message = message.Replace("\\n", Environment.NewLine);
+
+
+
+                    var result = await Application.Current.MainPage.DisplayAlert("", message, OK, Cancel);
+                    tcs.TrySetResult(result);
+                }
+                catch (Exception ex)
+                {
+                    tcs.SetException(ex);
+                }
+            });
+
+
+
+            return tcs.Task;
+        }
+
+        
+        private bool IsSignUpButtonEnabled()
+        {
+            if(UserName != null && Password != null && ConfirmPassword != null && Email != null && UserName != "" && Password != "" && ConfirmPassword != "" && Email != "")
+            {
+                return true;
+            }
+            return false;
+        }
+
         public void Dispose()
         {
             UserName = "";
             Password = "";
             ConfirmPassword = "";
             Email = "";
+            FilePath = "";
         }
     }
 }

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SOS.PopUpPhoto"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             CanBeDismissedByTappingOutsideOfPopup="False"
+             xmlns:local="clr-namespace:SOS.ViewModel"
+             x:DataType="local:VarMessage"
+             >
+    
+    
+    <VerticalStackLayout
+        BackgroundColor="White"
+        MinimumHeightRequest="150"
+        MinimumWidthRequest="150"
+        Padding="20"
+        Spacing="50">
+        <Label 
+            Text="{Binding TextMessage}"
+            TextColor="Black"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+        <HorizontalStackLayout Spacing="20">
+            <Button
+                HeightRequest="50"
+                Text="Pick Photo"
+                TextColor="White"
+                Clicked="OnPickPhotoClicked"
+                HorizontalOptions="CenterAndExpand"/>
+
+            <Button
+                HeightRequest="50"
+                Text="New Photo"
+                TextColor="White"
+                Clicked="OnTakePhotoClicked"
+                HorizontalOptions="CenterAndExpand"/>
+        </HorizontalStackLayout>
+       
+    </VerticalStackLayout>
+</toolkit:Popup>

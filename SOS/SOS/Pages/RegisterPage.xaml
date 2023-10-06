@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SOS.RegisterPage"
              xmlns:local="clr-namespace:SOS.ViewModel"
+             xmlns:app="clr-namespace:SOS.ViewModel"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              BackgroundColor="White" 
              Shell.BackgroundColor="#48bfe3"
@@ -19,7 +20,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition Height="10"/>
-            <RowDefinition Height="120"/>
+            <RowDefinition Height="140"/>
             <RowDefinition Height="10"/>
             <RowDefinition Height="80"/>
             <RowDefinition Height="10"/>
@@ -28,106 +29,87 @@
             <RowDefinition Height="80"/>
             <RowDefinition Height="10"/>
             <RowDefinition Height="80"/>
-            <RowDefinition Height="90"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="80"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
 
-        <Label Grid.Row="0" Margin="20,20,20,0" TextColor="#48bfe3" HorizontalOptions="Center" FontSize="Title" FontAttributes="Bold" Text="Create your account" VerticalOptions="Center"/>
+        <Label Grid.Row="0" Margin="20,20,20,0" TextColor="#48bfe3" HorizontalOptions="Center" FontSize="Title" FontAttributes="Bold" Text="Create your account" VerticalOptions="Center" Clip=""/>
         <StackLayout Grid.Row="2">
 
             <Frame HeightRequest="100" WidthRequest="100" CornerRadius="50" Padding="1" Margin="5" BorderColor="#48bfe3">
                 <Image
                     x:Name="UploadedOrSelectedImage"
-                    HorizontalOptions="Center"
+                    HorizontalOptions="Fill"
                     Source="user.png"
-                    Aspect="AspectFill" Margin="0"
+                    Aspect="AspectFill" 
+                    Margin="0"
                  />
             </Frame>
 
-            <Label Text="Edit picture" HorizontalOptions="Center" TextColor="#48bfe3" FontAttributes="Bold">
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding PopUpCommand}" />
-                </Label.GestureRecognizers>
-            </Label>
-            
+
+            <StackLayout  HorizontalOptions="CenterAndExpand">
+                <Button 
+                    BackgroundColor="White"
+                    TextColor="#48bfe3"
+                    FontAttributes="Bold"
+                    Text="Edit picture"
+                    Clicked="PopUpButton"
+                />
+                
+            </StackLayout>
+           
+
         </StackLayout>
         
         
         <Frame x:Name="UserFrame" Grid.Row="4" Margin="20,20,20,0" Padding="10,2,10,2">
             <HorizontalStackLayout>
-                <Label Text="Username" VerticalOptions="Center" WidthRequest="80"></Label>
+                <Label Text="Username*" VerticalOptions="Center" WidthRequest="80"></Label>
 
-                <Entry
+                <Entry x:Name="UserFrameEntry"
                     Text="{Binding UserName}" Placeholder="The field is required" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0">
-                    <Entry.Behaviors>
-                        <toolkit:TextValidationBehavior
-                            InvalidStyle="{StaticResource InvalidEntryStyle}"
-                            Flags="ValidateOnValueChanged"
-                            MinimumLength="1"/>
-                    </Entry.Behaviors>
                 </Entry>
 
             </HorizontalStackLayout>
         </Frame>
 
-        <Frame Grid.Row="6" Margin="20,20,20,0" Padding="10,2,10,2">
+        <Frame x:Name="PasswordFrame" Grid.Row="6" Margin="20,20,20,0" Padding="10,2,10,2">
             <HorizontalStackLayout>
-                <Label Text="Password" VerticalOptions="Center" WidthRequest="80"></Label>
-                <Entry 
+                <Label Text="Password*" VerticalOptions="Center" WidthRequest="80"></Label>
+                <Entry x:Name="PasswordFrameEntry"
                     Text="{Binding Password}" Placeholder="The field is required" IsPassword="True" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0">
-                    <Entry.Behaviors>
-                        <toolkit:TextValidationBehavior
-                            InvalidStyle="{StaticResource InvalidEntryStyle}"
-                            Flags="ValidateOnValueChanged"
-                            MinimumLength="1"/>
-                    </Entry.Behaviors>
                 </Entry>
 
             </HorizontalStackLayout>
         </Frame>
 
-        <Frame Grid.Row="8" Margin="20,20,20,0" Padding="10,2,10,2">
+        <Frame x:Name="ConfirmPasswordFrame" Grid.Row="8" Margin="20,20,20,0" Padding="10,2,10,2">
             <HorizontalStackLayout>
-                <Label Text="Confirm Password" VerticalOptions="Center" WidthRequest="80"></Label>
-                <Entry 
+                <Label Text="Confirm Password*" VerticalOptions="Center" WidthRequest="80"></Label>
+                <Entry x:Name="ConfirmPasswordFrameEntry"
                     Text="{Binding ConfirmPassword}" Placeholder="The field is required" IsPassword="True" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0">
-                    <Entry.Behaviors>
-                        <toolkit:TextValidationBehavior
-                            InvalidStyle="{StaticResource InvalidEntryStyle}"
-                            Flags="ValidateOnValueChanged"
-                            MinimumLength="1"/>
-                    </Entry.Behaviors>
                 </Entry>
 
             </HorizontalStackLayout>
         </Frame>
 
-        <Frame Grid.Row="10" Margin="20,20,20,0" Padding="10,2,10,2">
+        <Frame x:Name="EmailFrame" Grid.Row="10" Margin="20,20,20,0" Padding="10,2,10,2">
             <HorizontalStackLayout>
-                <Label Text="Mail" VerticalOptions="Center" WidthRequest="80"></Label>
-                <Entry Text="{Binding Email}" Placeholder="The field is required" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0">
-                    <Entry.Behaviors>
-                        <toolkit:TextValidationBehavior
-                            InvalidStyle="{StaticResource InvalidEntryStyle}"
-                            Flags="ValidateOnValueChanged"
-                            MinimumLength="1"/>
-                    </Entry.Behaviors>
+                <Label Text="Mail*" VerticalOptions="Center" WidthRequest="80"></Label>
+                <Entry x:Name="EmailFrameEntry" 
+                    Text="{Binding Email}" Placeholder="The field is required" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0">
                 </Entry>
             </HorizontalStackLayout>
         </Frame>
-        
 
-        <StackLayout  Grid.Row="12"  Margin="10,10,10,0" Padding="10,2,10,2" HorizontalOptions="FillAndExpand">
 
+        <StackLayout  Grid.Row="11"  VerticalOptions="End" Margin="10,10,10,0" Padding="10,2,10,2" HorizontalOptions="FillAndExpand">
             <Button 
                 BackgroundColor="#48bfe3"
                 x:Name="CounterBtn"
                 Text="Sign Up"
                 Command="{Binding RegisterCommand}"
-
+                IsEnabled="{Binding IsSignUpButtonEnabled}"
                 />
         </StackLayout>
 

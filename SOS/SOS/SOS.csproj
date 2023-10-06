@@ -72,7 +72,7 @@
 	  <MauiXaml Update="Pages\UserSettings.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="PopUp.xaml">
+	  <MauiXaml Update="PopUp\PopUp.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\RegisterPage.xaml">
@@ -84,7 +84,7 @@
 	  <MauiXaml Update="Pages\StartGame.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="PopUpPhoto.xaml">
+	  <MauiXaml Update="PopUp\PopUpPhoto.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UseControl\FlyoutHead.xaml">

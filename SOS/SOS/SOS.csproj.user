@@ -32,13 +32,13 @@
     <MauiXaml Update="Platforms\Windows\App.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="PopUp.xaml">
+    <MauiXaml Update="PopUp\PopUp.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="Pages\RegisterPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="PopUpPhoto.xaml">
+    <MauiXaml Update="PopUp\PopUpPhoto.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="Resources\Styles\Colors.xaml">

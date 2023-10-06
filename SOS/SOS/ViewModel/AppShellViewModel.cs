@@ -1,18 +1,32 @@
-﻿using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using System.ComponentModel;
+using System.Diagnostics;
 
 namespace SOS.ViewModel
 {
-    public partial class AppShellViewModel : BaseViewModel
+    public partial class AppShellViewModel : BaseViewModel, INotifyPropertyChanged
     {
+
+        [ObservableProperty]
+        private string _iconPath;
+
+        public void setTheIcon(string iconPath)
+        {
+            IconPath = iconPath;
+
+        }
+
+        public AppShellViewModel() 
+        {
+            _iconPath = "user.png";
+        }
+
         [RelayCommand]
         public async Task SignOut()
         {
             await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
         }
+
     }
 }

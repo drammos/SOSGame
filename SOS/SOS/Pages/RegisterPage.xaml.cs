@@ -21,6 +21,7 @@ public partial class RegisterPage : ContentPage
         this.selectedCompressionQuality = 10;
         this.BindingContext = registerViewModel;
         this.registerViewModel = registerViewModel;
+        CounterBtn.IsEnabled = registerViewModel.IsSignUpButtonEnabled();
     }
 
     private async void OnBackButtonClicked(object sender, EventArgs e)
@@ -30,28 +31,48 @@ public partial class RegisterPage : ContentPage
     }
 
 
-    private async void OnPickPhotoClicked(object sender, EventArgs e)
+    public async void PopUpButton(object sender, EventArgs e)
+    {
+        bool result = await this.registerViewModel.PopUp();
+        if (result) 
+        {
+            OnPickPhotoClicked();
+        }
+        else
+        {
+            OnTakePhotoClicked();
+        }
+    }
+
+    private async void OnPickPhotoClicked()
     {
         var result = await CrossMedia.Current.PickPhotoAsync();
         if (result is null) return;
 
-        UploadedOrSelectedImage.Source = result?.Path;
-
-        var fileInfo = new FileInfo(result?.Path);
-        var fileLength = fileInfo.Length;
+        string res = result?.Path;
+        UploadedOrSelectedImage.Source = res;
     }
 
-    private async void OnTakePhotoClicked(object sender, EventArgs e)
+    private async void OnTakePhotoClicked()
     {
         var options = new StoreCameraMediaOptions { CompressionQuality = 100 };
         var result = await CrossMedia.Current.TakePhotoAsync(options);
         if (result is null) return;
 
-        UploadedOrSelectedImage.Source = result?.Path;
-        this.registerViewModel.FilePath = result?.Path;
-
-        var fileInfo = new FileInfo(result?.Path);
-        var fileLength = fileInfo.Length;
+        string res = result?.Path;
+        UploadedOrSelectedImage.Source = res;
     }
 
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+
+        this.registerViewModel?.Dispose();
+        UploadedOrSelectedImage.Source = "user.png";
+
+        UserFrameEntry.Text = null;
+        PasswordFrameEntry.Text = null;
+        ConfirmPasswordFrameEntry.Text = null;
+        EmailFrameEntry.Text = null;
+    }
 }
