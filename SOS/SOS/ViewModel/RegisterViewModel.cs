@@ -19,6 +19,9 @@ namespace SOS.ViewModel
         [ObservableProperty]
         private string _email;
 
+        [ObservableProperty]
+        private bool _isRegisterButtonEnable;
+
         public string FilePath {  get; set; }
 
 
@@ -31,26 +34,69 @@ namespace SOS.ViewModel
             this.popupService = popupService;
         }
 
+
+
+        //
+        private bool IsUsernameValid(string username)
+        {
+            // Έλεγχος για το username (π.χ., να ξεκινάει με χαρακτήρα)
+            return !string.IsNullOrWhiteSpace(username) && username.Length >= 2 && char.IsLetter(username[0]);
+        }
+
+        private bool IsPasswordValid(string password)
+        {
+            // Έλεγχος για τον κωδικό (π.χ., να έχει τουλάχιστον 4 ψηφία)
+            return !string.IsNullOrWhiteSpace(password) && password.Length >= 4 && (password.Any(char.IsDigit) || password.Any(char.IsLetter));
+        }
+
+        private bool IsEmailValid(string email)
+        {
+            // Έλεγχος για το email (π.χ., να περιέχει @ και έγκυρη κατάληξη)
+            return !string.IsNullOrWhiteSpace(email) && email.Contains("@") && email.Split('@').Length == 2 && email.Split('@')[1].Contains(".");
+        }
+
+
+
+
         [RelayCommand]
         public async Task Register()
         {
-            if (UserName.Length == 0)
+            if ( !IsUsernameValid(UserName))
             {
-                var mes = new VarMessage("This username is wrong. Please try again");
+                var mes = new VarMessage("This username is wrong. The username must start with characters and have at least 2 characters, please try again");
                 var pop = new PopUp(mes);
                 popupService.ShowPopup(pop);
+                Dispose();
+                return;
             }
+
+            if (!IsPasswordValid(Password) || !IsPasswordValid(ConfirmPassword))
+            {
+                var mes = new VarMessage("The Password isn't wrong. The code must contain at least four characters. Please try again");
+                var pop = new PopUp(mes);
+                popupService.ShowPopup(pop);
+                Dispose();
+                return;
+            }
+
+
             if (Password != ConfirmPassword)
             {
                 var mes = new VarMessage("The Password isn't match. Please try again");
                 var pop = new PopUp(mes);
                 popupService.ShowPopup(pop);
+                Dispose();
+                return;
             }
-            if (Password.Length == 0 || ConfirmPassword.Length == 0)
+
+            if (!IsEmailValid(Email))
             {
-                var mes = new VarMessage("Please insert your passowrd. Please try again");
+                var mes = new VarMessage("The Mail is wrong. Please try again");
                 var pop = new PopUp(mes);
                 popupService.ShowPopup(pop);
+                
+                Dispose();
+                return;
             }
 
             bool res = await registerRepo.Register(UserName, Password, Email, FilePath);
@@ -127,6 +173,18 @@ namespace SOS.ViewModel
             return false;
         }
 
+        public void IsAllEntriesFilled()
+        {
+            if (!string.IsNullOrEmpty(UserName) && !string.IsNullOrEmpty(Password) && !string.IsNullOrEmpty(ConfirmPassword) && !string.IsNullOrEmpty(Email))
+            {
+                IsRegisterButtonEnable = true;
+            }
+            else
+            {
+                IsRegisterButtonEnable = false;
+            }
+        }
+
         public void Dispose()
         {
             UserName = "";
@@ -134,6 +192,7 @@ namespace SOS.ViewModel
             ConfirmPassword = "";
             Email = "";
             FilePath = "";
+            IsRegisterButtonEnable = false;
         }
     }
 }

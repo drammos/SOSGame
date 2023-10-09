@@ -22,7 +22,7 @@
 
         <Button
             Text="OK"
-            TextColor="#48bfe3"
+            TextColor="White"
             Clicked="OKButton_Clicked"
             HorizontalOptions="CenterAndExpand"/>
     </VerticalStackLayout>

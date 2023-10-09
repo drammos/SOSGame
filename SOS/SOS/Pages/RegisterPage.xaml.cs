@@ -16,12 +16,10 @@ public partial class RegisterPage : ContentPage
 
     public RegisterPage(RegisterViewModel registerViewModel)
     {
-        
         InitializeComponent();
         this.selectedCompressionQuality = 10;
         this.BindingContext = registerViewModel;
         this.registerViewModel = registerViewModel;
-        CounterBtn.IsEnabled = registerViewModel.IsSignUpButtonEnabled();
     }
 
     private async void OnBackButtonClicked(object sender, EventArgs e)
@@ -34,7 +32,7 @@ public partial class RegisterPage : ContentPage
     public async void PopUpButton(object sender, EventArgs e)
     {
         bool result = await this.registerViewModel.PopUp();
-        if (result) 
+        if (!result) 
         {
             OnPickPhotoClicked();
         }
@@ -51,6 +49,7 @@ public partial class RegisterPage : ContentPage
 
         string res = result?.Path;
         UploadedOrSelectedImage.Source = res;
+        this.registerViewModel.FilePath = res;
     }
 
     private async void OnTakePhotoClicked()
@@ -61,6 +60,7 @@ public partial class RegisterPage : ContentPage
 
         string res = result?.Path;
         UploadedOrSelectedImage.Source = res;
+        this.registerViewModel.FilePath = res;
     }
 
     protected override void OnDisappearing()
@@ -74,5 +74,14 @@ public partial class RegisterPage : ContentPage
         PasswordFrameEntry.Text = null;
         ConfirmPasswordFrameEntry.Text = null;
         EmailFrameEntry.Text = null;
+    }
+
+
+    private async void EntryTextChanged(object sender, TextChangedEventArgs e)
+    {
+        if(e.NewTextValue != null)
+        {
+            this.registerViewModel.IsAllEntriesFilled();
+        }
     }
 }

@@ -67,6 +67,7 @@
                 <Label Text="Username*" VerticalOptions="Center" WidthRequest="80"></Label>
 
                 <Entry x:Name="UserFrameEntry"
+                       TextChanged="EntryTextChanged"
                     Text="{Binding UserName}" Placeholder="The field is required" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0">
                 </Entry>
 
@@ -77,6 +78,7 @@
             <HorizontalStackLayout>
                 <Label Text="Password*" VerticalOptions="Center" WidthRequest="80"></Label>
                 <Entry x:Name="PasswordFrameEntry"
+                    TextChanged="EntryTextChanged"
                     Text="{Binding Password}" Placeholder="The field is required" IsPassword="True" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0">
                 </Entry>
 
@@ -87,6 +89,7 @@
             <HorizontalStackLayout>
                 <Label Text="Confirm Password*" VerticalOptions="Center" WidthRequest="80"></Label>
                 <Entry x:Name="ConfirmPasswordFrameEntry"
+                    TextChanged="EntryTextChanged"
                     Text="{Binding ConfirmPassword}" Placeholder="The field is required" IsPassword="True" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0">
                 </Entry>
 
@@ -96,7 +99,8 @@
         <Frame x:Name="EmailFrame" Grid.Row="10" Margin="20,20,20,0" Padding="10,2,10,2">
             <HorizontalStackLayout>
                 <Label Text="Mail*" VerticalOptions="Center" WidthRequest="80"></Label>
-                <Entry x:Name="EmailFrameEntry" 
+                <Entry x:Name="EmailFrameEntry"
+                    TextChanged="EntryTextChanged"
                     Text="{Binding Email}" Placeholder="The field is required" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0">
                 </Entry>
             </HorizontalStackLayout>
@@ -109,7 +113,7 @@
                 x:Name="CounterBtn"
                 Text="Sign Up"
                 Command="{Binding RegisterCommand}"
-                IsEnabled="{Binding IsSignUpButtonEnabled}"
+                IsEnabled="{Binding IsRegisterButtonEnable}"
                 />
         </StackLayout>
 

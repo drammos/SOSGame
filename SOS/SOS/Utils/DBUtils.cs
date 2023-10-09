@@ -20,9 +20,7 @@ namespace SOS.Utils
             if (Database == null)
             {
                 Database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
-                Debug.WriteLine("ela1111\n\n\n\n\n");
                 await Database.CreateTableAsync<User>();
-                Debug.WriteLine("\n\n\n\nela2222\n\n\n");
             }
 
             Debug.WriteLine("ela\n");
