@@ -3,11 +3,36 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SOS.HighScore"
              Title="HighScore">
-    <VerticalStackLayout>
-        <Label 
-            Text="HIGH SCORE"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <CollectionView x:Name="ViewUsersScores" ItemsLayout="VerticalList" SelectionMode="Multiple" EmptyView="No available Users">
+
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <Frame x:Name="ItemTemplateScore" Margin="10" BorderColor="#48bfe3" BackgroundColor="{Binding IsMe, Converter={StaticResource IsColorConverter}}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".1*" />
+                            <ColumnDefinition Width=".2*" />
+                            <ColumnDefinition Width=".1*" />
+                            <ColumnDefinition Width=".8*" />
+                        </Grid.ColumnDefinitions>
+         
+                        <Label Text="{Binding Index}" FontSize="Medium" FontAttributes="Bold" VerticalOptions="CenterAndExpand"/>
+                        <Frame HeightRequest="70" WidthRequest="70" CornerRadius="50" Padding="1" Margin="5" Grid.Column="1" Grid.Row="0" >
+                            <Image 
+                                Source="{Binding User.FilePath}"
+                                HorizontalOptions="Fill"
+                                Aspect="Fill"
+                                Margin="0"
+                                />
+                        </Frame>
+                        <VerticalStackLayout Grid.Column="3" Grid.Row="0" Padding="5" VerticalOptions="Center">
+                            <Label Text="{Binding User.UserName}" FontSize="Medium" FontAttributes="Bold" />
+                            <Label Text="{Binding User.Score}" TextColor="#fca311" FontSize="Medium" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Frame>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
 
 </ContentPage>

@@ -8,7 +8,7 @@ namespace SOS
 {
     public static class Constants
     {
-        public const string DatabaseFilename = "SOSGame1photo.db3";
+        public const string DatabaseFilename = "SOSGame1photo1.db3";
 
         public const SQLite.SQLiteOpenFlags Flags =
             // open the database in read/write mode

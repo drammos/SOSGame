@@ -13,6 +13,8 @@ public partial class App : Application, INotifyPropertyChanged
    
     public App(AppShellViewModel appShellViewModel)
     {
+        //Mjc1MjE4NkAzMjMzMmUzMDJlMzBLUjZSRGNIb3o4K1pjemk5aGg4L0VnN29peVExS0NIV0JDSjhyUTN3QjNrPQ==
+        Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Mjc1MjE4NkAzMjMzMmUzMDJlMzBLUjZSRGNIb3o4K1pjemk5aGg4L0VnN29peVExS0NIV0JDSjhyUTN3QjNrPQ==");
         InitializeComponent();
         MainPage = new AppShell(appShellViewModel);
     }

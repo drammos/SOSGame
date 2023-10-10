@@ -8,7 +8,7 @@ namespace SOS.Services
     {
         public UpdateService() { }
 
-        public async Task<bool> Update(Guid gid,string username, string password, string email, string filePath)
+        public async Task<bool> Update(Guid gid,string username, string password, string email, string filePath, int score)
         {
             var database = await DBUtils.GetDatabase();
             User user = new User()
@@ -17,19 +17,13 @@ namespace SOS.Services
                 UserName = username,
                 Password = password,
                 Email = email,
-                FilePath = filePath
+                FilePath = filePath,
+                Score = score
             };
 
             try
             {
                 await database.UpdateAsync(user);
-                Debug.WriteLine("\n\nPASSWORD-1: " + gid);
-                Debug.WriteLine("\n\nPASSWORD-2: " + username);
-                Debug.WriteLine("\n\nPASSWORD-3: " + password);
-                Debug.WriteLine("\n\nPASSWORD-4: " + email);
-                Debug.WriteLine("\n\nPASSWORD-5: " + filePath);
-
-
                 return true;
             }
             catch (Exception E)

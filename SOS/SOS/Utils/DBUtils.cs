@@ -23,7 +23,6 @@ namespace SOS.Utils
                 await Database.CreateTableAsync<User>();
             }
 
-            Debug.WriteLine("ela\n");
             return Database;
         }
     }

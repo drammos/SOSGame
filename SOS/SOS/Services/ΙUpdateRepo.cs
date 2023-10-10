@@ -4,6 +4,6 @@ namespace SOS.Services
 {
     public interface IUpdateRepo
     {
-        Task<bool> Update(Guid gid, string username, string password, string email, string filePath);
+        Task<bool> Update(Guid gid, string username, string password, string email, string filePath, int score);
     }
 }

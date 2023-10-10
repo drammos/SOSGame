@@ -20,7 +20,8 @@ namespace SOS.Services
                 UserName = username,
                 Password = hashedPassword,
                 Email = email,
-                FilePath = filePath
+                FilePath = filePath,
+                Score = 0
             };
 
             try

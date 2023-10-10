@@ -27,6 +27,9 @@ namespace SOS.ViewModel
         [ObservableProperty]
         private string _filePath;
 
+        [ObservableProperty]
+        private int _score;
+
         readonly IUpdateRepo updateRepo;
         readonly IPopupService popupService;
 
@@ -106,7 +109,7 @@ namespace SOS.ViewModel
                 return;
             }
 
-            bool res = await updateRepo.Update(Gid, UserName, Password, Email, FilePath);
+            bool res = await updateRepo.Update(Gid, UserName, Password, Email, FilePath, Score);
 
             if (res)
             {

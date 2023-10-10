@@ -34,6 +34,7 @@ public partial class UserSettings : ContentPage
             this.userImage.Source = this.userSettingsViewModel.FilePath;
             this.userSettingsViewModel.Gid = App.User.Gid;
             this.userSettingsViewModel.Password = App.User.Password;
+            this.userSettingsViewModel.Score = App.User.Score;
         }
     }
 
