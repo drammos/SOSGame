@@ -1,46 +1,25 @@
+using System.Collections.ObjectModel;
+using SOS.Box;
+using SOS.ViewModel;
+
 namespace SOS
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class StartGame : ContentPage
+    public partial class StartGame : ContentPage 
     {
+
+        public ObservableCollection<GridGameBox> GridGameList { get; set; } = new ObservableCollection<GridGameBox>();
+        private GridGameViewModel GridGameInstance { get; set; }
+        public int GridPanel { get; set; }
+
+
         public StartGame()
         {
-            Console.WriteLine("First print - 1\n");
             InitializeComponent();
-            Console.WriteLine("First print - 2\n");
-            //BindingContext = new SOSViewModel(); // Συνδέστε την σελίδα με το ViewModel
-        }
+            GridGameInstance = new GridGameViewModel();
+            GridPanel = GridGameInstance.BoardSpan;
 
-
-    }
-    public class SOSViewModel
-    {
-        public List<SOSItem> Board { get; set; }
-
-        public SOSViewModel()
-        {
-
-            Console.WriteLine("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee3\n");
-            // Δημιουργήστε τον πίνακα 8x8 με αρχικές τιμές
-            Board = new List<SOSItem>();
-            for (int i = 0; i < 5; i++)
-            {
-                for (int j = 0; j < 5; j++)
-                {
-                    Console.WriteLine("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee3 ii == {0} kai jj == {1}\n", i, j);
-                    Board.Add(new SOSItem { Symbol = "Χ" });
-                }
-            }
-
-
-
+            this.BindingContext = GridGameInstance;
         }
     }
-
-    public class SOSItem
-    {
-        public string Symbol { get; set; }
-    }
-
 
 }

@@ -2,7 +2,47 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SOS.StartGame"
+             xmlns:box="clr-namespace:SOS.Box"
+             xmlns:game="clr-namespace:SOS.Game"
+             xmlns:syncfusionGrid="clr-namespace:Syncfusion.Maui.DataGrid;assembly=Syncfusion.Maui.DataGrid"
              xmlns:item="clr-namespace:SOS"
-             Title="StartGame">
+             xmlns:local="clr-namespace:SOS.ViewModel"
+             Title="StartGame"
+             x:DataType="local:GridGameViewModel"
+             >
+    
+    
+    
+    <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"  Spacing="0" >
+
+        
+        <CollectionView ItemsSource="{Binding GridList}">
+        
+            
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Span="{Binding BoardSpan}" Orientation="Horizontal" VerticalItemSpacing="1" HorizontalItemSpacing="1"/>
+            </CollectionView.ItemsLayout>
+
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="box:GridGameBox">
+                    <Frame BackgroundColor="White" Padding="0" CornerRadius="0" HeightRequest="80" WidthRequest="80" >
+                        <Label Text="{Binding SelectedText}" FontSize="28" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+        
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer x:DataType="local:GridGameViewModel"
+                                Command="{Binding SelectedItemCommand}"
+                                CommandParameter="{Binding .}" />
+                        </Frame.GestureRecognizers>
+                    
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        
+        
+        </CollectionView>
+    </StackLayout>
+
+
 
 </ContentPage>
