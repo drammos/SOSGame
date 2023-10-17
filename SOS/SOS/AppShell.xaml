@@ -7,6 +7,7 @@
     xmlns:pages="clr-namespace:SOS.Pages"
     xmlns:views="clr-namespace:SOS.ViewModel"
     Shell.FlyoutBehavior="Flyout"
+    Shell.TabBarIsVisible="False"
     >
 
     <ShellContent
@@ -17,32 +18,32 @@
         Route="LoginPage" >
     </ShellContent>
     
-    <FlyoutItem Title="Home" FlyoutDisplayOptions="AsMultipleItems">
+    <FlyoutItem Title="Home" FlyoutDisplayOptions="AsMultipleItems" >
 
         <ShellContent
             Title="StartGame"
             ContentTemplate="{DataTemplate local:StartGame}"
             Route="StartGame" 
-            Icon="play.png"/>
+            FlyoutIcon="{AppThemeBinding Light=play.png, Dark=play_dark.png}"/>
 
 
         <ShellContent
             Title="HighScore"
             ContentTemplate="{DataTemplate local:HighScore}"
             Route="HighScore" 
-            Icon="high_score.png"/>
+            FlyoutIcon="{AppThemeBinding Light=high_score.png, Dark=high_score_d.png}"/>
 
         <ShellContent
             Title="Settings"
             ContentTemplate="{DataTemplate local:Settings}"
             Route="Settings" 
-            Icon="setting_lines.png"/>
+            FlyoutIcon="{AppThemeBinding Light=setting_lines.png, Dark=setting_lines_dark.png}"/>
 
         <ShellContent
             Title="User Settings"
             ContentTemplate="{DataTemplate pages:UserSettings}"
             Route="UserSettings" 
-            Icon="profile.png"/>
+            FlyoutIcon="{AppThemeBinding Light=profile.png, Dark=profile_dark.png}"/>
 
     </FlyoutItem>
 
@@ -52,7 +53,9 @@
             <Button 
                 Text="Sign Out" 
                 Command="{Binding SignOutCommand}"
-                BackgroundColor="#48bfe3"/>
+                BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}"
+                TextColor="White"
+                />
         </StackLayout>
     </Shell.FlyoutFooter>
 

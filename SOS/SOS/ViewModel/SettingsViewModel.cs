@@ -28,7 +28,7 @@ namespace SOS.ViewModel
             set
             {
                 _selectedLevelOption = value;
-                App.Level = _selectedLevelOption;
+                Preferences.Set("Level", _selectedLevelOption);
                 OnPropertyChanged(nameof(SelectedLevelOption));
             }
         }
@@ -53,7 +53,8 @@ namespace SOS.ViewModel
             set
             {
                 _selectedBoardOption = value;
-                App.Board = GetGridBoard();
+                int board = GetGridBoard();
+                Preferences.Set("Board", board);
                 OnPropertyChanged(nameof(SelectedBoardOption));
             }
         }
@@ -79,7 +80,7 @@ namespace SOS.ViewModel
             set
             {
                 _selectedPlayersOption = value;
-                App.Players = _selectedPlayersOption;
+                Preferences.Set("Players", _selectedPlayersOption);
                 OnPropertyChanged(nameof(SelectedPlayersOption));
             }
         }

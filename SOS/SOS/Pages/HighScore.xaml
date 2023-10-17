@@ -2,12 +2,14 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SOS.HighScore"
-             Title="HighScore">
+             Title="HighScore"
+             Shell.BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}"
+             >
     <CollectionView x:Name="ViewUsersScores" ItemsLayout="VerticalList" SelectionMode="Multiple" EmptyView="No available Users">
 
         <CollectionView.ItemTemplate>
             <DataTemplate>
-                <Frame x:Name="ItemTemplateScore" Margin="10" BorderColor="#48bfe3" BackgroundColor="{Binding IsMe, Converter={StaticResource IsColorConverter}}">
+                <Frame x:Name="ItemTemplateScore" Margin="10" BorderColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}" BackgroundColor="{Binding IsMe, Converter={StaticResource IsColorConverter}}">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width=".1*" />
@@ -26,7 +28,7 @@
                                 />
                         </Frame>
                         <VerticalStackLayout Grid.Column="3" Grid.Row="0" Padding="5" VerticalOptions="Center">
-                            <Label Text="{Binding User.UserName}" FontSize="Medium" FontAttributes="Bold" />
+                            <Label Text="{Binding User.UserName}" TextColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}" FontSize="Medium" FontAttributes="Bold" />
                             <Label Text="{Binding User.Score}" TextColor="#fca311" FontSize="Medium" />
                         </VerticalStackLayout>
                     </Grid>

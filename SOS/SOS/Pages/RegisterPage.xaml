@@ -30,17 +30,18 @@
             <RowDefinition Height="10"/>
             <RowDefinition Height="80"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
 
 
-        <Label Grid.Row="0" Margin="20,20,20,0" TextColor="#48bfe3" HorizontalOptions="Center" FontSize="Title" FontAttributes="Bold" Text="Create your account" VerticalOptions="Center" Clip=""/>
+        <Label Grid.Row="0" Margin="20,20,20,0" TextColor="#48bfe3" HorizontalOptions="Center" FontSize="Title" FontAttributes="Bold" Text="Create your account" VerticalOptions="Center"/>
         <StackLayout Grid.Row="2">
 
             <Frame HeightRequest="100" WidthRequest="100" CornerRadius="50" Padding="1" Margin="5" BorderColor="#48bfe3">
                 <Image
                     x:Name="UploadedOrSelectedImage"
                     HorizontalOptions="Fill"
-                    Source="user.png"
+                    Source="{AppThemeBinding Light=user.png, Dark=user_dark.png}"
                     Aspect="AspectFill" 
                     Margin="0"
                  />

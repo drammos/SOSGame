@@ -20,6 +20,17 @@ namespace SOS
 
             this.BindingContext = GridGameInstance;
         }
-    }
 
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+
+            GridPanel = GridGameInstance.RestartBoard();
+
+            if(GridPanel == 4)
+            {
+                
+            }
+        }
+    }
 }

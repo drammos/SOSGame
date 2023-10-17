@@ -43,4 +43,14 @@
     <Color x:Key="Blue200Accent">#72ACF1</Color>
     <Color x:Key="Blue300Accent">#A7CBF6</Color>
 
+    <Color x:Key="LightPrimaryColor">#48bfe3</Color>
+    <Color x:Key="LightSecondaryColor">White</Color>
+    <Color x:Key="LightThirdColor">White</Color>
+
+    <!-- Dark colors -->
+    <Color x:Key="DarkPrimaryColor">Teal</Color>
+    <Color x:Key="DarkSecondaryColor">Black</Color>
+    <Color x:Key="DarkThirdColor">Black</Color>
+
+
 </ResourceDictionary>

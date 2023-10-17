@@ -59,9 +59,15 @@ public class ListItem
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            
             if (value is bool isMe)
             {
-                return isMe ? Color.FromHex("#90e0ef") : Color.FromHex("#ffffff");
+                string theme = "#90e0ef";
+                if (Application.Current.UserAppTheme == AppTheme.Dark)
+                {
+                    theme = "52b788";
+                } 
+                return isMe ? Color.FromHex(theme) : Color.FromHex("#ffffff");
             }
             return Color.FromHex("#ffffff");
         }

@@ -3,22 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SOS.StartGame"
              xmlns:box="clr-namespace:SOS.Box"
-             xmlns:game="clr-namespace:SOS.Game"
              xmlns:syncfusionGrid="clr-namespace:Syncfusion.Maui.DataGrid;assembly=Syncfusion.Maui.DataGrid"
              xmlns:item="clr-namespace:SOS"
              xmlns:local="clr-namespace:SOS.ViewModel"
              Title="StartGame"
              x:DataType="local:GridGameViewModel"
+             Shell.BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}"
              >
-    
-    
-    
+
     <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"  Spacing="0" >
 
-        
+
         <CollectionView ItemsSource="{Binding GridList}">
         
-            
+
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Span="{Binding BoardSpan}" Orientation="Horizontal" VerticalItemSpacing="1" HorizontalItemSpacing="1"/>
             </CollectionView.ItemsLayout>
@@ -26,23 +24,20 @@
 
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="box:GridGameBox">
-                    <Frame BackgroundColor="White" Padding="0" CornerRadius="0" HeightRequest="80" WidthRequest="80" >
-                        <Label Text="{Binding SelectedText}" FontSize="28" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
-        
+                    <Frame x:Name="poutsoframe" BackgroundColor="White" Padding="0" CornerRadius="0" x:DataType="local:GridGameViewModel" HeightRequest="{Binding GridLength, Mode=TwoWay}" WidthRequest="{Binding GridLength, Mode=TwoWay}" >
+                        <Label x:DataType="box:GridGameBox" Text="{Binding SelectedText}" FontSize="28" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer x:DataType="local:GridGameViewModel"
                                 Command="{Binding SelectedItemCommand}"
                                 CommandParameter="{Binding .}" />
                         </Frame.GestureRecognizers>
-                    
+
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
-        
-        
+
+
         </CollectionView>
     </StackLayout>
-
-
-
 </ContentPage>

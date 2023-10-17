@@ -1,6 +1,8 @@
 using Plugin.Media.Abstractions;
 using Plugin.Media;
 using SOS.ViewModel;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui.ApplicationModel;
 
 namespace SOS.Pages;
 
@@ -11,6 +13,11 @@ public partial class UserSettings : ContentPage
 	public UserSettings(UserSettingsViewModel userSettingsViewModel)
 	{
 		InitializeComponent();
+        var theme = Application.Current.RequestedTheme;
+        if (theme is AppTheme.Light)
+            lightThemeRadioButton.IsChecked = true;
+        else if (theme is AppTheme.Dark)
+            darkThemeRadioButton.IsChecked = true;
         this.BindingContext = userSettingsViewModel;
         this.userSettingsViewModel = userSettingsViewModel;
     }
@@ -78,4 +85,28 @@ public partial class UserSettings : ContentPage
         }
     }
 
+
+    private void OnThemeSwitchToggled(object sender, ToggledEventArgs e)
+    {
+        if (e.Value)
+        {
+            // Dark mode
+            Application.Current.UserAppTheme = AppTheme.Dark;
+        }
+        else
+        {
+            // Light mode
+            Application.Current.UserAppTheme = AppTheme.Light;
+        }
+    }
+
+    private void lightThemeRadioButton_CheckedChanged(object sender, CheckedChangedEventArgs e)
+    {
+        Application.Current.UserAppTheme = AppTheme.Light;
+    }
+
+    private void darkThemeRadioButton_CheckedChanged(object sender, CheckedChangedEventArgs e)
+    {
+        Application.Current.UserAppTheme = AppTheme.Dark;
+    }
 }

@@ -1,27 +1,32 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SOS.Box;
-using SOS;
+using Microsoft.Maui;
 using System.Diagnostics;
 
 namespace SOS.ViewModel
 {
-    public partial class GridGameViewModel : ObservableObject
+    public partial class GridGameViewModel : BaseViewModel
     {
         public ObservableCollection<GridGameBox> GridList { get; set; } = new ObservableCollection<GridGameBox>();
-        public int BoardSpan {  get; set; }
 
+        [ObservableProperty]
+        private int _boardSpan;
+
+        [ObservableProperty]
+        private int _gridLength;
         // Initialize the game Tic-Tac-Toe
         public GridGameViewModel()
         {
             this.PlayerTurn = "X";
             SetUpGame();
+        }
+
+        public int RestartBoard()
+        {
+            SetUpGame();
+            return this.BoardSpan;
         }
 
         public String Winner
@@ -72,18 +77,49 @@ namespace SOS.ViewModel
         {
             this.PlayerTurn = "X";
             GridList.Clear();
-            BoardSpan = App.Board;
+            BoardSpan = Preferences.Get("Board", BoardSpan);
+            if (BoardSpan == 4)
+            {
+            Debug.WriteLine("\n\n\nelaa1");
+
+                GridLength = 80;
+            }
+            else if (BoardSpan == 5)
+            {
+                GridLength = 70;
+                Debug.WriteLine("\n\n\nelaa2");
+
+            }
+            else if (BoardSpan == 6)
+            {
+                GridLength = 60;
+                Debug.WriteLine("elaa3");
+
+            }
+            else if (BoardSpan == 7)
+            {
+                GridLength = 52;
+                Debug.WriteLine("elaa4");
+
+            }
+            else if (BoardSpan == 8)
+            {
+                GridLength = 45;
+                Debug.WriteLine("elaa5");
+
+            }
+
+            Debug.WriteLine("elaa");
             int board = BoardSpan * BoardSpan;
             for (int i = 0; i < board; i++)
             {
                 GridList.Add(new GridGameBox(i));
-            }
+            }  
         }
 
         [RelayCommand]
         public void SelectedItem(GridGameBox selectedItem)
         {
-
             if (selectedItem.Player != null)
             {
                 return;
@@ -95,8 +131,6 @@ namespace SOS.ViewModel
                 selectedItem.Player = 0;
                 this.PlayerTurn = "O";
                 this._playerTurn = "O";
-
-
             }
             else
             {
@@ -104,7 +138,6 @@ namespace SOS.ViewModel
                 selectedItem.Player = 1;
                 this._playerTurn = "X";
                 this.PlayerTurn = "X";
-
             }
         }
     }

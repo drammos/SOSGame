@@ -5,6 +5,7 @@
              Title="Settings"
              xmlns:local="clr-namespace:SOS.ViewModel"
              x:DataType="local:SettingsViewModel"
+             Shell.BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}"
              >
 
     <VerticalStackLayout Margin="50">
@@ -21,7 +22,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Frame Grid.Row="1" BackgroundColor="#48bfe3">
+            <Frame Grid.Row="1" BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}">
                 <StackLayout>
 
                     <Label Text="Choose Grid Board"  HorizontalOptions="CenterAndExpand" FontAttributes="Bold" />
@@ -33,7 +34,7 @@
                 </StackLayout>
             </Frame>
 
-            <Frame Grid.Row="3" BackgroundColor="#48bfe3">
+            <Frame Grid.Row="3" BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}">
                 <StackLayout>
 
                     <Label Text="Choose Level"  HorizontalOptions="CenterAndExpand" FontAttributes="Bold" />
@@ -45,7 +46,7 @@
                 </StackLayout>
             </Frame>
 
-            <Frame Grid.Row="5" BackgroundColor="#48bfe3">
+            <Frame Grid.Row="5" BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}">
                 <StackLayout>
 
                     <Label Text="Choose Number of Players"  HorizontalOptions="CenterAndExpand" FontAttributes="Bold" />
