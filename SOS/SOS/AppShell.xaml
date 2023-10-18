@@ -32,7 +32,7 @@
             ContentTemplate="{DataTemplate local:HighScore}"
             Route="HighScore" 
             FlyoutIcon="{AppThemeBinding Light=high_score.png, Dark=high_score_d.png}"/>
-
+        
         <ShellContent
             Title="Settings"
             ContentTemplate="{DataTemplate local:Settings}"

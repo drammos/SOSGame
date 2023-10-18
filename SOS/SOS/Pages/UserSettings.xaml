@@ -16,9 +16,9 @@
             <RowDefinition Height="90"/>
             <RowDefinition Height="20"/>
             <RowDefinition Height="90"/>
-            <RowDefinition Height="10"/>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="10"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="20"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -46,7 +46,7 @@
             </StackLayout>
         </StackLayout>
 
-        <Frame Grid.Row="3" Margin="20,20,20,0" Padding="10,2,10,2" CornerRadius="15" >
+        <Frame Grid.Row="3" Margin="20,20,20,0" Padding="10,2,10,2" CornerRadius="15" BackgroundColor="{AppThemeBinding Light=White, Dark=#52b788}" >
             <StackLayout Orientation="Horizontal">
                 <Label Text="Username" TextColor="Black" WidthRequest="70" HeightRequest="15"/>
                 <Entry   
@@ -56,7 +56,7 @@
             </StackLayout>
         </Frame>
 
-        <Frame Grid.Row="5" Margin="20,20,20,0" Padding="10,2,10,2" CornerRadius="15">
+        <Frame Grid.Row="5" Margin="20,20,20,0" Padding="10,2,10,2" CornerRadius="15" BackgroundColor="{AppThemeBinding Light=White, Dark=#52b788}">
             <StackLayout Orientation="Horizontal">
                 <Label Text="Email" TextColor="Black" WidthRequest="70" HeightRequest="15"/>
                 <Entry
@@ -66,29 +66,37 @@
             </StackLayout>
         </Frame>
 
-        <VerticalStackLayout  
-            Grid.Row="7" VerticalOptions="Center">
-            <!-- Προσθέστε τα στοιχεία εδώ -->
-            <Label Text="Theme" VerticalTextAlignment="Center" />
-            <HorizontalStackLayout
-                HorizontalOptions="Center"
-                IsVisible="true"
-                Spacing="8">
-                <RadioButton
-                    x:Name="lightThemeRadioButton"
-                    CheckedChanged="lightThemeRadioButton_CheckedChanged"
-                    Content="Light"
-                    GroupName="theme"
-                    MinimumWidthRequest="80" />
-                <RadioButton
-                    x:Name="darkThemeRadioButton"
-                    CheckedChanged="darkThemeRadioButton_CheckedChanged"
-                    Content="Dark"
-                    GroupName="theme"
-                    MinimumWidthRequest="80" />
-            </HorizontalStackLayout>
-        </VerticalStackLayout>
+        <HorizontalStackLayout
+            Grid.Row="7" 
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            IsVisible="true"
+            
+            BackgroundColor="Gray"
+            Spacing="0">
+            <Button 
+                WidthRequest="70"
+                HeightRequest="70"
+                Text="Light" 
+                TextColor="{AppThemeBinding Light=White, Dark=Black}"
+                Clicked="LightThemeClicked"
+                BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark=White}"
+                CornerRadius="0"
+                />
+                
+            <Button 
+                WidthRequest="70"
+                HeightRequest="70"
+                Text="Dark" 
+                TextColor="{AppThemeBinding Light=Black, Dark=White}"
+                Clicked="DarkThemeClicked"
+                BorderColor="{AppThemeBinding Light=Teal, Dark={StaticResource DarkPrimaryColor}}"
+                BorderWidth="2"
+                BackgroundColor="{AppThemeBinding Light=White, Dark={StaticResource DarkPrimaryColor}}" 
+                CornerRadius="0"/>
+        </HorizontalStackLayout>
 
+        
         <StackLayout  Grid.Row="9"  VerticalOptions="End" Margin="10,10,10,10" Padding="10,2,10,2" HorizontalOptions="FillAndExpand">
             <Button 
                     BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}"

@@ -13,11 +13,6 @@ public partial class UserSettings : ContentPage
 	public UserSettings(UserSettingsViewModel userSettingsViewModel)
 	{
 		InitializeComponent();
-        var theme = Application.Current.RequestedTheme;
-        if (theme is AppTheme.Light)
-            lightThemeRadioButton.IsChecked = true;
-        else if (theme is AppTheme.Dark)
-            darkThemeRadioButton.IsChecked = true;
         this.BindingContext = userSettingsViewModel;
         this.userSettingsViewModel = userSettingsViewModel;
     }
@@ -100,12 +95,12 @@ public partial class UserSettings : ContentPage
         }
     }
 
-    private void lightThemeRadioButton_CheckedChanged(object sender, CheckedChangedEventArgs e)
+    public void LightThemeClicked(object sender, EventArgs args)
     {
         Application.Current.UserAppTheme = AppTheme.Light;
     }
 
-    private void darkThemeRadioButton_CheckedChanged(object sender, CheckedChangedEventArgs e)
+    public void DarkThemeClicked(object sender, EventArgs args)
     {
         Application.Current.UserAppTheme = AppTheme.Dark;
     }

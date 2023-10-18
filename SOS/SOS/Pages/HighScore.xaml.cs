@@ -65,7 +65,7 @@ public class ListItem
                 string theme = "#90e0ef";
                 if (Application.Current.UserAppTheme == AppTheme.Dark)
                 {
-                    theme = "52b788";
+                    theme = "#52b788";
                 } 
                 return isMe ? Color.FromHex(theme) : Color.FromHex("#ffffff");
             }

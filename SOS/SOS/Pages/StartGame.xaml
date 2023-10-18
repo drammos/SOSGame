@@ -11,33 +11,51 @@
              Shell.BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}"
              >
 
-    <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"  Spacing="0" >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="350"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
 
-        <CollectionView ItemsSource="{Binding GridList}">
-        
 
-            <CollectionView.ItemsLayout>
-                <GridItemsLayout Span="{Binding BoardSpan}" Orientation="Horizontal" VerticalItemSpacing="1" HorizontalItemSpacing="1"/>
-            </CollectionView.ItemsLayout>
+        <StackLayout Grid.Row="1" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"  Spacing="0">
+
+            <CollectionView BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}"  ItemsSource="{Binding GridList}" >
 
 
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="box:GridGameBox">
-                    <Frame x:Name="poutsoframe" BackgroundColor="White" Padding="0" CornerRadius="0" x:DataType="local:GridGameViewModel" HeightRequest="{Binding GridLength, Mode=TwoWay}" WidthRequest="{Binding GridLength, Mode=TwoWay}" >
-                        <Label x:DataType="box:GridGameBox" Text="{Binding SelectedText}" FontSize="28" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
-
-                        <Frame.GestureRecognizers>
-                            <TapGestureRecognizer x:DataType="local:GridGameViewModel"
-                                Command="{Binding SelectedItemCommand}"
-                                CommandParameter="{Binding .}" />
-                        </Frame.GestureRecognizers>
-
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Span="{Binding BoardSpan}" Orientation="Horizontal" VerticalItemSpacing="1" HorizontalItemSpacing="1"/>
+                </CollectionView.ItemsLayout>
 
 
-        </CollectionView>
-    </StackLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BorderColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}" BackgroundColor="White" Padding="0" CornerRadius="0" x:DataType="local:GridGameViewModel" HeightRequest="{Binding Source={x:RelativeSource AncestorType={x:Type local:GridGameViewModel}}, Path=GridLength}" WidthRequest="{Binding Source={x:RelativeSource AncestorType={x:Type local:GridGameViewModel}}, Path=GridLength}" >
+                            <Label x:DataType="box:GridGameBox" Text="{Binding SelectedText}" FontSize="28" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding Source={x:RelativeSource AncestorType={x:Type local:GridGameViewModel}}, Path=SelectedItemCommand}"
+                                    CommandParameter="{Binding .}" />
+                            </Frame.GestureRecognizers>
+
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+        </StackLayout>
+
+        <StackLayout  Grid.Row="9"  VerticalOptions="End" Margin="10,10,10,10" Padding="10,2,10,2" HorizontalOptions="FillAndExpand" >
+            <Button 
+                BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}"
+                x:Name="ResetTheGame"
+                Text="Reset"
+                Command="{Binding ResetCommand}"
+            />
+        </StackLayout>
+
+    </Grid>
 </ContentPage>

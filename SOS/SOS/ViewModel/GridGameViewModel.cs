@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using SOS.Box;
 using Microsoft.Maui;
 using System.Diagnostics;
+using SOS.Services;
 
 namespace SOS.ViewModel
 {
@@ -16,10 +17,14 @@ namespace SOS.ViewModel
 
         [ObservableProperty]
         private int _gridLength;
+
+        readonly IPopupService popupService;
+
         // Initialize the game Tic-Tac-Toe
-        public GridGameViewModel()
+        public GridGameViewModel(IPopupService popupService)
         {
             this.PlayerTurn = "X";
+            this.popupService = popupService;
             SetUpGame();
         }
 
@@ -78,43 +83,23 @@ namespace SOS.ViewModel
             this.PlayerTurn = "X";
             GridList.Clear();
             BoardSpan = Preferences.Get("Board", BoardSpan);
-            if (BoardSpan == 4)
-            {
-            Debug.WriteLine("\n\n\nelaa1");
+            if (BoardSpan == 4) GridLength = 80;
+            else if (BoardSpan == 5) GridLength = 70;
+            else if (BoardSpan == 6) GridLength = 60;
+            else if (BoardSpan == 7) GridLength = 52;
+            else if (BoardSpan == 8) GridLength = 45;
 
-                GridLength = 80;
-            }
-            else if (BoardSpan == 5)
-            {
-                GridLength = 70;
-                Debug.WriteLine("\n\n\nelaa2");
-
-            }
-            else if (BoardSpan == 6)
-            {
-                GridLength = 60;
-                Debug.WriteLine("elaa3");
-
-            }
-            else if (BoardSpan == 7)
-            {
-                GridLength = 52;
-                Debug.WriteLine("elaa4");
-
-            }
-            else if (BoardSpan == 8)
-            {
-                GridLength = 45;
-                Debug.WriteLine("elaa5");
-
-            }
-
-            Debug.WriteLine("elaa");
             int board = BoardSpan * BoardSpan;
             for (int i = 0; i < board; i++)
             {
                 GridList.Add(new GridGameBox(i));
             }  
+        }
+
+        [RelayCommand]
+        public void Reset()
+        {
+            SetUpGame();
         }
 
         [RelayCommand]
@@ -124,6 +109,11 @@ namespace SOS.ViewModel
             {
                 return;
             }
+
+            VarMessage msg = new VarMessage("Choose");
+            var pop = new PopUp(msg);
+            popupService.ShowPopup(pop);
+            //Dispose();
 
             if (PlayerTurn == "X")
             {
