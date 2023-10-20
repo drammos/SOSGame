@@ -6,7 +6,7 @@ using SOS.Pages;
 using Plugin.Media.Abstractions;
 using Plugin.Media;
 
-namespace SOS;
+namespace SOS.Popups;
 
 public partial class PopUpPhoto : Popup
 {

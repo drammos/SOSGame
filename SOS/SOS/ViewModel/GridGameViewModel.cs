@@ -5,6 +5,7 @@ using SOS.Box;
 using Microsoft.Maui;
 using System.Diagnostics;
 using SOS.Services;
+using SOS.Popups;
 
 namespace SOS.ViewModel
 {
@@ -82,7 +83,8 @@ namespace SOS.ViewModel
         {
             this.PlayerTurn = "X";
             GridList.Clear();
-            BoardSpan = Preferences.Get("Board", BoardSpan);
+            string key = App.User.UserName + "Board";
+            BoardSpan = Preferences.Get(key, BoardSpan);
             if (BoardSpan == 4) GridLength = 80;
             else if (BoardSpan == 5) GridLength = 70;
             else if (BoardSpan == 6) GridLength = 60;
@@ -103,28 +105,48 @@ namespace SOS.ViewModel
         }
 
         [RelayCommand]
-        public void SelectedItem(GridGameBox selectedItem)
+        public async void QuitGame()
+        {
+            await Shell.Current.GoToAsync($"//{nameof(StartGame)}");
+        }
+
+        [RelayCommand]
+        public async void SelectedItem(GridGameBox selectedItem)
         {
             if (selectedItem.Player != null)
             {
                 return;
             }
 
-            VarMessage msg = new VarMessage("Choose");
-            var pop = new PopUp(msg);
-            popupService.ShowPopup(pop);
+            var pop = new BoardPopUp();
+            var res = await popupService.ShowPopup<string>(pop);
+
             //Dispose();
 
             if (PlayerTurn == "X")
             {
-                selectedItem.SelectedText = "X";
+                if(res == "S")
+                {
+                    selectedItem.SelectedText = "S";
+                }
+                else if(res == "O")
+                {
+                    selectedItem.SelectedText = "O";
+                }
                 selectedItem.Player = 0;
                 this.PlayerTurn = "O";
                 this._playerTurn = "O";
             }
             else
             {
-                selectedItem.SelectedText = "O";
+                if (res == "S")
+                {
+                    selectedItem.SelectedText = "S";
+                }
+                else if(res == "O")
+                {
+                    selectedItem.SelectedText = "O";
+                }
                 selectedItem.Player = 1;
                 this._playerTurn = "X";
                 this.PlayerTurn = "X";

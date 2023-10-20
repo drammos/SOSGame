@@ -24,7 +24,7 @@
             Title="StartGame"
             ContentTemplate="{DataTemplate local:StartGame}"
             Route="StartGame" 
-            FlyoutIcon="{AppThemeBinding Light=play.png, Dark=play_dark.png}"/>
+            FlyoutIcon="{AppThemeBinding Light=play.png, Dark=play_d.png}"/>
 
 
         <ShellContent
@@ -37,13 +37,13 @@
             Title="Settings"
             ContentTemplate="{DataTemplate local:Settings}"
             Route="Settings" 
-            FlyoutIcon="{AppThemeBinding Light=setting_lines.png, Dark=setting_lines_dark.png}"/>
+            FlyoutIcon="{AppThemeBinding Light=setting_lines.png, Dark=setting_lines_d.png}"/>
 
         <ShellContent
             Title="User Settings"
             ContentTemplate="{DataTemplate pages:UserSettings}"
             Route="UserSettings" 
-            FlyoutIcon="{AppThemeBinding Light=profile.png, Dark=profile_dark.png}"/>
+            FlyoutIcon="{AppThemeBinding Light=profile.png, Dark=profile_d.png}"/>
 
     </FlyoutItem>
 

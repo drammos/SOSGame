@@ -3,7 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using SOS.ViewModel;
 
-namespace SOS;
+namespace SOS.Popups;
 
 public partial class PopUp : Popup
 {
@@ -18,6 +18,4 @@ public partial class PopUp : Popup
     {
         Close();
     }
-
-
 }

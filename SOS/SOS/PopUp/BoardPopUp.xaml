@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup 
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SOS.Popups.BoardPopUp"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             CanBeDismissedByTappingOutsideOfPopup="False"       
+             xmlns:local="clr-namespace:SOS.ViewModel">
+
+    <VerticalStackLayout
+        BackgroundColor="White"
+        MinimumHeightRequest="120"
+        MinimumWidthRequest="120"
+        Padding="20">
+        
+        <HorizontalStackLayout Spacing="20">
+            <Button
+                HeightRequest="80"
+                WidthRequest="80"
+                Text="S"
+                BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}"
+                TextColor="Red"
+                Clicked="CheckS"
+                HorizontalOptions="CenterAndExpand"/>
+
+            <Button
+                HeightRequest="80"
+                WidthRequest="80"
+                Text="O"
+                BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}"
+                TextColor="Blue"
+                Clicked="CheckO"
+                HorizontalOptions="CenterAndExpand"/>
+        </HorizontalStackLayout>
+
+    </VerticalStackLayout>
+</toolkit:Popup>

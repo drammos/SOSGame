@@ -39,9 +39,11 @@ public static class MauiProgram
         builder.Services.AddSingleton<HighScore>();
         builder.Services.AddSingleton<HighScoreViewModel>();
         builder.Services.AddSingleton<GridGameViewModel>();
+        builder.Services.AddSingleton<StartGameViewModel>();
         builder.Services.AddSingleton<Settings>();
         builder.Services.AddSingleton<UserSettings>();
         builder.Services.AddSingleton<RegisterPage>();
+        builder.Services.AddSingleton<Game>();
         builder.Services.AddTransient<LoginViewModel>();
         builder.Services.AddTransient<RegisterViewModel>();
         builder.Services.AddTransient<UserSettingsViewModel>();

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace SOS.ViewModel
 {
@@ -11,6 +6,7 @@ namespace SOS.ViewModel
     {
         private string[] _pickerLevelOptions = { "Easy", "Hard" };
         private string _selectedLevelOption;
+
 
         public string[] PickerLevelOptions
         {
@@ -28,7 +24,9 @@ namespace SOS.ViewModel
             set
             {
                 _selectedLevelOption = value;
-                Preferences.Set("Level", _selectedLevelOption);
+                string username = App.User.UserName;
+                string key = username + "Level";
+                Preferences.Set(key, _selectedLevelOption);
                 OnPropertyChanged(nameof(SelectedLevelOption));
             }
         }
@@ -54,17 +52,19 @@ namespace SOS.ViewModel
             {
                 _selectedBoardOption = value;
                 int board = GetGridBoard();
-                Preferences.Set("Board", board);
+                string username = App.User.UserName;
+                string key = username + "Board";
+                Preferences.Set(key, board);
                 OnPropertyChanged(nameof(SelectedBoardOption));
             }
         }
         /// </summary>
 
 
-        private int[] _pickerPlayersOptions = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-        private int _selectedPlayersOption;
+        private string[] _pickerPlayersOptions = { "1", "2", "3",  "4",  "5",  "6",  "7", "8", "9",  "10" };
+        private string _selectedPlayersOption;
 
-        public int[] PickerPlayersOptions
+        public string[] PickerPlayersOptions
         {
             get { return _pickerPlayersOptions; }
             set
@@ -74,13 +74,16 @@ namespace SOS.ViewModel
             }
         }
 
-        public int SelectedPlayersOption
+        public string SelectedPlayersOption
         {
             get { return _selectedPlayersOption; }
             set
             {
                 _selectedPlayersOption = value;
-                Preferences.Set("Players", _selectedPlayersOption);
+                string username = App.User.UserName;
+                string key = username + "Players";
+                int players = int.Parse(_selectedPlayersOption);
+                Preferences.Set(key, players);
                 OnPropertyChanged(nameof(SelectedPlayersOption));
             }
         }
@@ -90,7 +93,7 @@ namespace SOS.ViewModel
         {
             if(SelectedBoardOption == null || SelectedBoardOption == "")
             {
-                return 4;
+                return -1;
             }
 
             char[] array = SelectedBoardOption.ToCharArray();

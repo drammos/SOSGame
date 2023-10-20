@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using SOS.Services;
 using SOS.ViewModel;
+using SOS.Popups;
 
 namespace SOS.ViewModel
 {
@@ -103,6 +104,13 @@ namespace SOS.ViewModel
 
             if (res)
             {
+                String board = UserName + "Board";
+                String level = UserName + "Level";
+                String players = UserName + "Players";
+
+                Preferences.Set(board, -1);
+                Preferences.Set(level, "");
+                Preferences.Set(players, -1);
                 await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
             }
             else

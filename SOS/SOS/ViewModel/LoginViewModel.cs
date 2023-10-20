@@ -6,6 +6,7 @@ using SOS.Models;
 using System.Text.Json.Serialization;
 using System.Text.Json;
 using SOS.UseControl;
+using SOS.Popups;
 
 namespace SOS.ViewModel
 {
@@ -70,6 +71,7 @@ namespace SOS.ViewModel
                 App.User = user;
 
                 AppShell.Current.FlyoutHeader = new FlyoutHead();
+
 
                 await Shell.Current.GoToAsync($"//{nameof(StartGame)}");
             }
