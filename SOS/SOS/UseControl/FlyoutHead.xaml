@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SOS.UseControl.FlyoutHead">
@@ -11,7 +11,7 @@
                 HorizontalOptions="Fill"
                 Aspect="Fill"
                 Margin="0"
-                Source="{AppThemeBinding Light=user.png, Dark=user_dark.png}"
+                Source="user.png"
             />
         </Frame>
         <Label x:Name="lblUserName" FontSize="20" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Center"/>

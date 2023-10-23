@@ -19,6 +19,9 @@ namespace SOS.ViewModel
         [ObservableProperty]
         private int _gridLength;
 
+        [ObservableProperty]
+        private string _userName;
+
         readonly IPopupService popupService;
 
         // Initialize the game Tic-Tac-Toe
@@ -82,6 +85,7 @@ namespace SOS.ViewModel
         private void SetUpGame()
         {
             this.PlayerTurn = "X";
+            _userName = App.User.UserName;
             GridList.Clear();
             string key = App.User.UserName + "Board";
             BoardSpan = Preferences.Get(key, BoardSpan);
