@@ -16,7 +16,7 @@ namespace SOS.ViewModel
 
         [ObservableProperty]
         private string _confirmPassword;
-
+        
         [ObservableProperty]
         private string _email;
 
@@ -199,7 +199,6 @@ namespace SOS.ViewModel
             Password = "";
             ConfirmPassword = "";
             Email = "";
-            FilePath = "";
             IsRegisterButtonEnable = false;
         }
     }

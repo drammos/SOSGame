@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SOS.Game"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:box="clr-namespace:SOS.Box"
              xmlns:item="clr-namespace:SOS"
              xmlns:local="clr-namespace:SOS.ViewModel"
@@ -18,44 +19,55 @@
         </Grid.RowDefinitions>
 
 
-        <HorizontalStackLayout Grid.Row="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Spacing="100">
+        <StackLayout Grid.Row="0" Orientation="Horizontal">
 
-            <StackLayout>
-                <Frame HeightRequest="70" WidthRequest="70" CornerRadius="50" Padding="1" Margin="5" Grid.Column="1" Grid.Row="0" >
+            <HorizontalStackLayout HorizontalOptions="StartAndExpand">
+                <Frame HeightRequest="70" WidthRequest="70" CornerRadius="50" Padding="1" Margin="5" Grid.Column="1" Grid.Row="0">
                     <Image 
-                        Source="{Binding FilePath}"
-                        HorizontalOptions="Fill"
-                        Aspect="Fill"
-                        Margin="0"
-                        />
+                    Source="{Binding FilePath}"
+                    HorizontalOptions="Fill"
+                    Aspect="Fill"
+                    Margin="0"
+                    />
                 </Frame>
                 <VerticalStackLayout Grid.Column="3" Grid.Row="0" Padding="5" VerticalOptions="Center">
                     <Label Text="{Binding UserName, Mode=TwoWay}" TextColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}" FontSize="Medium" FontAttributes="Bold" />
                     <Label Text="{Binding UserScore}" TextColor="#fca311" FontSize="Medium" />
                 </VerticalStackLayout>
+                <Label Grid.Column="4" Grid.Row="0" 
+                       Text="&#x2022;" VerticalOptions="Center" 
+                       FontSize="60" TextColor="{AppThemeBinding Light=Blue, Dark=White}" IsVisible="{Binding IsUser}"/>
 
-            </StackLayout>
-            <StackLayout>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout HorizontalOptions="EndAndExpand">
+                <Label Grid.Column="4" Grid.Row="0" 
+                   Text="&#x2022;" VerticalOptions="Center" 
+                   FontSize="60" TextColor="{AppThemeBinding Light=Blue, Dark=White}"
+                   IsVisible="{Binding IsComputer}"/>
+                <VerticalStackLayout Grid.Column="3" Grid.Row="0" Padding="5" VerticalOptions="Center">
+                    <Label Text="pc" TextColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}" FontSize="Medium" FontAttributes="Bold" />
+                    <Label Text="{Binding ComputerScore}" TextColor="#fca311" FontSize="Medium" />
+                </VerticalStackLayout>
                 <Frame HeightRequest="70" WidthRequest="70" CornerRadius="50" Padding="1" Margin="5" Grid.Column="1" Grid.Row="0" >
                     <Image 
-                        Source="{Binding FilePath}"
+                        Source="user.png"
                         HorizontalOptions="Fill"
                         Aspect="Fill"
                         Margin="0"
                         />
                 </Frame>
-                <VerticalStackLayout Grid.Column="3" Grid.Row="0" Padding="5" VerticalOptions="Center">
-                    <Label Text="{Binding UserName, Mode=TwoWay}" TextColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}" FontSize="Medium" FontAttributes="Bold" />
-                    <Label Text="{Binding UserScore}" TextColor="#fca311" FontSize="Medium" />
-                </VerticalStackLayout>
+            </HorizontalStackLayout>
 
-            </StackLayout>
-            <Label Text="Computer" TextColor="Black"/>
-        </HorizontalStackLayout>
+
+
+        </StackLayout>
+
 
         <StackLayout Grid.Row="1" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"  Spacing="0">
 
-            <CollectionView BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}"  ItemsSource="{Binding GridList}" >
+            <CollectionView BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}"  
+                            ItemsSource="{Binding GridList}" >
 
 
                 <CollectionView.ItemsLayout>
@@ -65,15 +77,19 @@
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame BorderColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}" BackgroundColor="White" Padding="0" CornerRadius="0" x:DataType="local:GridGameViewModel" HeightRequest="{Binding Source={x:RelativeSource AncestorType={x:Type local:GridGameViewModel}}, Path=GridLength}" WidthRequest="{Binding Source={x:RelativeSource AncestorType={x:Type local:GridGameViewModel}}, Path=GridLength}" >
-                            <Label x:DataType="box:GridGameBox" Text="{Binding SelectedText}" TextColor="Black" FontSize="28" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+                        <Frame IsEnabled="{Binding Source={x:RelativeSource AncestorType={x:Type local:GridGameViewModel}}, Path=IsUser, Mode=TwoWay}"
+                               BorderColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}" x:DataType="box:GridGameBox"
+                               BackgroundColor="{Binding CellColor, Mode=TwoWay}" Padding="0" CornerRadius="0" 
+                               HeightRequest="{Binding Source={x:RelativeSource AncestorType={x:Type local:GridGameViewModel}}, Path=GridLength}" 
+                               WidthRequest="{Binding Source={x:RelativeSource AncestorType={x:Type local:GridGameViewModel}}, Path=GridLength}" >
+                            
+                            <Label x:DataType="box:GridGameBox" Text="{Binding SelectedText}" TextColor="{Binding TextColor, Mode=TwoWay}" FontSize="28" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
 
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer
                                     Command="{Binding Source={x:RelativeSource AncestorType={x:Type local:GridGameViewModel}}, Path=SelectedItemCommand}"
                                     CommandParameter="{Binding .}" />
                             </Frame.GestureRecognizers>
-
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

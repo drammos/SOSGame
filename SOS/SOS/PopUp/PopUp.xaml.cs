@@ -1,6 +1,4 @@
 using CommunityToolkit.Maui.Views;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using SOS.ViewModel;
 
 namespace SOS.Popups;

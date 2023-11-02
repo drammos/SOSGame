@@ -97,6 +97,9 @@
 	  <MauiXaml Update="Pages\StartGame.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="PopUp\PopUpGame.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="PopUp\PopUpPhoto.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

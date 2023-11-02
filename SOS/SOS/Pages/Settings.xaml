@@ -26,7 +26,7 @@
                 <StackLayout>
 
                     <Label Text="Choose Grid Board"  HorizontalOptions="CenterAndExpand" FontAttributes="Bold" />
-                    <Picker Title="Choose" HorizontalOptions="CenterAndExpand" TextColor="Gray"
+                    <Picker Title="Choose" HorizontalOptions="CenterAndExpand" TextColor="White"
                         ItemsSource="{Binding PickerBoardOptions}"
                         SelectedItem="{Binding SelectedBoardOption}">
                     </Picker>
@@ -38,7 +38,7 @@
                 <StackLayout>
 
                     <Label Text="Choose Level"  HorizontalOptions="CenterAndExpand" FontAttributes="Bold" />
-                    <Picker Title="Choose" HorizontalOptions="CenterAndExpand" TextColor="Gray"
+                    <Picker Title="Choose" HorizontalOptions="CenterAndExpand" TextColor="White"
                         ItemsSource="{Binding PickerLevelOptions}"
                         SelectedItem="{Binding SelectedLevelOption}">
                     </Picker>
@@ -50,7 +50,7 @@
                 <StackLayout>
 
                     <Label Text="Choose Number of Players"  HorizontalOptions="CenterAndExpand" FontAttributes="Bold" />
-                    <Picker Title="Choose" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" TextColor="Gray"
+                    <Picker Title="Choose" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" TextColor="White"
                         ItemsSource="{Binding PickerPlayersOptions}"
                         SelectedItem="{Binding SelectedPlayersOption}">
                     </Picker>

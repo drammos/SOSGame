@@ -24,7 +24,7 @@
 
 
         <StackLayout Grid.Row="1">
-            <Frame HeightRequest="100" WidthRequest="100" CornerRadius="50" Padding="1" Margin="5" BackgroundColor="AntiqueWhite">
+            <Frame HeightRequest="100" WidthRequest="100" CornerRadius="50" Padding="1" Margin="5" BackgroundColor="White">
                 <Image
                     x:Name="userImage"
                         HorizontalOptions="Fill"

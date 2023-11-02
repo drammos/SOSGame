@@ -19,7 +19,7 @@
                 WidthRequest="80"
                 Text="S"
                 BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}"
-                TextColor="Red"
+                TextColor="Blue"
                 Clicked="CheckS"
                 HorizontalOptions="CenterAndExpand"/>
 
@@ -28,7 +28,7 @@
                 WidthRequest="80"
                 Text="O"
                 BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}"
-                TextColor="Blue"
+                TextColor="Red"
                 Clicked="CheckO"
                 HorizontalOptions="CenterAndExpand"/>
         </HorizontalStackLayout>

@@ -30,6 +30,8 @@ namespace SOS
             level = Preferences.Get(keyLevel, level);
             players = Preferences.Get(keyPlayers, players);
 
+
+
             if (board != -1 && level != "" && players != -1)
             {
                 this.startGameViewModel.IsNotCompleteSettingsEnable = false;
