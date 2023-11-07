@@ -10,7 +10,6 @@ public partial class PopUpGame : Popup
     {
         InitializeComponent();
         this.BindingContext = varMessage;
-        CanBeDismissedByTappingOutsideOfPopup = true;
     }
 
     private void ClickedPlay(object sender, EventArgs e)

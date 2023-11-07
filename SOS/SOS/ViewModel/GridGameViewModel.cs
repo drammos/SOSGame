@@ -45,14 +45,15 @@ namespace SOS.ViewModel
 
         private CancellationTokenSource cancellationTokenSource;
 
-
+        readonly IUpdateRepo updateRepo;
         readonly IPopupService popupService;
 
         // Initialize the game Grid Game
-        public GridGameViewModel(IPopupService popupService)
+        public GridGameViewModel(IUpdateRepo updateRepo, IPopupService popupService)
         {
             this.PlayerTurn = "user";
             this.popupService = popupService;
+            this.updateRepo = updateRepo;
             cancellationTokenSource = new CancellationTokenSource();
             SetUpGame();
             var task = this.StartAsync();
@@ -104,32 +105,7 @@ namespace SOS.ViewModel
 
                         if (completeCount == BoardSpan * BoardSpan)
                         {
-                            VarMessage mes;
-                            if (this.UserScore > this.ComputerScore)
-                            {
-                                mes = new VarMessage("You Win!!!");
-
-                            }
-                            else if (this.UserScore < this.ComputerScore)
-                            {
-                                mes = new VarMessage("Game Over!");
-                            }
-                            else
-                            {
-                                mes = new VarMessage("Draw!!!");
-                            }
-
-                            var popUp = new PopUpGame(mes);
-                            var result1 = await popupService.ShowPopup<string>(popUp);
-                            if (result1 == "play")
-                            {
-                                this.Reset();
-                            }
-                            else if(result1 == "quit")
-                            {
-                                this.QuitGame();
-                            }
-
+                            EndGame();
                         }
                     }   
                 }
@@ -278,32 +254,53 @@ namespace SOS.ViewModel
 
                 if(completeCount == BoardSpan*BoardSpan) 
                 {
-                    VarMessage mes;
-                    if (this.UserScore > this.ComputerScore)
-                    {
-                        mes = new VarMessage("You Win!!!");
-
-                    }
-                    else if( this.UserScore < this.ComputerScore)
-                    {
-                        mes = new VarMessage("Game Over!");
-                    }
-                    else
-                    {
-                        mes = new VarMessage("Draw!!!");
-                    }
-
-                    var popUp = new PopUpGame(mes);
-                    var result = await popupService.ShowPopup<string>(popUp);
-                    if (result == "play")
-                    {
-                        this.Reset();
-                    }
-                    else if (result == "quit")
-                    {
-                        this.QuitGame();
-                    }
+                   EndGame();
                 }
+            }
+        }
+
+        public async void EndGame()
+        {
+
+            VarMessage mes;
+            if (this.UserScore > this.ComputerScore)
+            {
+                mes = new VarMessage("You Win!!!");
+                UpdateDataBase();
+            }
+            else if (this.UserScore < this.ComputerScore)
+            {
+                mes = new VarMessage("Game Over!");
+            }
+            else
+            {
+                mes = new VarMessage("Draw!!!");
+                UpdateDataBase();
+            }
+
+            var popUp = new PopUpGame(mes);
+            var result = await popupService.ShowPopup<string>(popUp);
+            if (result == "play")
+            {
+                this.Reset();
+            }
+            else if (result == "quit")
+            {
+                this.QuitGame();
+            }
+           
+        }
+
+        public async void UpdateDataBase()
+        {
+            int score = App.User.Score + UserScore;
+            bool res = await updateRepo.Update(App.User.Gid, UserName, App.User.Password, App.User.Email, App.User.FilePath, score);
+            App.User.Score = score;
+            if (!res)
+            {
+                var mes = new VarMessage("The User score don't update!");
+                var pop = new PopUp(mes);
+                popupService.ShowPopup(pop);
             }
         }
 
@@ -479,7 +476,6 @@ namespace SOS.ViewModel
         public int SelectPCEasy()
         {
             Thread.Sleep(1000);
-            int board = BoardSpan;
             int size = BoardSpan * BoardSpan;
             int seed = (int)DateTime.Now.Ticks;
             Random random = new Random(seed);
@@ -492,7 +488,8 @@ namespace SOS.ViewModel
                 box = GridList[randomNumber];
                 if (string.IsNullOrEmpty(box.SelectedText)) break;
             }
-            if ((randomNumber % 2) == 0)
+            int numberNum = random.Next();
+            if ((numberNum % 2) == 0)
             {
                 box.SetText("S", 1);
             }

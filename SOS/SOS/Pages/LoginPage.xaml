@@ -3,12 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:SOS.ViewModel"
              x:Class="SOS.LoginPage"
-             BackgroundImageSource="loginimage.jpg"
+             BackgroundImageSource="opa.jpg"
              Shell.NavBarIsVisible="False"
              x:DataType="local:LoginViewModel"
              >
     <Grid>
-        
+
         <Grid.RowDefinitions>
             <RowDefinition Height="220"/>
             <RowDefinition Height="50"/>
@@ -19,12 +19,6 @@
             <RowDefinition Height="70"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
-        <Frame Grid.Row="0" BackgroundColor="White" HeightRequest="70" WidthRequest="70" CornerRadius="20" Padding="0" Margin="0,150,0,0" HorizontalOptions="Center">
-            <Image Source="user1.png" Aspect="AspectFill" Margin="0"/>
-        </Frame>
-
-        <Label Grid.Row="2" Text="Welcome!" TextColor="White" HorizontalOptions="Center" FontSize="Title" FontAttributes="Bold" Padding="0" Margin="0"/>
 
         <Frame Grid.Row="3" BackgroundColor="White" BorderColor="White" Margin="0,5,0,0" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
             <StackLayout Orientation="Horizontal">
