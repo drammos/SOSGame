@@ -29,7 +29,6 @@ Obj/
 
 # Jetbrains Rider cache/options directory
 .idea/
-.vs/
 
 # MSTest test Results
 [Tt]est[Rr]esult*/

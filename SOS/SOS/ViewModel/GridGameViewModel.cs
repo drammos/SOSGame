@@ -1,9 +1,10 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿// Libraries
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+
+// Lcocal namespaces
 using SOS.Box;
-using Microsoft.Maui;
-using System.Diagnostics;
 using SOS.Services;
 using SOS.Popups;
 
@@ -12,8 +13,8 @@ namespace SOS.ViewModel
     public partial class GridGameViewModel : BaseViewModel
     {
         public ObservableCollection<GridGameBox> GridList { get; set; } = new ObservableCollection<GridGameBox>();
-
-        private int completeCount;
+        private int completeCount;    
+        private List<int> FreeList = new List<int>();
 
         [ObservableProperty]
         private int _boardSpan;
@@ -39,12 +40,15 @@ namespace SOS.ViewModel
         [ObservableProperty]
         private bool _isComputer;
 
+        [ObservableProperty]
+        private string _level;
+
         private CancellationTokenSource cancellationTokenSource;
 
 
         readonly IPopupService popupService;
 
-        // Initialize the game Tic-Tac-Toe
+        // Initialize the game Grid Game
         public GridGameViewModel(IPopupService popupService)
         {
             this.PlayerTurn = "user";
@@ -61,23 +65,71 @@ namespace SOS.ViewModel
                 await Task.Delay(500);
 
                 // Εδώ μπορείτε να τρέξετε τον κώδικα που θέλετε να εκτελείται σε ατέρμονα βρόχο.
-                bool result;
+                int result;
+                
                 if (this.IsComputer)
                 {
                     if (completeCount < BoardSpan * BoardSpan)
                     {
-
-                        result = this.SelectPC();
-                        if (result==false)
+                        if(Level == "Easy")
                         {
-                            this.PlayerTurn = "user";
-                            this._playerTurn = "user";
-                            this.IsUser = true;
-                            this.IsComputer = false;
+                            result = this.SelectPCEasy();
+                            if (result == 0)
+                            {
+                                this.PlayerTurn = "user";
+                                this._playerTurn = "user";
+                                this.IsUser = true;
+                                this.IsComputer = false;
+                            }
+                            else
+                            {
+                                this.ComputerScore += 5*result;
+                            }
                         }
-                        else 
+                        else if(Level == "Hard")
                         {
-                            this.ComputerScore += 10;
+                            result = this.SelectPCHard();
+                            if (result == 0)
+                            {
+                                this.PlayerTurn = "user";
+                                this._playerTurn = "user";
+                                this.IsUser = true;
+                                this.IsComputer = false;
+                            }
+                            else
+                            {
+                                this.ComputerScore += 10*result;
+                            }
+                        }
+
+                        if (completeCount == BoardSpan * BoardSpan)
+                        {
+                            VarMessage mes;
+                            if (this.UserScore > this.ComputerScore)
+                            {
+                                mes = new VarMessage("You Win!!!");
+
+                            }
+                            else if (this.UserScore < this.ComputerScore)
+                            {
+                                mes = new VarMessage("Game Over!");
+                            }
+                            else
+                            {
+                                mes = new VarMessage("Draw!!!");
+                            }
+
+                            var popUp = new PopUpGame(mes);
+                            var result1 = await popupService.ShowPopup<string>(popUp);
+                            if (result1 == "play")
+                            {
+                                this.Reset();
+                            }
+                            else if(result1 == "quit")
+                            {
+                                this.QuitGame();
+                            }
+
                         }
                     }   
                 }
@@ -87,41 +139,18 @@ namespace SOS.ViewModel
         public int RestartBoard()
         {
             SetUpGame();
+            UserScore = 0;
+            ComputerScore = 0;
             UserName = App.User.UserName;
-            UserScore = App.User.Score;
             FilePath = App.User.FilePath;
+            string key = UserName + "Level";
+            Level = Preferences.Get(key, Level);
             return this.BoardSpan;
         }
 
-        public String Winner
-        {
-            get
-            {
-                return "The player " + _theWinner + " is Winner!";
-            }
-        }
-
-        private String _theWinner;
-        public String TheWinner
-        {
-            get { return _theWinner; }
-            set { _playerTurn = value; OnPropertyChanged("Winner"); }
-        }
-
-
-
-        // Screen Player for label
-        public string ScreenPlayer
-        {
-            get
-            {
-                return "Player " + _playerTurn;
-            }
-        }
-
-
         // The player is 'X' or 'O'
         private string _playerTurn;
+
         public String PlayerTurn
         {
             get
@@ -135,20 +164,20 @@ namespace SOS.ViewModel
             }
         }
 
-
         // SetUp the Game
         private void SetUpGame()
         {
             this.PlayerTurn = "user";
             this.IsUser = true;
             this.IsComputer = false;
-            _userName = App.User.UserName;
-            _userScore = App.User.Score;
-            _filePath = App.User.FilePath;
-            _computerScore = 0;
-            if(string.IsNullOrEmpty(_filePath) )
+            UserName = App.User.UserName;
+            FilePath = App.User.FilePath;
+            string key1 = UserName + "Level";
+            Level = Preferences.Get(key1, Level);
+            ComputerScore = 0;
+            if(string.IsNullOrEmpty(FilePath) )
             {
-                _filePath = "user.png";
+                FilePath = "user.png";
             }
             GridList.Clear();
             string key = App.User.UserName + "Board";
@@ -171,6 +200,8 @@ namespace SOS.ViewModel
         public void Reset()
         {
             UserName = App.User.UserName;
+            string key = UserName + "Level";
+            Level = Preferences.Get(key, Level);
             UserScore = 0;
             ComputerScore = 0;
             FilePath = App.User.FilePath;
@@ -199,7 +230,8 @@ namespace SOS.ViewModel
                 if (res == "S")
                 {
                     selectedItem.SetText("S", 0);
-                    if (checkForSOS(selectedItem) == false)
+                    int count = checkForSOS(selectedItem);
+                    if (count == 0)
                     {
                         this.PlayerTurn = "pc";
                         this._playerTurn = "pc";
@@ -208,14 +240,22 @@ namespace SOS.ViewModel
                     }
                     else
                     {
-                        this.UserScore += 10;
+                        if (Level == "Easy")
+                        {
+                            this.UserScore += 5*count;
+                        }
+                        else
+                        {
+                            this.UserScore += 10*count;
+                        }
                     }
                     completeCount++;
                 }
                 else if (res == "O")
                 {
                     selectedItem.SetText("O", 0);
-                    if (checkForSOS(selectedItem) == false)
+                    int count = checkForSOS(selectedItem);
+                    if (count == 0)
                     {
                         this.PlayerTurn = "pc";
                         this._playerTurn = "pc";
@@ -224,440 +264,94 @@ namespace SOS.ViewModel
                     }
                     else
                     {
-                        this.UserScore += 10;
+                        if (Level == "Easy")
+                        {
+                            this.UserScore += 5 * count;
+                        }
+                        else
+                        {
+                            this.UserScore += 10 * count;
+                        }
                     }
                     completeCount++;
                 }
 
                 if(completeCount == BoardSpan*BoardSpan) 
                 {
-                    if(this.)
-                    var mes = new VarMessage("C");
-                    var pop = new PopUp(mes);
-                    popupService.ShowPopup(pop);
+                    VarMessage mes;
+                    if (this.UserScore > this.ComputerScore)
+                    {
+                        mes = new VarMessage("You Win!!!");
+
+                    }
+                    else if( this.UserScore < this.ComputerScore)
+                    {
+                        mes = new VarMessage("Game Over!");
+                    }
+                    else
+                    {
+                        mes = new VarMessage("Draw!!!");
+                    }
+
+                    var popUp = new PopUpGame(mes);
+                    var result = await popupService.ShowPopup<string>(popUp);
+                    if (result == "play")
+                    {
+                        this.Reset();
+                    }
+                    else if (result == "quit")
+                    {
+                        this.QuitGame();
+                    }
                 }
             }
         }
 
-        public bool checkForSOS(GridGameBox box)
+        public bool checkForS(int randomNumber, int num, int num1)
         {
-            int num, num1;
             int board = BoardSpan;
             int size = board * board;
-            int randomNumber = box.Index;
-
-
-            if (box.SelectedText == "S")
+            GridGameBox box = GridList[randomNumber];
+            
+            if (num >= 0 && num < size)
             {
-                //1st line
-                if (randomNumber % board == 0)
+                GridGameBox box2 = GridList[num];
+
+                if (box2.SelectedText == "S")
                 {
-                    num = randomNumber - 2 * board + 2;
-                    if (num >= 0 && num < size)
+                    GridGameBox box3 = GridList[num1];
+                    if (box3.SelectedText == "O")
                     {
-                        GridGameBox box2 = GridList[num];
-
-                        if (box2.SelectedText == "S")
-                        {
-                            num1 = randomNumber - board + 1;
-                            GridGameBox box3 = GridList[num1];
-                            if (box3.SelectedText == "O")
-                            {
-                                box.SetDisableColors();
-                                box2.SetDisableColors();
-                                box3.SetDisableColors();
-                                return true;
-                            }
-
-                        }
-                    }
-                    num = randomNumber + 2 * board + 2;
-                    if (num >= 0 && num < size)
-                    {
-                        GridGameBox box2 = GridList[num];
-                        if (box2.SelectedText == "S")
-                        {
-                            num1 = randomNumber + board + 1;
-                            GridGameBox box3 = GridList[num1];
-                            if (box3.SelectedText == "O")
-                            {
-                                box.SetDisableColors();
-                                box2.SetDisableColors();
-                                box3.SetDisableColors();
-                                return true;
-                            }
-                        }
+                        box.SetDisableColors();
+                        box2.SetDisableColors();
+                        box3.SetDisableColors();
+                        return true;
                     }
 
-                    num = randomNumber + 2;
-                    if (num >= 0 && num < size)
-                    {
-                        GridGameBox box2 = GridList[num];
-                        if (box2.SelectedText == "S")
-                        {
-                            num1 = randomNumber + 1;
-                            GridGameBox box3 = GridList[num1];
-                            if (box3.SelectedText == "O")
-                            {
-                                box.SetDisableColors();
-                                box2.SetDisableColors();
-                                box3.SetDisableColors();
-                                return true;
-                            }
-                        }
-                    }
-                }
-                //last line
-                else if ((randomNumber + 1) % board == 0)
-                {
-                    num = randomNumber - 2 * board - 2;
-                    if (num >= 0 && num < size)
-                    {
-                        GridGameBox box2 = GridList[num];
-                        if (box2.SelectedText == "S")
-                        {
-                            num1 = randomNumber - board - 1;
-                            GridGameBox box3 = GridList[num1];
-                            if (box3.SelectedText == "O")
-                            {
-                                box.SetDisableColors();
-                                box2.SetDisableColors();
-                                box3.SetDisableColors();
-                                return true;
-                            }
-                        }
-                    }
-                    num = randomNumber + 2 * board - 2;
-                    if (num >= 0 && num < size)
-                    {
-                        GridGameBox box2 = GridList[num];
-                        if (box2.SelectedText == "S")
-                        {
-                            num1 = randomNumber + board - 1;
-                            GridGameBox box3 = GridList[num1];
-                            if (box3.SelectedText == "O")
-                            {
-                                box.SetDisableColors();
-                                box2.SetDisableColors();
-                                box3.SetDisableColors();
-                                return true;
-                            }
-                        }
-                    }
-
-                    num = randomNumber - 2;
-                    if (num >= 0 && num < size)
-                    {
-                        GridGameBox box2 = GridList[num];
-                        if (box2.SelectedText == "S")
-                        {
-                            num1 = randomNumber - 1;
-                            GridGameBox box3 = GridList[num1];
-                            if (box3.SelectedText == "O")
-                            {
-                                box.SetDisableColors();
-                                box2.SetDisableColors();
-                                box3.SetDisableColors();
-                                return true;
-                            }
-                        }
-                    }
-
-                }
-                else
-                {
-                    num = randomNumber - 2 * board + 2;
-                    if (num >= 0 && num < size)
-                    {
-                        GridGameBox box2 = GridList[num];
-                        if (box2.SelectedText == "S")
-                        {
-                            num1 = randomNumber - board + 1;
-                            GridGameBox box3 = GridList[num1];
-                            if (box3.SelectedText == "O")
-                            {
-                                box.SetDisableColors();
-                                box2.SetDisableColors();
-                                box3.SetDisableColors();
-                                return true;
-                            }
-                        }
-                    }
-                    num = randomNumber + 2 * board - 2;
-                    if (num >= 0 && num < size)
-                    {
-                        GridGameBox box2 = GridList[num];
-                        if (box2.SelectedText == "S")
-                        {
-                            num1 = randomNumber + board - 1;
-                            GridGameBox box3 = GridList[num1];
-                            if (box3.SelectedText == "O")
-                            {
-                                box.SetDisableColors();
-                                box2.SetDisableColors();
-                                box3.SetDisableColors();
-                                return true;
-                            }
-                        }
-                    }
-
-
-                    /////////////////
-                    num = randomNumber - 2 * board + 2;
-                    if (num >= 0 && num < size)
-                    {
-                        GridGameBox box2 = GridList[num];
-                        if (box2.SelectedText == "S")
-                        {
-                            num1 = randomNumber - board + 1;
-                            GridGameBox box3 = GridList[num1];
-                            if (box3.SelectedText == "O")
-                            {
-                                box.SetDisableColors();
-                                box2.SetDisableColors();
-                                box3.SetDisableColors();
-                                return true;
-                            }
-                        }
-                    }
-                    num = randomNumber + 2 * board + 2;
-                    if (num >= 0 && num < size)
-                    {
-                        GridGameBox box2 = GridList[num];
-                        if (box2.SelectedText == "S")
-                        {
-                            num1 = randomNumber + board + 1;
-                            GridGameBox box3 = GridList[num1];
-                            if (box3.SelectedText == "O")
-                            {
-                                box.SetDisableColors();
-                                box2.SetDisableColors();
-                                box3.SetDisableColors();
-                                return true;
-                            }
-                        }
-                    }
-
-                    
-                    if((randomNumber -1)%board != 0)
-                    {
-                        num = randomNumber - 2;
-                        if (num >= 0 && num < size)
-                        {
-                            GridGameBox box2 = GridList[num];
-                            if (box2.SelectedText == "S")
-                            {
-                                num1 = randomNumber - 1;
-                                GridGameBox box3 = GridList[num1];
-                                if (box3.SelectedText == "O")
-                                {
-                                    box.SetDisableColors();
-                                    box2.SetDisableColors();
-                                    box3.SetDisableColors();
-                                    return true;
-                                }
-                            }
-                        }
-                    }
-                    if ((randomNumber + 1) % board != 0)
-                    {
-                        num = randomNumber + 2;
-                        if (num >= 0 && num < size)
-                        {
-                            GridGameBox box2 = GridList[num];
-                            if (box2.SelectedText == "S")
-                            {
-                                num1 = randomNumber + 1;
-                                GridGameBox box3 = GridList[num1];
-                                if (box3.SelectedText == "O")
-                                {
-                                    box.SetDisableColors();
-                                    box2.SetDisableColors();
-                                    box3.SetDisableColors();
-                                    return true;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                num = randomNumber - 2 * board;
-                if (num >= 0 && num < size)
-                {
-                    GridGameBox box2 = GridList[num];
-                    if (box2.SelectedText == "S")
-                    {
-                        num1 = randomNumber - board;
-                        GridGameBox box3 = GridList[num1];
-                        if (box3.SelectedText == "O")
-                        {
-                            box.SetDisableColors();
-                            box2.SetDisableColors();
-                            box3.SetDisableColors();
-                            return true;
-                        }
-                    }
-                }
-                
-
-                num = randomNumber + 2 * board;
-                if (num >= 0 && num < size)
-                {
-                    GridGameBox box2 = GridList[num];
-                    if (box2.SelectedText == "S")
-                    {
-                        num1 = randomNumber + board;
-                        GridGameBox box3 = GridList[num1];
-                        if (box3.SelectedText == "O")
-                        {
-                            box.SetDisableColors();
-                            box2.SetDisableColors();
-                            box3.SetDisableColors();
-                            return true;
-                        }
-                    }
                 }
             }
-            else if(box.SelectedText == "O")
+            return false;
+        }
+
+        public bool checkForO(int randomNumber, int num, int num1)
+        {
+            int board = BoardSpan;
+            int size = board * board;
+            GridGameBox box = GridList[randomNumber];
+            if (num >= 0 && num < size)
             {
-                if (randomNumber % board == 0)
+                GridGameBox box2 = GridList[num];
+                if (box2.SelectedText == "S")
                 {
-                    //tha koitakso mono deksia aristera kai katw
-                    num = randomNumber - board;
-                    if(num >= 0 && num < size)
+                    if (num1 >= 0 && num1 < size)
                     {
-                        GridGameBox box2 = GridList[num];
-                        if(box2.SelectedText == "S")
+                        GridGameBox box3 = GridList[num1];
+                        if (box3.SelectedText == "S")
                         {
-                            num1 = randomNumber + board;
-                            if(num1 >= 0 && num1 < size)
-                            {
-                                GridGameBox box3 = GridList[num1];
-                                if (box3.SelectedText == "S")
-                                {
-                                    box.SetDisableColors();
-                                    box2.SetDisableColors();
-                                    box3.SetDisableColors();
-                                    return true;
-                                }
-                            }
-                        }
-                    }
-
-                }
-                else if ((randomNumber + 1) % board == 0)
-                {
-                    // tha koitaks deksia aristera kai panw
-                    num = randomNumber - board;
-                    if (num >= 0 && num < size)
-                    {
-                        GridGameBox box2 = GridList[num];
-                        if (box2.SelectedText == "S")
-                        {
-                            num1 = randomNumber + board;
-                            if (num1 >= 0 && num1 < size)
-                            {
-                                GridGameBox box3 = GridList[num1];
-                                if (box3.SelectedText == "S")
-                                {
-                                    box.SetDisableColors();
-                                    box2.SetDisableColors();
-                                    box3.SetDisableColors();
-                                    return true;
-                                }
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    // tha koitakso deksio deksi aristera panw kai katw kai diagwnia
-
-                    //deksia aristera
-                    num = randomNumber - board;
-                    if (num >= 0 && num < size)
-                    {
-                        GridGameBox box2 = GridList[num];
-                        if (box2.SelectedText == "S")
-                        {
-                            num1 = randomNumber + board;
-                            if (num1 >= 0 && num1 < size)
-                            {
-                                GridGameBox box3 = GridList[num1];
-                                if (box3.SelectedText == "S")
-                                {
-                                    box.SetDisableColors();
-                                    box2.SetDisableColors();
-                                    box3.SetDisableColors();
-                                    return true;
-                                }
-                            }
-                        }
-                    }
-
-                    //panw katw
-                    num = randomNumber - 1;
-                    if (num >= 0 && num < size)
-                    {
-                        GridGameBox box2 = GridList[num];
-                        if (box2.SelectedText == "S")
-                        {
-                            num1 = randomNumber + 1;
-                            if (num1 >= 0 && num1 < size)
-                            {
-                                GridGameBox box3 = GridList[num1];
-                                if (box3.SelectedText == "S")
-                                {
-                                    box.SetDisableColors();
-                                    box2.SetDisableColors();
-                                    box3.SetDisableColors();
-                                    return true;
-                                }
-                            }
-                        }
-                    }
-
-                    //deksia diagwnios
-                    num = randomNumber - board - 1;
-                    if (num >= 0 && num < size)
-                    {
-                        GridGameBox box2 = GridList[num];
-                        if (box2.SelectedText == "S")
-                        {
-                            num1 = randomNumber + board + 1;
-                            if (num1 >= 0 && num1 < size)
-                            {
-                                GridGameBox box3 = GridList[num1];
-                                if (box3.SelectedText == "S")
-                                {
-                                    box.SetDisableColors();
-                                    box2.SetDisableColors();
-                                    box3.SetDisableColors();
-                                    return true;
-                                }
-                            }
-                        }
-                    }
-
-                    //aristera diagwnios
-                    num = randomNumber - board + 1;
-                    if (num >= 0 && num < size)
-                    {
-                        GridGameBox box2 = GridList[num];
-                        if (box2.SelectedText == "S")
-                        {
-                            num1 = randomNumber + board - 1;
-                            if (num1 >= 0 && num1 < size)
-                            {
-                                GridGameBox box3 = GridList[num1];
-                                if (box3.SelectedText == "S")
-                                {
-                                    box.SetDisableColors();
-                                    box2.SetDisableColors();
-                                    box3.SetDisableColors();
-                                    return true;
-                                }
-                            }
+                            box.SetDisableColors();
+                            box2.SetDisableColors();
+                            box3.SetDisableColors();
+                            return true;
                         }
                     }
                 }
@@ -665,454 +359,199 @@ namespace SOS.ViewModel
             return false;
         }
 
-        public bool SelectPC()
+        public int checkForSOS(GridGameBox box)
+        {
+            int board = BoardSpan;
+            int size = board * board;
+            int randomNumber = box.Index;
+            int check = 0;
+            //prepei na testaro ola ta senaria 
+
+            if (box.SelectedText == "S")
+            {
+                //1st line
+                if (randomNumber % board == 0)
+                {
+                    if((randomNumber - 2 * board + 2) > 0)
+                    {
+                        if (checkForS(randomNumber, randomNumber - 2 * board + 2, randomNumber - board + 1)) check++;
+                    }
+                    
+                    if((randomNumber + 2 * board + 2) < size)
+                    {
+                        if (checkForS(randomNumber, randomNumber + 2 * board + 2, randomNumber + board + 1)) check++;
+                    }
+                    if (checkForS(randomNumber, randomNumber + 2, randomNumber + 1)) check++;
+                }
+                //last line
+                else if ((randomNumber + 1) % board == 0)
+                {
+                    if ((randomNumber - 2 * board - 2) > 0)
+                    {
+                        if (checkForS(randomNumber, randomNumber - 2 * board - 2, randomNumber - board - 1)) check++;
+                    }
+                    if ((randomNumber + 2 * board - 2) < size)
+                    {
+                        if (checkForS(randomNumber, randomNumber + 2 * board - 2, randomNumber + board - 1)) check++;
+                    }
+
+                    if (checkForS(randomNumber, randomNumber - 2, randomNumber - 1)) check++;
+                }
+                else
+                {
+                    if ((randomNumber + 2) % board == 0)
+                    {
+                        if (randomNumber - 2 * board - 2 >= 0)
+                        {
+                            if (checkForS(randomNumber, randomNumber - 2 * board - 2, randomNumber - board - 1)) check++;
+                        }
+                        if (randomNumber + 2 * board - 2 < size)
+                        {
+                            if (checkForS(randomNumber, randomNumber + 2 * board - 2, randomNumber + board - 1)) check++;
+                        }
+                        if (checkForS(randomNumber, randomNumber - 2, randomNumber - 1)) check++;
+                    }
+                    else if ((randomNumber - 1) % board == 0)
+                    {
+                        if ((randomNumber - 2 * board + 2) > 0)
+                        {
+                            if (checkForS(randomNumber, randomNumber - 2 * board + 2, randomNumber - board + 1)) check++;
+                        }
+                        if ((randomNumber + 2 * board + 2) < size)
+                        {
+                            if (checkForS(randomNumber, randomNumber + 2 * board + 2, randomNumber + board + 1)) check++;
+                        }
+                        if (checkForS(randomNumber, randomNumber + 2, randomNumber + 1)) check++;
+                    }
+                    else
+                    {
+                        if ((randomNumber - 2 * board + 2) > 0)
+                        {
+                            if (checkForS(randomNumber, randomNumber - 2 * board + 2, randomNumber - board + 1)) check++;
+                        }
+                        if (randomNumber + 2 * board - 2 < size)
+                        {
+                            if (checkForS(randomNumber, randomNumber + 2 * board - 2, randomNumber + board - 1)) check++;
+                        }
+                        if ((randomNumber + 2 * board + 2) < size)
+                        {
+                            if (checkForS(randomNumber, randomNumber + 2 * board + 2, randomNumber + board + 1)) check++;
+                        }
+                        if (randomNumber - 2 * board - 2 >= 0)
+                        {
+                            if (checkForS(randomNumber, randomNumber - 2 * board - 2, randomNumber - board - 1)) check++;
+                        }
+                        if (checkForS(randomNumber, randomNumber + 2, randomNumber + 1)) check++;
+                        if (checkForS(randomNumber, randomNumber - 2, randomNumber - 1)) check++;
+                    }
+                }
+                if ((randomNumber + 2 * board) < size)
+                {
+                    if (checkForS(randomNumber, randomNumber + 2*board, randomNumber + board)) check++;
+                }
+                if ((randomNumber - 2 * board) >= 0)
+                {
+                    if (checkForS(randomNumber, randomNumber - 2*board, randomNumber - board)) check++;
+                }
+            }
+            else if(box.SelectedText == "O")
+            {
+                if (randomNumber % board == 0)
+                {
+                    if(checkForO(randomNumber, randomNumber - board, randomNumber + board)) check++;
+                }
+                else if ((randomNumber + 1) % board == 0)
+                {
+                    if (checkForO(randomNumber, randomNumber - board, randomNumber + board)) check++;
+                }
+                else
+                {
+                    // tha koitakso deksio deksi aristera panw kai katw kai diagwnia
+                    if (checkForO(randomNumber, randomNumber - board, randomNumber + board)) check++;
+                    if (checkForO(randomNumber, randomNumber - 1, randomNumber + 1)) check++;
+                    if (checkForO(randomNumber, randomNumber - board -1, randomNumber + board +1)) check++;
+                    if (checkForO(randomNumber, randomNumber - board +1, randomNumber + board -1)) check++;
+                }
+            }
+            return check;
+        }
+
+        public int SelectPCEasy()
         {
             Thread.Sleep(1000);
-
             int board = BoardSpan;
-
-            // σε γραμμες παμε
+            int size = BoardSpan * BoardSpan;
+            int seed = (int)DateTime.Now.Ticks;
+            Random random = new Random(seed);
+            GridGameBox box;
+            int randomNumber;
+            while (true) 
+            {
+                int number = random.Next();
+                randomNumber = number % size;
+                box = GridList[randomNumber];
+                if (string.IsNullOrEmpty(box.SelectedText)) break;
+            }
+            if ((randomNumber % 2) == 0)
+            {
+                box.SetText("S", 1);
+            }
+            else
+            {
+                box.SetText("O", 1);
+            }
+            GridList[randomNumber] = box;
+            completeCount++;
+            return checkForSOS(box);
+        }
+        
+        public int SelectPCHard()
+        {
+            Thread.Sleep(1000);
+            int board = BoardSpan;
             int box;
             for (int i = 0; i < board; i++)
             {
                 box = i;
                 for(int j = 0; j < board; j++)
                 {
+                    int resultBox;
                     GridGameBox boxPrice = GridList[box];
-                    // ειμαστε στην 1η γραμμη
+                    // First Line
                     if (i == 0)
-                    {
-                        if (boxPrice.SelectedText == "S")
-                        {
-                            //koitame orizontia
-                            if (j + 1 < board - 1)
-                            {
-                                GridGameBox boxPriceNext = GridList[box + board];
-                                GridGameBox boxPriceDoubleNext = GridList[box + 2*board];
-                                if (boxPriceNext.SelectedText == "O" && string.IsNullOrEmpty(boxPriceDoubleNext.SelectedText))
-                                {
-                                    boxPriceDoubleNext.SetText("S", 1);
-                                    boxPriceDoubleNext.SetDisableColors();
-                                    GridList[box + 2*board] = boxPriceDoubleNext;
-                                    boxPriceNext.SetDisableColors();
-                                    boxPrice.SetDisableColors();
-                                    completeCount++;
-                                    return true;
-                                }
-                                else if (string.IsNullOrEmpty(boxPriceNext.SelectedText) && boxPriceDoubleNext.SelectedText == "S")
-                                {
-                                    boxPriceNext.SetText("O", 1);
-                                    boxPriceNext.SetDisableColors();
-                                    GridList[box + board] = boxPriceNext;
-                                    boxPrice.SetDisableColors();
-                                    boxPriceDoubleNext.SetDisableColors();
-                                    completeCount++;
-                                    return true;
-                                }
-                            }
-
-                            //koitame katheta
-                            GridGameBox boxDownNext = GridList[box + 1];
-                            GridGameBox boxDownDoubleNext = GridList[box + 2];
-                            if (boxDownNext.SelectedText == "O" && string.IsNullOrEmpty(boxDownDoubleNext.SelectedText))
-                            {
-                                boxDownDoubleNext.SetText("S", 1);
-                                boxDownDoubleNext.SetDisableColors();
-                                boxDownNext.SetDisableColors();
-                                boxPrice.SetDisableColors();
-                                GridList[box + 2] = boxDownDoubleNext;
-                                completeCount++;
-                                return true;
-                            }
-                            else if (string.IsNullOrEmpty(boxDownNext.SelectedText) && boxDownDoubleNext.SelectedText == "S")
-                            {
-                                boxDownNext.SetText("O", 1);
-                                boxPrice.SetDisableColors();
-                                boxDownDoubleNext.SetDisableColors();
-                                boxDownNext.SetDisableColors();
-                                GridList[box + 1] = boxDownNext;
-                                completeCount++;
-                                return true;
-                            }
-
-                            //koitame diagwnia
-
-                            //pros deksia katw-diagwnia
-                            if (j + 1 < board - 1)
-                            {
-                                GridGameBox boxDowndiagonalsNext = GridList[box + board + 1];
-                                GridGameBox boxDowndiagonalsDoubleNext = GridList[box + 2 * board + 2];
-
-                                if (boxDowndiagonalsNext.SelectedText == "O" && string.IsNullOrEmpty(boxDowndiagonalsDoubleNext.SelectedText))
-                                {
-                                    boxDowndiagonalsDoubleNext.SetText("S", 1);
-                                    boxDowndiagonalsDoubleNext.SetDisableColors();
-                                    boxPrice.SetDisableColors();
-                                    boxDowndiagonalsNext.SetDisableColors();
-                                    GridList[box + 2 * board + 2] = boxDowndiagonalsDoubleNext;
-                                    completeCount++;
-                                    return true;
-                                }
-                                else if (string.IsNullOrEmpty(boxDowndiagonalsNext.SelectedText) && boxDowndiagonalsDoubleNext.SelectedText == "S")
-                                {
-                                    boxDowndiagonalsNext.SetText("O", 1);
-                                    boxDowndiagonalsNext.SetDisableColors();
-                                    boxPrice.SetDisableColors();
-                                    boxDowndiagonalsDoubleNext.SetDisableColors();
-                                    GridList[box + board + 1] = boxDowndiagonalsNext;
-                                    completeCount++;
-                                    return true;
-                                }
-                            }
-
-                            //pros aristera katw-diagwnia
-                            if (j - 1 > 0)
-                            {
-                                GridGameBox boxDownDiagonalsPrevious = GridList[box - board + 1];
-                                GridGameBox boxDownDiagonalsDoublePrevious = GridList[box - 2 * board + 2];
-                                if (boxDownDiagonalsPrevious.SelectedText == "O" && string.IsNullOrEmpty(boxDownDiagonalsDoublePrevious.SelectedText))
-                                {
-                                    boxDownDiagonalsDoublePrevious.SetText("S", 1);
-                                    boxDownDiagonalsDoublePrevious.SetDisableColors();
-                                    boxPrice.SetDisableColors();
-                                    boxDownDiagonalsPrevious.SetDisableColors();
-                                    GridList[box - 2 * board + 2] = boxDownDiagonalsDoublePrevious;
-                                    completeCount++;
-                                    return true;
-                                }
-                                else if (string.IsNullOrEmpty(boxDownDiagonalsPrevious.SelectedText) && boxDownDiagonalsDoublePrevious.SelectedText == "S")
-                                {
-                                    boxDownDiagonalsPrevious.SetText("O", 1);
-                                    boxDownDiagonalsPrevious.SetDisableColors();
-                                    boxPrice.SetDisableColors();
-                                    boxDownDiagonalsDoublePrevious.SetDisableColors();
-                                    GridList[box - board + 1] = boxDownDiagonalsPrevious;
-                                    completeCount++;
-                                    return true;
-                                }
-                            }
-                        }
-                        else if (string.IsNullOrEmpty(boxPrice.SelectedText))
-                        {
-                            // koitame orizontia
-                            if (j + 1 < board - 1)
-                            {
-                                GridGameBox boxPriceNext = GridList[box + board];
-                                GridGameBox boxPriceDoubleNext = GridList[box + 2 * board];
-                                if (boxPriceNext.SelectedText == "O" && boxPriceDoubleNext.SelectedText == "S")
-                                {
-                                    boxPrice.SetText("S", 1);
-                                    boxPrice.SetDisableColors();
-                                    boxPriceNext.SetDisableColors();
-                                    boxPriceDoubleNext.SetDisableColors();
-                                    GridList[box] = boxPrice;
-                                    completeCount++;
-                                    return true;
-                                }
-                            }
-
-                            //koitame katheta
-                            GridGameBox boxDownNext = GridList[box + 1];
-                            GridGameBox boxDownDoubleNext = GridList[box + 2];
-                            if (boxDownNext.SelectedText == "O" && boxDownDoubleNext.SelectedText == "S")
-                            {
-                                boxPrice.SetText("S", 1);
-                                boxPrice.SetDisableColors();
-                                boxDownNext.SetDisableColors(); 
-                                boxDownDoubleNext.SetDisableColors();
-                                GridList[box] = boxPrice;
-                                completeCount++;
-                                return true;
-                            }
-
-                            //koitame diagwnia
-                            //pros deksia katw-diagwnia
-                            if (j + 1 < board - 1)
-                            {
-                                GridGameBox boxDowndiagonalsNext = GridList[box + board + 1];
-                                GridGameBox boxDowndiagonalsDoubleNext = GridList[box + 2 * board + 2];
-
-                                if (boxDowndiagonalsNext.SelectedText == "O" && boxDowndiagonalsDoubleNext.SelectedText == "S")
-                                {
-                                    boxPrice.SetText("S", 1);
-                                    boxPrice.SetDisableColors();
-                                    boxDowndiagonalsNext.SetDisableColors();
-                                    boxDowndiagonalsDoubleNext.SetDisableColors();
-                                    GridList[box] = boxPrice;
-                                    completeCount++;
-                                    return true;
-                                }
-                            }
-
-                            //pros aristera katw-diagwnia
-                            if (j - 1 > 0)
-                            {
-                                GridGameBox boxDownDiagonalsPrevious = GridList[box - board + 1];
-                                GridGameBox boxDownDiagonalsDoublePrevious = GridList[box - 2 * board + 2];
-                                if (boxDownDiagonalsPrevious.SelectedText == "O" && boxDownDiagonalsDoublePrevious.SelectedText == "S")
-                                {
-                                    boxPrice.SetText("S", 1);
-                                    boxPrice.SetDisableColors();
-                                    boxDownDiagonalsDoublePrevious.SetDisableColors();
-                                    boxDownDiagonalsPrevious.SetDisableColors();
-                                    GridList[box] = boxPrice;
-                                    completeCount++;
-                                    return true;
-                                }
-                            }
-                        }
+                    {   
+                        // Check Horizontal Line
+                        if (j + 1 < board - 1) if((resultBox=CheckTheBoxes(boxPrice, box + board, box + 2 * board))!=0) return resultBox;
+                        // Check Vertical Line
+                        if ((resultBox = CheckTheBoxes(boxPrice, box + 1, box + 2))!=0) return resultBox;
+                        //Check Down Right Line
+                        if (j + 1 < board - 1) if((resultBox = CheckTheBoxes(boxPrice, box + board + 1, box + 2 * board + 2))!=0) return resultBox;
+                        //Check Down Left Line
+                        if (j - 1 > 0) if((resultBox = CheckTheBoxes(boxPrice, box - board + 1, box - 2 * board + 2)) != 0) return resultBox;
                     }
-                    // ειμαστε στην τελευατια γραμμη
+                    // Last Line
                     else if (i == board - 1)
                     {
-                        if (boxPrice.SelectedText == "S")
-                        {
-                            //koitame orizontia
-                            if (j + 1 < board - 1)
-                            {
-                                GridGameBox boxPriceNext = GridList[box + board];
-                                GridGameBox boxPriceDoubleNext = GridList[box + 2*board];
-                                if (boxPriceNext.SelectedText == "O" && string.IsNullOrEmpty(boxPriceDoubleNext.SelectedText))
-                                {
-                                    boxPriceDoubleNext.SetText("S",1);
-                                    boxPriceDoubleNext.SetDisableColors();
-                                    boxPriceNext.SetDisableColors();
-                                    boxPrice.SetDisableColors();
-                                    GridList[box + 2 * board] = boxPriceDoubleNext;
-                                    completeCount++;
-                                    return true;
-                                }
-                                else if (string.IsNullOrEmpty(boxPriceNext.SelectedText) && boxPriceDoubleNext.SelectedText == "S")
-                                {
-                                    boxPriceNext.SetText("O", 1);
-                                    boxPriceNext.SetDisableColors();
-                                    boxPrice.SetDisableColors();
-                                    boxPriceDoubleNext.SetDisableColors();
-                                    GridList[box + board] = boxPriceNext;
-                                    completeCount++;
-                                    return true;
-                                }
-                            }
-
-                        }
-                        else if (string.IsNullOrEmpty(boxPrice.SelectedText))
-                        {
-                            // koitame orizontia
-                            if (j + 1 < board - 1)
-                            {
-                                GridGameBox boxPriceNext = GridList[box + board];
-                                GridGameBox boxPriceDoubleNext = GridList[box + 2 * board];
-                                if (boxPriceNext.SelectedText == "O" && boxPriceDoubleNext.SelectedText == "S")
-                                {
-                                    boxPrice.SetText("S", 1);
-                                    boxPrice.SetDisableColors();
-                                    boxPriceDoubleNext.SetDisableColors();
-                                    boxPriceNext.SetDisableColors();
-                                    GridList[box] = boxPrice;
-                                    completeCount++;
-                                    return true;
-                                }
-                            }
-                        }
+                        // Check Horizontal Line
+                        if (j + 1 < board - 1) if ((resultBox = CheckTheBoxes(boxPrice, box + board, box + 2 * board)) != 0) return resultBox;
                     }
+                    // Other Lines
                     else
                     {
-                        if (boxPrice.SelectedText == "S")
+                        // Check Horizontal Line
+                        if (j + 1 < board - 1) if ((resultBox = CheckTheBoxes(boxPrice, box + board, box + 2 * board)) != 0) return resultBox;
+                        
+                        // Check Lines
+                        if (i + 1 < board - 1)
                         {
-                            //koitame orizontia
-                            if (j + 1 < board - 1)
-                            {
-                                GridGameBox boxPriceNext = GridList[box + board];
-                                GridGameBox boxPriceDoubleNext = GridList[box + 2 * board];
-                                if (boxPriceNext.SelectedText == "O" && string.IsNullOrEmpty(boxPriceDoubleNext.SelectedText))
-                                {
-                                    boxPriceDoubleNext.SetText("S", 1);
-                                    boxPriceDoubleNext.SetDisableColors();
-                                    boxPrice.SetDisableColors();
-                                    boxPriceNext.SetDisableColors();
-                                    GridList[box+2 * board] = boxPriceDoubleNext;
-                                    completeCount++;
-                                    return true;
-                                }
-                                else if (string.IsNullOrEmpty(boxPriceNext.SelectedText) && boxPriceDoubleNext.SelectedText == "S")
-                                {
-                                    boxPriceNext.SetText("O", 1);
-                                    boxPriceNext.SetDisableColors();
-                                    boxPriceDoubleNext.SetDisableColors();
-                                    boxPrice.SetDisableColors();
-                                    GridList[box+board] = boxPriceNext;
-                                    completeCount++;
-                                    return true;
-                                }
-                            }
-
-                            //koitame katheta
-
-                            if (i + 1 < board - 1)
-                            {
-                                GridGameBox boxDownNext = GridList[box + 1];
-                                GridGameBox boxDownDoubleNext = GridList[box + 2];
-                                if (boxDownNext.SelectedText == "O" && string.IsNullOrEmpty(boxDownDoubleNext.SelectedText))
-                                {
-                                    boxDownDoubleNext.SetText("S", 1);
-                                    boxDownDoubleNext.SetDisableColors();
-                                    boxPrice.SetDisableColors();
-                                    boxDownNext.SetDisableColors();
-                                    GridList[box + 2] = boxDownDoubleNext;
-                                    completeCount++;
-                                    return true;
-                                }
-                                else if (string.IsNullOrEmpty(boxDownNext.SelectedText) && boxDownDoubleNext.SelectedText == "S")
-                                {
-                                    boxDownNext.SetText("O", 1);
-                                    boxDownNext.SetDisableColors();
-                                    boxPrice.SetDisableColors();
-                                    boxDownDoubleNext.SetDisableColors();
-                                    GridList[box + 1] = boxDownNext;
-                                    completeCount++;
-                                    return true;
-                                }
-                            }
-
-                            //koitame diagwnia
-                            if (i + 1 < board - 1)
-                            {
-                                //pros deksia katw-diagwnia
-                                if (j + 1 < board - 1)
-                                {
-                                    GridGameBox boxDowndiagonalsNext = GridList[box + board + 1];
-                                    GridGameBox boxDowndiagonalsDoubleNext = GridList[box + 2 * board + 2];
-
-                                    if (boxDowndiagonalsNext.SelectedText == "O" && string.IsNullOrEmpty(boxDowndiagonalsDoubleNext.SelectedText))
-                                    {
-                                        boxDowndiagonalsDoubleNext.SetText("S", 1);
-                                        boxDowndiagonalsDoubleNext.SetDisableColors();
-                                        boxPrice.SetDisableColors();
-                                        boxDowndiagonalsNext.SetDisableColors();
-                                        GridList[box + 2*board + 2] = boxDowndiagonalsDoubleNext;
-                                        completeCount++;
-                                        return true;
-                                    }
-                                    else if (string.IsNullOrEmpty(boxDowndiagonalsNext.SelectedText) && boxDowndiagonalsDoubleNext.SelectedText == "S")
-                                    {
-                                        boxDowndiagonalsNext.SetText("O", 1);
-                                        boxDowndiagonalsNext.SetDisableColors();
-                                        boxDowndiagonalsDoubleNext.SetDisableColors();
-                                        boxPrice.SetDisableColors();
-                                        GridList[box + board + 1] = boxDowndiagonalsNext;
-                                        completeCount++;
-                                        return true;
-                                    }
-                                }
-
-                                //pros aristera katw-diagwnia
-                                if (j - 1 > 0)
-                                {
-                                    GridGameBox boxDownDiagonalsPrevious = GridList[box - board + 1];
-                                    GridGameBox boxDownDiagonalsDoublePrevious = GridList[box - 2 * board + 2];
-                                    if (boxDownDiagonalsPrevious.SelectedText == "O" && string.IsNullOrEmpty(boxDownDiagonalsDoublePrevious.SelectedText))
-                                    {
-                                        boxDownDiagonalsDoublePrevious.SetText("S", 1);
-                                        boxDownDiagonalsDoublePrevious.SetDisableColors();
-                                        boxPrice.SetDisableColors();
-                                        boxDownDiagonalsPrevious.SetDisableColors();
-                                        GridList[box - 2 * board + 2] = boxDownDiagonalsDoublePrevious;
-                                        completeCount++;
-                                        return true;
-                                    }
-                                    else if (string.IsNullOrEmpty(boxDownDiagonalsPrevious.SelectedText) && boxDownDiagonalsDoublePrevious.SelectedText == "S")
-                                    {
-                                        boxDownDiagonalsPrevious.SetText("O", 1);
-                                        boxDownDiagonalsPrevious.SetDisableColors();
-                                        boxPrice.SetDisableColors();
-                                        boxDownDiagonalsDoublePrevious.SetDisableColors();
-                                        GridList[box - board + 1] = boxDownDiagonalsPrevious;
-                                        completeCount++;
-                                        return true;
-                                    }
-                                }
-                            }
-
+                            // Check Vertical Line
+                            if ((resultBox = CheckTheBoxes(boxPrice, box + 1, box + 2)) != 0) return resultBox;
+                            //Check Down Right Diagonal Line
+                            if (j + 1 < board - 1) if ((resultBox = CheckTheBoxes(boxPrice, box + board + 1, box + 2 * board + 2)) != 0) return resultBox;
+                            //Check Down Left Diagonal Line
+                            if (j - 1 > 0) if ((resultBox = CheckTheBoxes(boxPrice, box - board + 1, box - 2 * board + 2)) != 0) return resultBox;
                         }
-                        else if (string.IsNullOrEmpty(boxPrice.SelectedText))
-                        {
-                            // koitame orizontia
-                            if (j + 1 < board - 1)
-                            {
-                                GridGameBox boxPriceNext = GridList[box + board];
-                                GridGameBox boxPriceDoubleNext = GridList[box + 2*board];
-                                if (boxPriceNext.SelectedText == "O" && boxPriceDoubleNext.SelectedText == "S")
-                                {
-                                    boxPrice.SetText("S", 1);
-                                    boxPrice.SetDisableColors();
-                                    boxPriceNext.SetDisableColors();
-                                    boxPriceDoubleNext.SetDisableColors();
-                                    GridList[box] = boxPrice;
-                                    completeCount++;
-                                    return true;
-                                }
-                            }
-
-                            if(i + 1 < board - 1)
-                            {
-                                //koitame katheta
-                                GridGameBox boxDownNext = GridList[box + 1];
-                                GridGameBox boxDownDoubleNext = GridList[box + 2];
-                                if (boxDownNext.SelectedText == "O" && boxDownDoubleNext.SelectedText == "S")
-                                {
-                                    boxPrice.SetText("S", 1);
-                                    boxPrice.SetDisableColors();
-                                    boxDownNext.SetDisableColors();
-                                    boxDownDoubleNext.SetDisableColors();
-                                    GridList[box] = boxPrice;
-                                    completeCount++;
-                                    return true;
-                                }
-                            }
-
-
-                            //koitame diagwnia
-                            if (i + 1 < board - 1)
-                            {
-                                //pros deksia katw-diagwnia
-                                if (j + 1 < board - 1)
-                                {
-                                    GridGameBox boxDowndiagonalsNext = GridList[box + board + 1];
-                                    GridGameBox boxDowndiagonalsDoubleNext = GridList[box + 2 * board + 2];
-
-                                    if (boxDowndiagonalsNext.SelectedText == "O" && boxDowndiagonalsDoubleNext.SelectedText == "S")
-                                    {
-                                        boxPrice.SetText("S", 1);
-                                        boxPrice.SetDisableColors();
-                                        boxDowndiagonalsNext.SetDisableColors();
-                                        boxDowndiagonalsDoubleNext.SetDisableColors();
-                                        GridList[box] = boxPrice;
-                                        completeCount++;
-                                        return true;
-                                    }
-                                }
-
-                                //pros aristera katw-diagwnia
-                                if (j - 1 > 0)
-                                {
-                                    GridGameBox boxDownDiagonalsPrevious = GridList[box - board + 1];
-                                    GridGameBox boxDownDiagonalsDoublePrevious = GridList[box - 2 * board + 2];
-                                    if (boxDownDiagonalsPrevious.SelectedText == "O" && boxDownDiagonalsDoublePrevious.SelectedText == "S")
-                                    {
-                                        boxPrice.SetText("S", 1);
-                                        boxPrice.SetDisableColors();
-                                        boxDownDiagonalsPrevious.SetDisableColors();
-                                        boxDownDiagonalsDoublePrevious.SetDisableColors();
-                                        GridList[box] = boxPrice;
-                                        completeCount++;
-                                        return true;
-                                    }
-                                }
-                            }
-                        }
-
                     }
-
                     box += board;
                 }
             }
@@ -1121,6 +560,10 @@ namespace SOS.ViewModel
             Random random = new Random(seed);
             //allios dialego random
             int size = BoardSpan * BoardSpan;
+
+            FreeList.Clear();
+            FreeList = new List<int>();
+            int res;
             while (true)
             {
                 int number = random.Next();
@@ -1128,205 +571,361 @@ namespace SOS.ViewModel
                 GridGameBox randomBox = GridList[randomNumber];
                 if (string.IsNullOrEmpty(randomBox.SelectedText))
                 {
-                    //edo prepei na checkaro ta guro guro
-                    // idia grammi i=0 tha einai (-2*board-2), (+2*board - 2),-2*board, -2 ,2, 2*board, (-2*board+2), (+2*board+2)
-                    int num, num1;
-                    //1st line
-                    if ( randomNumber%board == 0)
+                    // Check For S
+                    //Check The First Line
+                    if (randomNumber % board == 0)
                     {
-                        num = randomNumber - 2 * board + 2;
-                        if (num >= 0 && num < size)
+                        // eimaste sti proti grammi kai theloume na doume an einai diagwnios ara randomNumber -2board +2 na einai >0 < board -1
+                        if ((randomNumber - 2 * board + 2) > 0)
                         {
-                            GridGameBox box2 = GridList[num];
-                            if (box2.SelectedText == "S")
+                            res = CheckTheRandomBox(randomNumber, randomNumber - 2 * board + 2, randomNumber - board + 1);
+                            if (res == 1)
                             {
-                                num1 = randomNumber - board + 1;
-                                GridGameBox box3 = GridList[num1];
-                                if (string.IsNullOrEmpty(box3.SelectedText))
-                                {
-                                    continue;
-                                }
+                                return 0;
+                            }
+                            else if(res == 0)
+                            {
+                                continue;
                             }
                         }
-                        num = randomNumber + 2 * board + 2;
-                        if (num >= 0 && num < size)
+                        if ((randomNumber + 2 * board + 2) < size)
                         {
-                            GridGameBox box2 = GridList[num];
-                            if (box2.SelectedText == "S")
+                            res = CheckTheRandomBox(randomNumber, randomNumber + 2 * board + 2, randomNumber + board + 1);
+                            if (res == 1)
                             {
-                                num1 = randomNumber + board + 1;
-                                GridGameBox box3 = GridList[num1];
-                                if (string.IsNullOrEmpty(box3.SelectedText))
-                                {
-                                    continue;
-                                }
+                                return 0;
+                            }
+                            else if (res == 0)
+                            {
+                                continue;
                             }
                         }
-                    }
-                    //last line
-                    else if((randomNumber+1)%board == 0) 
-                    {
-                        num = randomNumber - 2 * board - 2;
-                        if (num >= 0 && num < size)
+                        res = CheckTheRandomBox(randomNumber, randomNumber + 2, randomNumber + 1);
+                        if (res == 1)
                         {
-                            GridGameBox box2 = GridList[num];
-                            if (box2.SelectedText == "S")
-                            {
-                                num1 = randomNumber -board - 1;
-                                GridGameBox box3 = GridList[num1];
-                                if (string.IsNullOrEmpty(box3.SelectedText))
-                                {
-                                    continue;
-                                }
-                            }
+                            return 0;
                         }
-                        num = randomNumber + 2 * board - 2;
-                        if (num >= 0 && num < size)
+                        else if (res == 0)
                         {
-                            GridGameBox box2 = GridList[num];
-                            if (box2.SelectedText == "S")
-                            {
-                                num1 = randomNumber + board - 1;
-                                GridGameBox box3 = GridList[num1];
-                                if (string.IsNullOrEmpty(box3.SelectedText))
-                                {
-                                    continue;
-                                }
-                            }
+                            continue;
                         }
 
                     }
-                    //other lines
+                    // Check The Last Line
+                    else if((randomNumber+1) % board == 0)
+                    {
+                        if ((randomNumber - 2 * board - 2) > 0) 
+                        {
+                            res = CheckTheRandomBox(randomNumber, randomNumber - 2 * board - 2, randomNumber - board - 1);
+                            if (res == 1)
+                            {
+                                return 0;
+                            }
+                            else if (res == 0)
+                            {
+                                continue;
+                            }
+                        }
+                        if ((randomNumber + 2 * board - 2) < size)
+                        {
+                            res = CheckTheRandomBox(randomNumber, randomNumber + 2 * board - 2, randomNumber + board - 1);
+                            if (res == 1)
+                            {
+                                return 0;
+                            }
+                            else if (res == 0)
+                            {
+                                continue;
+                            }
+                        }
+                        res = CheckTheRandomBox(randomNumber, randomNumber - 2, randomNumber - 1);
+                        if (res == 1)
+                        {
+                            return 0;
+                        }
+                        else if (res == 0)
+                        {
+                            continue;
+                        }
+                    }
+                    // Check Other Lines
                     else
                     {
-                        num = randomNumber - 2 * board + 2;
-                        if (num >= 0 && num < size)
+                        if ((randomNumber + 2) % board == 0)
                         {
-                            GridGameBox box2 = GridList[num];
-                            if (box2.SelectedText == "S")
+                            if (randomNumber - 2 * board - 2 >= 0)
                             {
-                                num1 = randomNumber - board + 1;
-                                GridGameBox box3 = GridList[num1];
-                                if (string.IsNullOrEmpty(box3.SelectedText))
+                                res = CheckTheRandomBox(randomNumber, randomNumber - 2 * board - 2, randomNumber - board - 1);
+                                if (res == 1)
+                                {
+                                    return 0;
+                                }
+                                else if (res == 0)
                                 {
                                     continue;
                                 }
                             }
-                        }
-                        num = randomNumber + 2 * board - 2;
-                        if (num >= 0 && num < size)
-                        {
-                            GridGameBox box2 = GridList[num];
-                            if (box2.SelectedText == "S")
+                            if (randomNumber + 2 * board - 2 < size)
                             {
-                                num1 = randomNumber + board - 1;
-                                GridGameBox box3 = GridList[num1];
-                                if (string.IsNullOrEmpty(box3.SelectedText))
+                                res = CheckTheRandomBox(randomNumber, randomNumber + 2 * board - 2, randomNumber + board - 1);
+                                if (res == 1)
+                                {
+                                    return 0;
+                                }
+                                else if (res == 0)
                                 {
                                     continue;
                                 }
                             }
-                        }
-
-
-                        /////////////////
-                        num = randomNumber - 2 * board + 2;
-                        if (num >= 0 && num < size)
-                        {
-                            GridGameBox box2 = GridList[num];
-                            if (box2.SelectedText == "S")
+                            res = CheckTheRandomBox(randomNumber, randomNumber - 2, randomNumber - 1);
+                            if (res == 1)
                             {
-                                num1 = randomNumber - board + 1;
-                                GridGameBox box3 = GridList[num1];
-                                if (string.IsNullOrEmpty(box3.SelectedText))
+                                return 0;
+                            }
+                            else if (res == 0)
+                            {
+                                continue;
+                            }
+                        }
+                        //2h grammi dne exei panw diagwnious
+                        else if ((randomNumber - 1) % board == 0)
+                        {
+                            if ((randomNumber - 2 * board + 2) > 0)
+                            {
+                                res = CheckTheRandomBox(randomNumber, randomNumber - 2 * board + 2, randomNumber - board + 1);
+                                if (res == 1)
+                                {
+                                    return 0;
+                                }
+                                else if (res == 0)
                                 {
                                     continue;
                                 }
                             }
-                        }
-                        num = randomNumber + 2 * board + 2;
-                        if (num >= 0 && num < size)
-                        {
-                            GridGameBox box2 = GridList[num];
-                            if (box2.SelectedText == "S")
+                            if ((randomNumber + 2 * board + 2) < size)
                             {
-                                num1 = randomNumber + board + 1;
-                                GridGameBox box3 = GridList[num1];
-                                if (string.IsNullOrEmpty(box3.SelectedText))
+                                res = CheckTheRandomBox(randomNumber, randomNumber + 2 * board + 2, randomNumber + board + 1);
+                                if (res == 1)
+                                {
+                                    return 0;
+                                }
+                                else if (res == 0)
                                 {
                                     continue;
                                 }
                             }
+                            res = CheckTheRandomBox(randomNumber, randomNumber + 2, randomNumber + 1);
+                            if (res == 1)
+                            {
+                                return 0;
+                            }
+                            else if (res == 0)
+                            {
+                                continue;
+                            }
                         }
-                    }
-
-                    
-                    num = randomNumber -2 *board;
-                    if (num >= 0 && num < size)
-                    {
-                        GridGameBox box2 = GridList[num];
-                        if (box2.SelectedText == "S")
+                        else
                         {
-                            num1 = randomNumber - board;
-                            GridGameBox box3 = GridList[num1];
-                            if (string.IsNullOrEmpty(box3.SelectedText))
+                            if ((randomNumber - 2 * board + 2) > 0)
+                            {
+                                res = CheckTheRandomBox(randomNumber, randomNumber - 2 * board + 2, randomNumber - board + 1);
+                                if (res == 1)
+                                {
+                                    return 0;
+                                }
+                                else if (res == 0)
+                                {
+                                    continue;
+                                }
+                            }
+                            if (randomNumber + 2 * board - 2 < size)
+                            {
+                                res = CheckTheRandomBox(randomNumber, randomNumber + 2 * board - 2, randomNumber + board - 1);
+                                if (res == 1)
+                                {
+                                    return 0;
+                                }
+                                else if (res == 0)
+                                {
+                                    continue;
+                                }
+                            }
+                            if ((randomNumber + 2 * board + 2) < size)
+                            {
+                                res = CheckTheRandomBox(randomNumber, randomNumber + 2 * board + 2, randomNumber + board + 1);
+                                if (res == 1)
+                                {
+                                    return 0;
+                                }
+                                else if (res == 0)
+                                {
+                                    continue;
+                                }
+                            }
+                            if (randomNumber - 2 * board - 2 >= 0)
+                            {
+                                res = CheckTheRandomBox(randomNumber, randomNumber - 2 * board - 2, randomNumber - board - 1);
+                                if (res == 1)
+                                {
+                                    return 0;
+                                }
+                                else if (res == 0)
+                                {
+                                    continue;
+                                }
+                            }
+                            res = CheckTheRandomBox(randomNumber, randomNumber + 2, randomNumber + 1);
+                            if (res == 1)
+                            {
+                                return 0;
+                            }
+                            else if (res == 0)
+                            {
+                                continue;
+                            }
+                            res = CheckTheRandomBox(randomNumber, randomNumber - 2, randomNumber - 1);
+                            if (res == 1)
+                            {
+                                return 0;
+                            }
+                            else if (res == 0)
                             {
                                 continue;
                             }
                         }
                     }
-                    num = randomNumber-2;
-                    if (num >= 0 && num < size)
+
+                    if ((randomNumber + 2 * board) < size)
                     {
-                        GridGameBox box2 = GridList[num];
-                        if (box2.SelectedText == "S")
+                        res = CheckTheRandomBox(randomNumber, randomNumber + 2 * board, randomNumber + board);
+                        if (res == 1)
                         {
-                            num1 = randomNumber - 1;
-                            GridGameBox box3 = GridList[num1];
-                            if (string.IsNullOrEmpty(box3.SelectedText))
-                            {
-                                continue;
-                            }
+                            return 0;
+                        }
+                        else if (res == 0)
+                        {
+                            continue;
                         }
                     }
-                    num = randomNumber + 2;
-                    if (num >= 0 && num < size)
+                    if ((randomNumber - 2 * board) >= 0)
                     {
-                        GridGameBox box2 = GridList[num];
-                        if (box2.SelectedText == "S")
+                        res = CheckTheRandomBox(randomNumber, randomNumber - 2 * board, randomNumber - board);
+                        if (res == 1)
                         {
-                            num1 = randomNumber - board + 1;
-                            GridGameBox box3 = GridList[num1];
-                            if (string.IsNullOrEmpty(box3.SelectedText))
-                            {
-                                continue;
-                            }
+                            return 0;
+                        }
+                        else if (res == 0)
+                        {
+                            continue;
                         }
                     }
-
-                    num = randomNumber + 2 * board;
-                    if (num >= 0 && num < size)
-                    {
-                        GridGameBox box2 = GridList[num];
-                        if (box2.SelectedText == "S")
-                        {
-                            num1 = randomNumber + board;
-                            GridGameBox box3 = GridList[num1];
-                            if (string.IsNullOrEmpty(box3.SelectedText))
-                            {
-                                continue;
-                            }
-                        }
-                    }
-
-
 
                     randomBox.SetText("S", 1);
                     GridList[randomNumber] = randomBox;
                     completeCount++;
-                    return false;
+                    return 0;
                 }
             }
+        }
+    
+        public int CheckTheBoxes(GridGameBox box1, int index1, int index2)
+        {
+            GridGameBox box2 = GridList[index1];
+            GridGameBox box3 = GridList[index2];
+            if (box1.SelectedText == "S")
+            {
+                if (box2.SelectedText == "O" && string.IsNullOrEmpty(box3.SelectedText))
+                {
+                    box3.SetText("S", 1);
+                    box3.SetDisableColors();
+                    box1.SetDisableColors();
+                    box2.SetDisableColors();
+                    completeCount++;
+                    return checkForSOS(box3);
+                }
+                else if (string.IsNullOrEmpty(box2.SelectedText) && box3.SelectedText == "S")
+                {
+                    box2.SetText("O", 1);
+                    box2.SetDisableColors();
+                    box1.SetDisableColors();
+                    box3.SetDisableColors();
+                    completeCount++;
+                    return checkForSOS(box2);
+                }
+            }
+            else if (string.IsNullOrEmpty(box1.SelectedText))
+            {
+                GridGameBox boxPriceNext = GridList[index1];
+                GridGameBox boxPriceDoubleNext = GridList[index2];
+                if (boxPriceNext.SelectedText == "O" && boxPriceDoubleNext.SelectedText == "S")
+                {
+                    box1.SetText("S", 1);
+                    box1.SetDisableColors();
+                    box2.SetDisableColors();
+                    box3.SetDisableColors();
+                    completeCount++;
+                    return checkForSOS(box1);
+                }
+            }
+            return 0;
+        }
+    
+        public int CheckTheRandomBox(int randomNumber, int index1, int index2)
+        {
+            GridGameBox box = GridList[randomNumber];
+            int size = BoardSpan * BoardSpan;
+            int freeBox = size - completeCount;
+            if(index1>=0 && index1<size)
+            {
+                GridGameBox box2 = GridList[index1];
+                if (box2.SelectedText == "S")
+                {
+                    GridGameBox box3 = GridList[index2];
+                    if (string.IsNullOrEmpty(box3.SelectedText))
+                    {
+                        if (FreeList.Contains(randomNumber))
+                        {
+                            return 0;
+                        }
+                        else
+                        {
+                            FreeList.Add(randomNumber);
+                            if (FreeList.Count == freeBox)
+                            {
+                                box.SetText("S", 1);
+                                GridList[randomNumber] = box;
+                                completeCount++;
+                                return 1;
+                            }
+                            return 0;
+                        }
+                    }
+                }
+                else if(string.IsNullOrEmpty(box2.SelectedText))
+                {
+                    GridGameBox box3 = GridList[index2];
+                    if(box3.SelectedText == "O")
+                    {
+                        if(FreeList.Contains(randomNumber))
+                        {
+                            return 0;
+                        }
+                        else
+                        {
+                            FreeList.Add(randomNumber);
+                            if(FreeList.Count == freeBox)
+                            {
+                                box.SetText("S", 1);
+                                GridList[randomNumber] = box;
+                                completeCount++;
+                                return 1;
+                            }
+                            return 0;
+                        }
+                    }
+                }
+            }
+            return 2;
         }
     }
 }
