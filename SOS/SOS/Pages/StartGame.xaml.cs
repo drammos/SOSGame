@@ -17,20 +17,20 @@ namespace SOS
             base.OnAppearing();
             await Task.Delay(100);
             imgLoader.IsAnimationPlaying = true;
+            if (App.User.Theme == "Dark")
+            {
+                Application.Current.UserAppTheme = AppTheme.Dark;
+            }
+            else
+            {
+                Application.Current.UserAppTheme = AppTheme.Light;
+            }
 
-            string keyBoard = App.User.UserName + "Board";
-            string keyLevel = App.User.UserName + "Level";
-            string keyPlayers = App.User.UserName + "Players";
+            int board = App.UserSettings.Board;
+            string level = App.UserSettings.Level;
+            int players = App.UserSettings.Players;
 
-            int board = -1;
-            string level = "";
-            int players = -1;
-
-            board = Preferences.Get(keyBoard, board);
-            level = Preferences.Get(keyLevel, level);
-            players = Preferences.Get(keyPlayers, players);
-
-            if (board != -1 && level != "" && players != -1)
+            if (board != 0 && !String.IsNullOrEmpty(level) && players != 0)
             {
                 this.startGameViewModel.IsNotCompleteSettingsEnable = false;
                 this.startGameViewModel.IsStartGameButtonEnable = true;

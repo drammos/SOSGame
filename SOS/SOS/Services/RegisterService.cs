@@ -14,6 +14,10 @@ namespace SOS.Services
             var database = await DBUtils.GetDatabase();
             //First check the usename
             string hashedPassword = PasswordHasherRegister.HashPassword(password);
+            if (string.IsNullOrEmpty(filePath))
+            {
+                filePath = "user.png";
+            }
             User user = new User()
             {
                 Gid = Guid.NewGuid(),
@@ -21,12 +25,21 @@ namespace SOS.Services
                 Password = hashedPassword,
                 Email = email,
                 FilePath = filePath,
-                Score = 0
+                Score = 0,
+                Theme = "Light"
+            };
+            SettingsData settings = new SettingsData()
+            {
+                Username = username,
+                Board = 0,
+                Level = string.Empty,
+                Players = 0
             };
 
             try
             {
                 await database.InsertAsync(user);
+                await database.InsertAsync(settings);
                 return true;
             }
             catch (Exception E)

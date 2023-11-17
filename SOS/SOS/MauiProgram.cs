@@ -7,6 +7,10 @@ using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 using SOS.Pages;
 
+//using Plugin.Firebase.Auth;
+using Microsoft.Maui.LifecycleEvents;
+
+
 namespace SOS;
 
 public static class MauiProgram
@@ -23,7 +27,6 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
-
 #if DEBUG
         builder.Logging.AddDebug();
 #endif

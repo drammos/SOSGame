@@ -9,7 +9,6 @@ namespace SOS
         public ObservableCollection<GridGameBox> GridGameList { get; set; } = new ObservableCollection<GridGameBox>();
         private GridGameViewModel GridGameInstance { get; set; }
 
-
         public Game(GridGameViewModel gridGameViewModel)
         {
             InitializeComponent();

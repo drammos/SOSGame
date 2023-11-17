@@ -1,12 +1,6 @@
 ﻿using SOS.Models;
 using SQLite;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace SOS.Utils
 {
@@ -21,6 +15,7 @@ namespace SOS.Utils
             {
                 Database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
                 await Database.CreateTableAsync<User>();
+                await Database.CreateTableAsync<SettingsData>();
             }
 
             return Database;

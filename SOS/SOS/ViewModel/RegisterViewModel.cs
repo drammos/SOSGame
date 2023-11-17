@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using SOS.Services;
 using SOS.ViewModel;
 using SOS.Popups;
+using System.ComponentModel.DataAnnotations;
 
 namespace SOS.ViewModel
 {
@@ -35,9 +36,6 @@ namespace SOS.ViewModel
             this.popupService = popupService;
         }
 
-
-
-        //
         private bool IsUsernameValid(string username)
         {
             // Έλεγχος για το username (π.χ., να ξεκινάει με χαρακτήρα)
@@ -56,7 +54,11 @@ namespace SOS.ViewModel
             return !string.IsNullOrWhiteSpace(email) && email.Contains("@") && email.Split('@').Length == 2 && email.Split('@')[1].Contains(".");
         }
 
-
+        [RelayCommand]
+        public async Task LoginBack()
+        {
+            await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
+        }
 
 
         [RelayCommand]

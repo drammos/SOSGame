@@ -119,8 +119,7 @@ namespace SOS.ViewModel
             ComputerScore = 0;
             UserName = App.User.UserName;
             FilePath = App.User.FilePath;
-            string key = UserName + "Level";
-            Level = Preferences.Get(key, Level);
+            Level = App.UserSettings.Level;
             return this.BoardSpan;
         }
 
@@ -148,16 +147,10 @@ namespace SOS.ViewModel
             this.IsComputer = false;
             UserName = App.User.UserName;
             FilePath = App.User.FilePath;
-            string key1 = UserName + "Level";
-            Level = Preferences.Get(key1, Level);
+            Level = App.UserSettings.Level;
             ComputerScore = 0;
-            if(string.IsNullOrEmpty(FilePath) )
-            {
-                FilePath = "user.png";
-            }
             GridList.Clear();
-            string key = App.User.UserName + "Board";
-            BoardSpan = Preferences.Get(key, BoardSpan);
+            BoardSpan = App.UserSettings.Board;
             if (BoardSpan == 4) GridLength = 80;
             else if (BoardSpan == 5) GridLength = 70;
             else if (BoardSpan == 6) GridLength = 60;
@@ -176,8 +169,7 @@ namespace SOS.ViewModel
         public void Reset()
         {
             UserName = App.User.UserName;
-            string key = UserName + "Level";
-            Level = Preferences.Get(key, Level);
+            Level = App.UserSettings.Level;
             UserScore = 0;
             ComputerScore = 0;
             FilePath = App.User.FilePath;
@@ -294,7 +286,7 @@ namespace SOS.ViewModel
         public async void UpdateDataBase()
         {
             int score = App.User.Score + UserScore;
-            bool res = await updateRepo.Update(App.User.Gid, UserName, App.User.Password, App.User.Email, App.User.FilePath, score);
+            bool res = await updateRepo.Update(App.User.Gid, UserName, App.User.Password, App.User.Email, App.User.FilePath, score, App.User.Theme);
             App.User.Score = score;
             if (!res)
             {

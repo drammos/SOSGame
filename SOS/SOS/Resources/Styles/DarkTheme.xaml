@@ -5,7 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="SOS.DarkTheme">
 
-    <Color x:Key="PageBackgroundColor">Black</Color>
+    <Color x:Key="PageBackgroundColor">#e9ecef</Color>
+    <!--<Color x:Key="PageBackgroundColor">Black</Color>-->
     <Color x:Key="NavigationBarColor">Teal</Color>
     <Color x:Key="PrimaryColor">Teal</Color>
     <Color x:Key="SecondaryColor">White</Color>

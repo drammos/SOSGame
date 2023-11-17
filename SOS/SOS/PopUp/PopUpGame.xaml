@@ -8,7 +8,7 @@
              >
  
     <VerticalStackLayout
-        BackgroundColor="White"
+        BackgroundColor="{AppThemeBinding Light=White, Dark=Black}"
         MinimumHeightRequest="200"
         MinimumWidthRequest="200"
         Padding="20"

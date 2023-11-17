@@ -7,6 +7,7 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using SOS.UseControl;
 using SOS.Popups;
+using SOS.Firebase;
 
 namespace SOS.ViewModel
 {
@@ -47,19 +48,23 @@ namespace SOS.ViewModel
         [ObservableProperty]
         private string _email;
 
+        public SignInModel SignIn { get; set; }
 
         readonly ILoginRepo loginRepo;
         readonly IPopupService popupService;
+
         public LoginViewModel(ILoginRepo loginRepo, IPopupService opupService)
         {
             this.loginRepo = loginRepo;
             this.popupService = opupService;
+            this.SignIn = new SignInModel();
         }
 
         [RelayCommand]
         public async Task IsValid()
         {
             User user = await loginRepo.IsValid(UserName, Password);
+            Client cl = new Client();
             if (user!=null)
             {
                 if(Preferences.ContainsKey(nameof(App.User)))
@@ -69,6 +74,7 @@ namespace SOS.ViewModel
                 string userDetails = JsonSerializer.Serialize(user);
                 Preferences.Set(nameof(App.User), userDetails);
                 App.User = user;
+                App.UserSettings = await loginRepo.TakeUserSettings(user.UserName);
 
                 AppShell.Current.FlyoutHeader = new FlyoutHead();
 

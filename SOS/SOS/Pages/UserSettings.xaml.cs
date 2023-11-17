@@ -80,28 +80,15 @@ public partial class UserSettings : ContentPage
         }
     }
 
-
-    private void OnThemeSwitchToggled(object sender, ToggledEventArgs e)
-    {
-        if (e.Value)
-        {
-            // Dark mode
-            Application.Current.UserAppTheme = AppTheme.Dark;
-        }
-        else
-        {
-            // Light mode
-            Application.Current.UserAppTheme = AppTheme.Light;
-        }
-    }
-
     public void LightThemeClicked(object sender, EventArgs args)
     {
+        this.userSettingsViewModel.AppTheme = "Light";
         Application.Current.UserAppTheme = AppTheme.Light;
     }
 
     public void DarkThemeClicked(object sender, EventArgs args)
     {
+        this.userSettingsViewModel.AppTheme = "Dark";
         Application.Current.UserAppTheme = AppTheme.Dark;
     }
 }

@@ -24,7 +24,8 @@
 
 
         <StackLayout Grid.Row="1">
-            <Frame HeightRequest="100" WidthRequest="100" CornerRadius="50" Padding="1" Margin="5" BackgroundColor="White">
+            <Border Stroke="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}" 
+                    StrokeThickness="3" HeightRequest="120" WidthRequest="120" StrokeShape="RoundRectangle 80,80,80,80" Padding="1" Margin="5" BackgroundColor="White">
                 <Image
                     x:Name="userImage"
                         HorizontalOptions="Fill"
@@ -32,7 +33,7 @@
                         Aspect="AspectFill" 
                         Margin="0"
                  />
-            </Frame>
+            </Border>
 
 
             <StackLayout  HorizontalOptions="CenterAndExpand">
@@ -102,6 +103,7 @@
                     BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}"
                     x:Name="CounterBtnUpdate"
                     Text="Update"
+                    TextColor="White"
                     Command="{Binding UpdateCommand}"
                     IsEnabled="{Binding IsUpdateButtonEnable}"
                     />

@@ -30,6 +30,9 @@ namespace SOS.ViewModel
         [ObservableProperty]
         private int _score;
 
+        [ObservableProperty]
+        private string _appTheme;
+
         readonly IUpdateRepo updateRepo;
         readonly IPopupService popupService;
 
@@ -106,10 +109,11 @@ namespace SOS.ViewModel
                 var mes = new VarMessage("The Mail is wrong. Please try again");
                 var pop = new PopUp(mes);
                 popupService.ShowPopup(pop);
+                Email = App.User.Email;
                 return;
             }
 
-            bool res = await updateRepo.Update(Gid, UserName, Password, Email, FilePath, Score);
+            bool res = await updateRepo.Update(Gid, UserName, Password, Email, FilePath, Score, AppTheme);
 
             if (res)
             {

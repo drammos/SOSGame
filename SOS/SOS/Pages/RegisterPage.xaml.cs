@@ -74,6 +74,10 @@ public partial class RegisterPage : ContentPage
         PasswordFrameEntry.Text = null;
         ConfirmPasswordFrameEntry.Text = null;
         EmailFrameEntry.Text = null;
+        PasswordFrameEntry.IsPassword = true;
+        ImageButtonEyeReg.Source = "hide.png";
+        ConfirmPasswordFrameEntry.IsPassword = true;
+        ImageButtonEyeReg2.Source = "hide.png";
     }
 
 
@@ -82,6 +86,34 @@ public partial class RegisterPage : ContentPage
         if(e.NewTextValue != null)
         {
             this.registerViewModel.IsAllEntriesFilled();
+        }
+    }
+
+    private void OnShowHidePasswordClicked(object sender, EventArgs e)
+    {
+        if (PasswordFrameEntry.IsPassword)
+        {
+            PasswordFrameEntry.IsPassword = false;
+            ImageButtonEyeReg.Source = "show.png";
+        }
+        else
+        {
+            PasswordFrameEntry.IsPassword = true;
+            ImageButtonEyeReg.Source = "hide.png";
+        }
+    }
+
+    private void OnShowHidePasswordClicked2(object sender, EventArgs e)
+    {
+        if (ConfirmPasswordFrameEntry.IsPassword)
+        {
+            ConfirmPasswordFrameEntry.IsPassword = false;
+            ImageButtonEyeReg2.Source = "show.png";
+        }
+        else
+        {
+            ConfirmPasswordFrameEntry.IsPassword = true;
+            ImageButtonEyeReg2.Source = "hide.png";
         }
     }
 }

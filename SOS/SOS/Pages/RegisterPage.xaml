@@ -1,43 +1,53 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sf="clr-namespace:Syncfusion.Maui.DataForm;assembly=Syncfusion.Maui.DataForm"
              x:Class="SOS.RegisterPage"
              xmlns:local="clr-namespace:SOS.ViewModel"
              xmlns:app="clr-namespace:SOS.ViewModel"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             BackgroundColor="White" 
-             Shell.BackgroundColor="#48bfe3"
+             BackgroundColor="White"
+             Shell.NavBarIsVisible="False"
              x:DataType="local:RegisterViewModel"
              >
-
-    <ContentPage.Resources>
-        <Style x:Key="InvalidEntryStyle" TargetType="Entry">
-
-            <Setter Property="PlaceholderColor" Value="Red" />
-        </Style>
-    </ContentPage.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="10"/>
             <RowDefinition Height="140"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="10"/>
-            <RowDefinition Height="80"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="10"/>
-            <RowDefinition Height="80"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="10"/>
-            <RowDefinition Height="80"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="70"/>
             <RowDefinition Height="10"/>
-            <RowDefinition Height="80"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="20"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
 
+        <StackLayout Margin="20,10,20,0" Grid.Row="0" Orientation="Horizontal">
+            <Label TextColor="Black" FontSize="20" FontAttributes="Bold" Text="Create Account" HorizontalOptions="StartAndExpand"/>
 
-        <Label Grid.Row="0" Margin="20,20,20,0" TextColor="#48bfe3" HorizontalOptions="Center" FontSize="Title" FontAttributes="Bold" Text="Create your account" VerticalOptions="Center"/>
+
+            <Label Text="Login" HorizontalOptions="EndAndExpand" FontSize="20" TextColor="#48bfe3" FontAttributes="Bold">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding LoginBackCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+        </StackLayout>
+
+
         <StackLayout Grid.Row="2">
-
-            <Frame HeightRequest="100" WidthRequest="100" CornerRadius="50" Padding="1" Margin="5" BorderColor="#48bfe3">
+            <Border Stroke="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}" 
+               StrokeThickness="4" HeightRequest="120" WidthRequest="120" StrokeShape="RoundRectangle 80,80,80,80" Padding="1" Margin="0">
                 <Image
                     x:Name="UploadedOrSelectedImage"
                     HorizontalOptions="Fill"
@@ -45,8 +55,7 @@
                     Aspect="AspectFill" 
                     Margin="0"
                  />
-            </Frame>
-
+            </Border>
 
             <StackLayout  HorizontalOptions="CenterAndExpand">
                 <Button 
@@ -56,60 +65,63 @@
                     Text="Edit picture"
                     Clicked="PopUpButton"
                 />
-                
+
             </StackLayout>
-           
 
         </StackLayout>
-        
-        
-        <Frame x:Name="UserFrame" Grid.Row="4" Margin="20,20,20,0" Padding="10,2,10,2">
-            <HorizontalStackLayout>
-                <Label Text="Username*" VerticalOptions="Center" WidthRequest="80"></Label>
 
+   
+        <Frame x:Name="UserFrame" Grid.Row="4" Margin="20,0,20,0" Padding="10,2,10,2">
+            <HorizontalStackLayout>
+ 
                 <Entry x:Name="UserFrameEntry"
                        TextChanged="EntryTextChanged"
-                    Text="{Binding UserName}" Placeholder="The field is required" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0">
+                    Text="{Binding UserName}" Placeholder="Username" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0">
                 </Entry>
-
             </HorizontalStackLayout>
         </Frame>
 
-        <Frame x:Name="PasswordFrame" Grid.Row="6" Margin="20,20,20,0" Padding="10,2,10,2">
-            <HorizontalStackLayout>
-                <Label Text="Password*" VerticalOptions="Center" WidthRequest="80"></Label>
+ 
+        <Frame x:Name="PasswordFrame" Grid.Row="6" Margin="20,0,20,0" Padding="10,2,10,2">
+            <StackLayout Orientation="Horizontal">
                 <Entry x:Name="PasswordFrameEntry"
-                    TextChanged="EntryTextChanged"
-                    Text="{Binding Password}" Placeholder="The field is required" IsPassword="True" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0">
+                       TextChanged="EntryTextChanged"
+                       Text="{Binding Password}" Placeholder="Password" 
+                       IsPassword="True" TextColor="Black" FontAttributes="Bold" 
+                       VerticalOptions="Center" HorizontalOptions="FillAndExpand" 
+                       Margin="0,0,20,0">
                 </Entry>
-
-            </HorizontalStackLayout>
+                
+                <ImageButton   Margin="0,0,10,0"  WidthRequest="16" HeightRequest="16" HorizontalOptions="EndAndExpand"  x:Name="ImageButtonEyeReg" Source="hide.png"  Clicked="OnShowHidePasswordClicked" />
+            </StackLayout>
         </Frame>
 
-        <Frame x:Name="ConfirmPasswordFrame" Grid.Row="8" Margin="20,20,20,0" Padding="10,2,10,2">
-            <HorizontalStackLayout>
-                <Label Text="Confirm Password*" VerticalOptions="Center" WidthRequest="80"></Label>
+        <Frame x:Name="ConfirmPasswordFrame" Grid.Row="8" Margin="20,0,20,0" Padding="10,2,10,2">
+            <StackLayout Orientation="Horizontal">
                 <Entry x:Name="ConfirmPasswordFrameEntry"
-                    TextChanged="EntryTextChanged"
-                    Text="{Binding ConfirmPassword}" Placeholder="The field is required" IsPassword="True" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0">
+                       TextChanged="EntryTextChanged"
+                       Text="{Binding ConfirmPassword}" Placeholder="Confirm Password" 
+                       IsPassword="True" TextColor="Black" FontAttributes="Bold" 
+                       VerticalOptions="Center" HorizontalOptions="FillAndExpand" 
+                       Margin="0,0,20,0">
                 </Entry>
-
-            </HorizontalStackLayout>
+                <ImageButton   Margin="0,0,10,0"  WidthRequest="16" HeightRequest="16" HorizontalOptions="EndAndExpand"  x:Name="ImageButtonEyeReg2" Source="hide.png"  Clicked="OnShowHidePasswordClicked2" />
+            </StackLayout>
         </Frame>
 
-        <Frame x:Name="EmailFrame" Grid.Row="10" Margin="20,20,20,0" Padding="10,2,10,2">
+        <Frame x:Name="EmailFrame" Grid.Row="10" Margin="20,0,20,0" Padding="10,2,10,2">
             <HorizontalStackLayout>
-                <Label Text="Mail*" VerticalOptions="Center" WidthRequest="80"></Label>
                 <Entry x:Name="EmailFrameEntry"
                     TextChanged="EntryTextChanged"
-                    Text="{Binding Email}" Placeholder="The field is required" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0">
+                    Text="{Binding Email}" Placeholder="Email" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0">
                 </Entry>
             </HorizontalStackLayout>
         </Frame>
 
 
-        <StackLayout  Grid.Row="11"  VerticalOptions="End" Margin="10,10,10,0" Padding="10,2,10,2" HorizontalOptions="FillAndExpand">
+        <StackLayout  Grid.Row="12"   Margin="20,10,20,0" Padding="10,2,10,2" HorizontalOptions="FillAndExpand">
             <Button 
+                CornerRadius="20"
                 BackgroundColor="#48bfe3"
                 x:Name="CounterBtn"
                 Text="Sign Up"
@@ -117,6 +129,45 @@
                 IsEnabled="{Binding IsRegisterButtonEnable}"
                 />
         </StackLayout>
+        
+        
+        <StackLayout Margin="20,20,20,0" Grid.Row="14">
+            <Grid ColumnSpacing="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <BoxView Grid.Column="0" HeightRequest="1" Color="Black"/>
+                <Label Grid.Column="1" FontSize="12" HorizontalOptions="Center" Text="Use other method" FontAttributes="Bold"/>
+                <BoxView Grid.Column="2" HeightRequest="1" Color="Black"/>
+            </Grid>
+            
+        </StackLayout>
+        
+
+        <VerticalStackLayout Margin="0,20,0,0" Grid.Row="16">
+
+            <Button Margin="20,10,20,0"
+                    CornerRadius="20" 
+                    BackgroundColor="White" 
+                    BorderColor="#48bfe3" 
+                    BorderWidth="2" 
+                    Text="Sign up with Google"
+                    TextColor="Black"
+                    ImageSource="google.png"
+                    Command="{Binding RegisterCommand}"/>
+                  
+
+            <Button Margin="20,10,20,0" 
+                    Text="Sign up with Faecebook" 
+                    CornerRadius="20" BackgroundColor="White" 
+                    BorderColor="#48bfe3" BorderWidth="2" 
+                    TextColor="Black"
+                    ImageSource="facebook.png"
+                    Command="{Binding RegisterCommand}"/>
+          
+        </VerticalStackLayout>
 
 
     </Grid>

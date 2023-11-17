@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using SOS.Services;
 
 namespace SOS.ViewModel
 {
@@ -6,7 +7,12 @@ namespace SOS.ViewModel
     {
         private string[] _pickerLevelOptions = { "Easy", "Hard" };
         private string _selectedLevelOption;
+        public IUpdateRepo UpdateRepo;
 
+        public SettingsViewModel( IUpdateRepo updateRepo)
+        {
+            this.UpdateRepo = updateRepo;
+        }
 
         public string[] PickerLevelOptions
         {
@@ -24,9 +30,6 @@ namespace SOS.ViewModel
             set
             {
                 _selectedLevelOption = value;
-                string username = App.User.UserName;
-                string key = username + "Level";
-                Preferences.Set(key, _selectedLevelOption);
                 OnPropertyChanged(nameof(SelectedLevelOption));
             }
         }
@@ -51,10 +54,6 @@ namespace SOS.ViewModel
             set
             {
                 _selectedBoardOption = value;
-                int board = GetGridBoard();
-                string username = App.User.UserName;
-                string key = username + "Board";
-                Preferences.Set(key, board);
                 OnPropertyChanged(nameof(SelectedBoardOption));
             }
         }
@@ -80,10 +79,6 @@ namespace SOS.ViewModel
             set
             {
                 _selectedPlayersOption = value;
-                string username = App.User.UserName;
-                string key = username + "Players";
-                int players = int.Parse(_selectedPlayersOption);
-                Preferences.Set(key, players);
                 OnPropertyChanged(nameof(SelectedPlayersOption));
             }
         }

@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SOS.StartGame"
              xmlns:box="clr-namespace:SOS.Box"
-             xmlns:syncfusionGrid="clr-namespace:Syncfusion.Maui.DataGrid;assembly=Syncfusion.Maui.DataGrid"
              xmlns:item="clr-namespace:SOS"
              xmlns:local="clr-namespace:SOS.ViewModel"
              Title="Game"
@@ -45,6 +44,7 @@
             <Button         
                 HeightRequest="70"
                 BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}"
+                TextColor="White"
                 x:Name="StartTheGame"
                 Text="New Game"
                 Command="{Binding StartGameCommand}"

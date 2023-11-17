@@ -1,5 +1,4 @@
 namespace SOS;
-using SOS.Models;
 using SOS.ViewModel;
 using System.Globalization;
 
@@ -9,71 +8,42 @@ public partial class HighScore : ContentPage
     public HighScore(HighScoreViewModel highScoreViewModel)
     {
         InitializeComponent();
+        this.BindingContext = highScoreViewModel;
         this.highScoreViewModel = highScoreViewModel;
     }
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        List<User> highScores = await highScoreViewModel.TakeAllUsers();
-        
-        var sortedUsersByScoreDescending = highScores.OrderByDescending(user => user.Score).ToList();
-        List<ListItem> listItems = new List<ListItem>();
-        for(int i = 0; i < sortedUsersByScoreDescending.Count; i++)
-        {
-            User user = sortedUsersByScoreDescending[i];
-            bool isMe = false;
-            if(user.FilePath == null || user.FilePath.Length == 0)
-            {
-                user.FilePath = "user.png";
-            }
-            if(App.User.UserName == user.UserName)
-            {
-                isMe = true;
-            }
-            ListItem item = new ListItem(user,i+1,isMe);
-            listItems.Add(item);
-        }
+        await highScoreViewModel.InitializeUsers();
+    }
 
-        ViewUsersScores.ItemsSource = listItems;
-
+    private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (((SearchBar)sender).SearchCommand?.CanExecute(e.NewTextValue) == true)
+            ((SearchBar)sender).SearchCommand?.Execute(e.NewTextValue);
     }
 }
 
-public class ListItem
+public class IsColorConverter : IValueConverter
 {
-    public User User { get; set; }
-    public int Index { get; set; }
-    public bool IsMe { get; set; }
-
-    public ListItem(User user, int index, bool isMe)
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        this.User = user;
-        this.Index = index;
-        this.IsMe = isMe;
+            
+        if (value is bool isMe)
+        {
+            string theme = "#90e0ef";
+            if (Application.Current.UserAppTheme == AppTheme.Dark)
+            {
+                theme = "#52b788";
+            } 
+            return isMe ? Color.FromHex(theme) : Color.FromHex("#ffffff");
+        }
+        return Color.FromHex("#ffffff");
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
     }
 }
-
-
-    public class IsColorConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            
-            if (value is bool isMe)
-            {
-                string theme = "#90e0ef";
-                if (Application.Current.UserAppTheme == AppTheme.Dark)
-                {
-                    theme = "#52b788";
-                } 
-                return isMe ? Color.FromHex(theme) : Color.FromHex("#ffffff");
-            }
-            return Color.FromHex("#ffffff");
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }

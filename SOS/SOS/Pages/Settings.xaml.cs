@@ -13,17 +13,31 @@ public partial class Settings : ContentPage
         this.settingsViewModel = settingsViewModel;
     }
 
+    protected async override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        int board = this.settingsViewModel.GetGridBoard();
+        int players = int.Parse(this.settingsViewModel.SelectedPlayersOption);
+
+        this.settingsViewModel.UpdateRepo
+            .UpdateSettings(
+                App.UserSettings.Username,
+                board,
+                this.settingsViewModel.SelectedLevelOption,
+                players
+            );
+    }
+
+    protected override bool OnBackButtonPressed()
+    {
+        return false;
+    }
     protected async override void OnAppearing()
     {
         base.OnAppearing();
-        string board = App.User.UserName + "Board";
-        string level = App.User.UserName + "Level";
-        string players = App.User.UserName + "Players";
-        
-        
-        int boardPrice = -1;
-        boardPrice = Preferences.Get(board, boardPrice);
-        if(boardPrice != -1)
+
+        int boardPrice = App.UserSettings.Board;
+        if(boardPrice != 0)
         {
             if (boardPrice == 4) { this.settingsViewModel.SelectedBoardOption = "4x4"; }
             else if (boardPrice == 5) { this.settingsViewModel.SelectedBoardOption = "5x5"; }
@@ -32,16 +46,14 @@ public partial class Settings : ContentPage
             else if (boardPrice == 8) { this.settingsViewModel.SelectedBoardOption = "8x8"; }
         }
 
-        string levelPrice = "";
-        levelPrice = Preferences.Get(level, levelPrice);
-        if (levelPrice!="")
+        string levelPrice = App.UserSettings.Level;
+        if (!string.IsNullOrEmpty(levelPrice))
         {
             this.settingsViewModel.SelectedLevelOption = levelPrice;
         }
 
-        int playersPrice = -1;
-        playersPrice = Preferences.Get(players, playersPrice);
-        if (playersPrice != -1)
+        int playersPrice = App.UserSettings.Players;
+        if (playersPrice != 0)
         {
             this.settingsViewModel.SelectedPlayersOption = playersPrice.ToString();
         }
