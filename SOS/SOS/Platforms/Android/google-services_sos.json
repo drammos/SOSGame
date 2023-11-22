@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "865933140258",
+    "firebase_url": "https://sosgame-72e62-default-rtdb.firebaseio.com",
+    "project_id": "sosgame-72e62",
+    "storage_bucket": "sosgame-72e62.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:865933140258:android:336476d9f1bcc1582d057b",
+        "android_client_info": {
+          "package_name": "com.companyname.sos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "865933140258-93ja0pcsps9ag4h7spj4bv4dam7ri78d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.companyname.sos",
+            "certificate_hash": "defb1b5ce1bfc197d2561c635b9cc10a42288f9c"
+          }
+        },
+        {
+          "client_id": "865933140258-ld1t2tl76c160kagq0aii595j56dvts6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfi-MO4thwjK3ovRBUK4jfYbUiAVVkwow"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "865933140258-ld1t2tl76c160kagq0aii595j56dvts6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

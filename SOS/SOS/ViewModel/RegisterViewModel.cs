@@ -1,9 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using SOS.Services;
-using SOS.ViewModel;
+using SOS.Models;
 using SOS.Popups;
-using System.ComponentModel.DataAnnotations;
+using SOS.Firebase;
 
 namespace SOS.ViewModel
 {
@@ -26,13 +26,13 @@ namespace SOS.ViewModel
 
         public string FilePath {  get; set; }
 
-
-        readonly IRegisterRepo registerRepo;
+        //readonly IRegisterRepo registerRepo;
+        readonly IFirebaseClient firebaseClient;
         readonly IPopupService popupService;
 
-        public RegisterViewModel(IRegisterRepo registerRepo, IPopupService popupService)
+        public RegisterViewModel(IFirebaseClient firebaseClient, IPopupService popupService)
         {
-            this.registerRepo = registerRepo;
+            this.firebaseClient = firebaseClient;
             this.popupService = popupService;
         }
 
@@ -60,13 +60,13 @@ namespace SOS.ViewModel
             await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
         }
 
-
         [RelayCommand]
         public async Task Register()
         {
             if ( !IsUsernameValid(UserName))
             {
-                var mes = new VarMessage("This username is wrong. The username must start with characters and have at least 2 characters, please try again");
+                var mes = new VarMessage(
+                    "This username is wrong. The username must start with characters and have at least 2 characters, please try again");
                 var pop = new PopUp(mes);
                 popupService.ShowPopup(pop);
                 Dispose();
@@ -102,9 +102,31 @@ namespace SOS.ViewModel
                 return;
             }
 
-            bool res = await registerRepo.Register(UserName, Password, Email, FilePath);
+            // Create User and Settings
+            User user = new User(UserName, Password, Email, FilePath);
+            SettingsData settings = new SettingsData(Email, 0, string.Empty, 0);
 
-            if (res)
+            // Saves in firebase
+            bool res = await firebaseClient.RegisterFirebaseAuhtenticaiton(user.Email, user.Password);
+            if (!res)
+            {
+                var mes = new VarMessage("This username is used by another user. Please try with different username");
+                var pop = new PopUp(mes);
+                popupService.ShowPopup(pop);
+                return;
+            }
+            res = await firebaseClient.SaveUserToFirestore(user);
+            if (!res)
+            {
+                var mes = new VarMessage("This username is used by another user. Please try with different username");
+                var pop = new PopUp(mes);
+                popupService.ShowPopup(pop);
+                return;
+            }
+            bool res2 = await firebaseClient.SaveSettingsToFirestore(settings);
+            
+
+            if (res2)
             {
                 String board = UserName + "Board";
                 String level = UserName + "Level";
@@ -137,14 +159,14 @@ namespace SOS.ViewModel
             Dispose();
         }
 
-
-
+        [RelayCommand]
+        public async Task GoogleRegister()
+        {
+            await firebaseClient.RegisterWithGoogle();
+        }
         public Task<bool> ShowYesCancelASync(string message, string OK = "OK", string Cancel = "Cancel")
         {
             var tcs = new TaskCompletionSource<bool>();
-
-
-
             Device.BeginInvokeOnMainThread(async () =>
             {
                 try
@@ -167,12 +189,8 @@ namespace SOS.ViewModel
                     tcs.SetException(ex);
                 }
             });
-
-
-
             return tcs.Task;
         }
-
         
         private bool IsSignUpButtonEnabled()
         {

@@ -4,7 +4,6 @@
              xmlns:local="clr-namespace:SOS.ViewModel"
              x:Class="SOS.LoginPage"
              Shell.NavBarIsVisible="False"
-             xmlns:sf="clr-namespace:Syncfusion.Maui.DataForm;assembly=Syncfusion.Maui.DataForm"
              x:DataType="local:LoginViewModel"
              >
 
@@ -36,16 +35,11 @@
                     HeightRequest="190"
                     HorizontalOptions="Center"
                     IsAnimationPlaying="False"/>
-
-                <!--<sf:SfDataForm Grid.Row="3" x:Name="signInForm"
-                       LayoutType="TextInputLayout"
-                       DataObject="{Binding SignIn}"
-                       ValidationMode="PropertyChanged">
-                </sf:SfDataForm>-->
+                
                 <Frame x:Name="UserFrame" Grid.Row="3" Margin="20,00,20,0" Padding="10,2,10,2">
                     <HorizontalStackLayout>
                         <Entry x:Name="UserFrameEntry"
-                               Text="{Binding UserName}" Placeholder="Username" 
+                               Text="{Binding Email}" Placeholder="Email" 
                                TextColor="Black" FontAttributes="Bold" 
                                VerticalOptions="Center" HorizontalOptions="FillAndExpand" 
                                Margin="0,0,20,0">

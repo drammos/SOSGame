@@ -9,6 +9,6 @@ namespace SOS.Services
 {
     public interface IRegisterRepo
     {
-        Task<bool> Register(string username, string password, string email, string filePath);
+        Task<bool> Register(User user, SettingsData settings);
     }
 }

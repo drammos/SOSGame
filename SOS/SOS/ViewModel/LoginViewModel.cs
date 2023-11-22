@@ -1,10 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.Maui.Graphics.Text;
+using System.Text.Json;
+
 using SOS.Services;
 using SOS.Models;
-using System.Text.Json.Serialization;
-using System.Text.Json;
 using SOS.UseControl;
 using SOS.Popups;
 using SOS.Firebase;
@@ -50,12 +49,12 @@ namespace SOS.ViewModel
 
         public SignInModel SignIn { get; set; }
 
-        readonly ILoginRepo loginRepo;
+        readonly IFirebaseClient firebaseCLient;
         readonly IPopupService popupService;
 
-        public LoginViewModel(ILoginRepo loginRepo, IPopupService opupService)
+        public LoginViewModel(IFirebaseClient firebaseClient, IPopupService opupService)
         {
-            this.loginRepo = loginRepo;
+            this.firebaseCLient = firebaseClient;
             this.popupService = opupService;
             this.SignIn = new SignInModel();
         }
@@ -63,8 +62,17 @@ namespace SOS.ViewModel
         [RelayCommand]
         public async Task IsValid()
         {
-            User user = await loginRepo.IsValid(UserName, Password);
-            Client cl = new Client();
+            string password = PasswordHasher.HashPassword(Password);
+            bool login = await this.firebaseCLient.LoginFirebaseAuhtenticaiton(Email, password);
+            if (!login)
+            {
+                var mes = new VarMessage("Invalid email or password. Please try again");
+                var pop = new PopUp(mes);
+                popupService.ShowPopup(pop);
+                return;
+            }
+
+            User user = await firebaseCLient.GetUserFromFirestore(Email);
             if (user!=null)
             {
                 if(Preferences.ContainsKey(nameof(App.User)))
@@ -74,11 +82,9 @@ namespace SOS.ViewModel
                 string userDetails = JsonSerializer.Serialize(user);
                 Preferences.Set(nameof(App.User), userDetails);
                 App.User = user;
-                App.UserSettings = await loginRepo.TakeUserSettings(user.UserName);
+                App.UserSettings = await firebaseCLient.GetSettingsFromFirestore(user.Email);
 
                 AppShell.Current.FlyoutHeader = new FlyoutHead();
-
-
                 await Shell.Current.GoToAsync($"//{nameof(StartGame)}");
             }
             else

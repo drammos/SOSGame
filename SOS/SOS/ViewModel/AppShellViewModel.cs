@@ -14,7 +14,6 @@ namespace SOS.ViewModel
         public void setTheIcon(string iconPath)
         {
             IconPath = iconPath;
-
         }
 
         public AppShellViewModel() 

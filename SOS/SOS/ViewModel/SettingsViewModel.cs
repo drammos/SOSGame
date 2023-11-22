@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
-using SOS.Services;
+using SOS.Firebase;
+using SOS.Models;
 
 namespace SOS.ViewModel
 {
@@ -7,11 +8,11 @@ namespace SOS.ViewModel
     {
         private string[] _pickerLevelOptions = { "Easy", "Hard" };
         private string _selectedLevelOption;
-        public IUpdateRepo UpdateRepo;
+        public IFirebaseClient firebaseClient;
 
-        public SettingsViewModel( IUpdateRepo updateRepo)
+        public SettingsViewModel(IFirebaseClient firebaseClient)
         {
-            this.UpdateRepo = updateRepo;
+            this.firebaseClient = firebaseClient;
         }
 
         public string[] PickerLevelOptions
@@ -34,7 +35,6 @@ namespace SOS.ViewModel
             }
         }
 
-        /// 
         private string[] _pickerBoardOptions = { "4x4", "5x5", "6x6", "7x7", "8x8" };
         private string _selectedBoardOption;
 
@@ -57,8 +57,6 @@ namespace SOS.ViewModel
                 OnPropertyChanged(nameof(SelectedBoardOption));
             }
         }
-        /// </summary>
-
 
         private string[] _pickerPlayersOptions = { "1", "2", "3",  "4",  "5",  "6",  "7", "8", "9",  "10" };
         private string _selectedPlayersOption;
@@ -102,6 +100,23 @@ namespace SOS.ViewModel
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public async Task UpdateUserSettings(string email, int board, string level, int players)
+        {
+            SettingsData updateSettings = new SettingsData()
+            {
+                Email = email,
+                Board = board,
+                Level = level,
+                Players = players
+            };
+
+            bool result = await this.firebaseClient.UpdateSettingsInFirestore(updateSettings);
+            if (!result)
+            {
+                App.UserSettings = updateSettings;
+            }
         }
     }
 }
