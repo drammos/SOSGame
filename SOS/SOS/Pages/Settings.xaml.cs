@@ -1,5 +1,4 @@
 using SOS.ViewModel;
-
 namespace SOS;
 
 
@@ -19,9 +18,8 @@ public partial class Settings : ContentPage
         int board = this.settingsViewModel.GetGridBoard();
         int players = int.Parse(this.settingsViewModel.SelectedPlayersOption);
 
-        this.settingsViewModel.UpdateRepo
-            .UpdateSettings(
-                App.UserSettings.Username,
+        await this.settingsViewModel.UpdateUserSettings(
+                App.UserSettings.Email,
                 board,
                 this.settingsViewModel.SelectedLevelOption,
                 players

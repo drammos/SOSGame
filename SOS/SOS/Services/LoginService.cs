@@ -26,12 +26,12 @@ namespace SOS.Services
             return null;
         }
 
-        public async Task<SettingsData> TakeUserSettings(string username)
+        public async Task<SettingsData> TakeUserSettings(string email)
         {
             var database = await DBUtils.GetDatabase();
-            if (!string.IsNullOrEmpty(username))
+            if (!string.IsNullOrEmpty(email))
             {
-                SettingsData settingsData = await database.Table<SettingsData>().Where(i => i.Username == username).FirstOrDefaultAsync();
+                SettingsData settingsData = await database.Table<SettingsData>().Where(i => i.Email == email).FirstOrDefaultAsync();
                 return settingsData;
             }
             return null;

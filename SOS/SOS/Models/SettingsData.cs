@@ -7,9 +7,19 @@ namespace SOS.Models
     public class  SettingsData
     {
         [PrimaryKey]
-        public string Username { get; set; }
+        public string Email { get; set; }
         public int Board {  get; set; }
         public string Level { get; set; }
         public int Players { get; set; }
+        
+        public SettingsData(string email, int board, string level, int players) 
+        {
+            Email = email;
+            Board = board;
+            Level = level;
+            Players = players;
+        }
+
+        public SettingsData() { }
     }
 }

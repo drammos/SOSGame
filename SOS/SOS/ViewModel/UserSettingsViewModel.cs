@@ -1,8 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+
 using SOS.Services;
 using SOS.UseControl;
 using SOS.Popups;
+using SOS.Firebase;
+using SOS.Models;
 
 namespace SOS.ViewModel
 {
@@ -33,12 +36,12 @@ namespace SOS.ViewModel
         [ObservableProperty]
         private string _appTheme;
 
-        readonly IUpdateRepo updateRepo;
+        readonly IFirebaseClient firebaseClient;
         readonly IPopupService popupService;
 
-        public UserSettingsViewModel(IUpdateRepo updateRepo, IPopupService popupService)
+        public UserSettingsViewModel(IFirebaseClient firebaseClient, IPopupService popupService)
         {
-            this.updateRepo = updateRepo;
+            this.firebaseClient = firebaseClient;
             this.popupService = popupService;
         }
 
@@ -113,7 +116,17 @@ namespace SOS.ViewModel
                 return;
             }
 
-            bool res = await updateRepo.Update(Gid, UserName, Password, Email, FilePath, Score, AppTheme);
+            User uptadeUser = new User
+            {
+                Gid = Gid,
+                UserName = UserName,
+                Password = Password,
+                Email = Email,
+                FilePath = FilePath,
+                Score = Score,
+                Theme = AppTheme
+            };
+            bool res = await this.firebaseClient.UpdateUserInFirestore(uptadeUser);
 
             if (res)
             {

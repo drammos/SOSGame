@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:sf="clr-namespace:Syncfusion.Maui.DataForm;assembly=Syncfusion.Maui.DataForm"
              x:Class="SOS.RegisterPage"
              xmlns:local="clr-namespace:SOS.ViewModel"
              xmlns:app="clr-namespace:SOS.ViewModel"
@@ -156,7 +155,7 @@
                     Text="Sign up with Google"
                     TextColor="Black"
                     ImageSource="google.png"
-                    Command="{Binding RegisterCommand}"/>
+                    Command="{Binding GoogleRegisterCommand}"/>
                   
 
             <Button Margin="20,10,20,0" 

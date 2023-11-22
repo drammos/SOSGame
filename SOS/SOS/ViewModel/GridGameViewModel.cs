@@ -7,6 +7,8 @@ using System.Collections.ObjectModel;
 using SOS.Box;
 using SOS.Services;
 using SOS.Popups;
+using SOS.Firebase;
+using SOS.Models;
 
 namespace SOS.ViewModel
 {
@@ -45,15 +47,15 @@ namespace SOS.ViewModel
 
         private CancellationTokenSource cancellationTokenSource;
 
-        readonly IUpdateRepo updateRepo;
+        readonly IFirebaseClient firebaseClient;
         readonly IPopupService popupService;
 
         // Initialize the game Grid Game
-        public GridGameViewModel(IUpdateRepo updateRepo, IPopupService popupService)
+        public GridGameViewModel(IFirebaseClient firebaseClient, IPopupService popupService)
         {
             this.PlayerTurn = "user";
             this.popupService = popupService;
-            this.updateRepo = updateRepo;
+            this.firebaseClient = firebaseClient;
             cancellationTokenSource = new CancellationTokenSource();
             SetUpGame();
             var task = this.StartAsync();
@@ -286,7 +288,18 @@ namespace SOS.ViewModel
         public async void UpdateDataBase()
         {
             int score = App.User.Score + UserScore;
-            bool res = await updateRepo.Update(App.User.Gid, UserName, App.User.Password, App.User.Email, App.User.FilePath, score, App.User.Theme);
+            User updateUser = new User
+            {
+                Gid = App.User.Gid, 
+                UserName = UserName, 
+                Password = App.User.Password, 
+                Email = App.User.Email, 
+                FilePath = App.User.FilePath, 
+                Score = score, 
+                Theme = App.User.Theme
+            };
+            bool res = await firebaseClient.UpdateUserInFirestore(updateUser);
+
             App.User.Score = score;
             if (!res)
             {

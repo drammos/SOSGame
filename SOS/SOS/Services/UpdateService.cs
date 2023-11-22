@@ -35,12 +35,12 @@ namespace SOS.Services
             }
         }
 
-        public async Task<bool> UpdateSettings( string username, int board, string level, int players)
+        public async Task<bool> UpdateSettings( string email, int board, string level, int players)
         {
             var database = await DBUtils.GetDatabase();
             SettingsData settings = new SettingsData()
             {
-                Username = username,
+                Email = email,
                 Board = board,
                 Level = level,
                 Players = players
